@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -14,23 +15,20 @@ import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
 
+@SuppressWarnings("serial")
 public class GUIAltaVehiculo extends JFrame {
-	private boolean init=false;
-	public void initGui() {
-	if(init) {
-		setVisible(true);
-		return;
-	}
-	init=true;
-	this.setLayout(new GridLayout(6,2,5,10));
-	//Declaracion de componentes.
+	
 	JButton btnAlta = new JButton("Dar de alta");
 	JButton btnCancelar = new JButton("Cancelar");
-	String[] labels = {"Insertar matricula","Insertar sucursal", "Insertar tipo",
+	String[] labels = {"Insertar matricula","Insertar ID sucursal", "Insertar tipo",
 			"Insertar daños"};
 	JLabel etiqgeneral;
 	JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 	JTextField[] inputs = new JTextField[labels.length];
+	
+	public void initGui() {
+	
+	this.setLayout(new GridLayout(6,2,5,10));
 	for(int i = 0; i<labels.length;i++) {
 		etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
 		inputs[i] = new JTextField(20);
@@ -44,13 +42,25 @@ public class GUIAltaVehiculo extends JFrame {
 	add(btnAlta);
 	add(btnCancelar);
 	setVisible(true);
-	GUIMaker.getInstance().configurateWindow(this);
+	GUIMaker.getInstance().configurateSubWindow(this,410,250,"Registrar un alta");
 	//Botones
 	btnAlta.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			TVehiculo v= new TVehiculo(100,Integer.parseInt(inputs[1].getText()),
-					inputs[2].getText(),inputs[0].getText(),actividad.isSelected(),inputs[3].getText());
-			Controller.getInstance().accion(eventos.ALTA_VEHICULO, v);
+			for(int i=0;i<labels.length-1;i++) { // Menos uno por que danos que es la ultima puede ser vacia
+				if(inputs[i].getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Matricula, tipo y ID sucursal no pueden ser vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+			
+			try {
+				TVehiculo v= new TVehiculo(0,Integer.parseInt(inputs[1].getText()),
+						inputs[2].getText(),inputs[0].getText(),actividad.isSelected(),inputs[3].getText());
+				Controller.getInstance().accion(eventos.ALTA_VEHICULO, v);
+			}
+			catch(Exception ex){
+				JOptionPane.showMessageDialog(null, "Compruebe formato de los datos. \n ("+ex.toString()+")","Información",JOptionPane.WARNING_MESSAGE);
+			}
 		}
 		});
 	btnCancelar.addActionListener(new ActionListener() {

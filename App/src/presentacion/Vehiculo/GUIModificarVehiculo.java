@@ -15,14 +15,21 @@ import javax.swing.JTextField;
 
 import negocio.Vehiculo.TVehiculo;
 import presentacion.Controller;
+import presentacion.GUIMaker;
 import presentacion.eventos;
 
 public class GUIModificarVehiculo extends JFrame {
 	
-	
+	private boolean init=false;
 	//panel que solo pregunta por la id
 	public void initGui() {
-		this.setLayout(new GridLayout(2,2));
+		if(init) {
+			setVisible(true);
+			return;
+		}
+		init=true;
+		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar un vehículo ");
+		this.setLayout(new FlowLayout());
 		JPanel upPanel = new JPanel(new BorderLayout());
 		JLabel lblID = new JLabel("Introduce ID: ");
 		JTextField tfID= new JTextField();
@@ -32,7 +39,7 @@ public class GUIModificarVehiculo extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_VEHICULO,aux );
-			}
+				}
 			});
 		upPanel.add(lblID,BorderLayout.NORTH);
 		upPanel.add(tfID,BorderLayout.CENTER);
@@ -57,7 +64,9 @@ public class GUIModificarVehiculo extends JFrame {
 		centerPanel.add(lblDanos);centerPanel.add(tfDanos);
 		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
 		centerPanel.add(lblMatricula);centerPanel.add(tfMatricula);
+		tfDanos.setColumns(30);
 		JButton actualizar = new JButton("Actualizar");
+		JButton btnCancelar=new JButton("Cancelar");
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TVehiculo v= new TVehiculo(veh.getId(),veh.getIdSucursal(),
@@ -65,7 +74,14 @@ public class GUIModificarVehiculo extends JFrame {
 				Controller.getInstance().accion(eventos.MODIFICAR_VEHICULO, v);
 			}
 			});
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				}
+			});
+		centerPanel.add(btnCancelar);
 		centerPanel.add(actualizar);
 		this.add(centerPanel);
+		this.setSize(800, 245);
 	}
 }

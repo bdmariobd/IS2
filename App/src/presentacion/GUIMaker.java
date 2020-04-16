@@ -19,4 +19,5 @@ private static GUIMaker instancia;
 	//reactiva la animacion
 	public abstract void reInit();
 	public abstract JPanel panelAlta(String[] etiq);
+	public abstract void configurateSubWindow(JFrame window, int h, int w, String title);
 }

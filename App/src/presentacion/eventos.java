@@ -10,6 +10,7 @@ public class eventos {
 	public static final int GUI_VEHICULO=6;
 	public static final int GUI_PRINC=7;
 	
+	
 	//Altas
 	public static final int ALTA_ALUMNO=10;
 	public static final int ALTA_PROFESOR=11;
@@ -35,7 +36,7 @@ public class eventos {
 	public static final int MOSTRAR_TODOS_VEHICULO=35;
 	
 	//Temporal cosas personalizadas
-	public static final int REGISTRAR_DANOS=45; // jeje lo necesito perdon
+	public static final int REGISTRAR_DANOS=45;
 	public static final int MOSTRAR_UNO_VEHICULO=55;
 	
 	//Modificar
@@ -46,6 +47,22 @@ public class eventos {
 	public static final int MODIFICAR_TEST=64;
 	public static final int MODIFICAR_VEHICULO=65;
 	
+	//Altas ok
+	public static final int ALTA_OK_ALUMNO=110;
+	public static final int ALTA_OK_PROFESOR=111;
+	public static final int ALTA_OK_SUCURSAL=112;
+	public static final int ALTA_OK_SESION=113;
+	public static final int ALTA_OK_TEST=114;
+	public static final int ALTA_OK_VEHICULO=115;
+	
+	//Bajas ok
+	public static final int BAJA_OK_ALUMNO=120;
+	public static final int BAJA_OK_PROFESOR=121;
+	public static final int BAJA_OK_SUCURSAL=122;
+	public static final int BAJA_OK_SESION=123;
+	public static final int BAJA_OK_TEST=124;
+	public static final int BAJA_OK_VEHICULO=125;
+	
 	//Mostrar todos OK
 	public static final int MOSTRAR_TODOS_OK_ALUMNO=130;
 	public static final int MOSTRAR_TODOS_OK_PROFESOR=131;
@@ -53,7 +70,7 @@ public class eventos {
 	public static final int MOSTRAR_TODOS_OK_SESION=133;
 	public static final int MOSTRAR_TODOS_OK_TEST=134;
 	public static final int MOSTRAR_TODOS_OK_VEHICULO=135;
-	
+	//Mostrar uno OK
 	public static final int MOSTRAR_UNO_OK_ALUMNO=140;
 	public static final int MOSTRAR_UNO_OK_PROFESOR=141;
 	public static final int MOSTRAR_UNO_OK_SUCURSAL=142;
@@ -75,4 +92,33 @@ public class eventos {
 	public static final int BUSCAR_SESION_OK=213;
 	public static final int BUSCAR_TEST_OK=214;
 	public static final int BUSCAR_VEHICULO_OK=215;
+	
+	//FALLOS
+	public static final int ALTA_KO_ALUMNO=220;
+	public static final int ALTA_KO_PROFESOR=221;
+	public static final int ALTA_KO_SUCURSAL=222;
+	public static final int ALTA_KO_SESION=223;
+	public static final int ALTA_KO_TEST=224;
+	public static final int ALTA_KO_VEHICULO=225;
+	//Mostrar todos ko
+	public static final int MOSTRAR_TODOS_KO_ALUMNO=230;
+	public static final int MOSTRAR_TODOS_KO_PROFESOR=231;
+	public static final int MOSTRAR_TODOS_KO_SUCURSAL=232;
+	public static final int MOSTRAR_TODOS_KO_SESION=233;
+	public static final int MOSTRAR_TODOS_KO_TEST=234;
+	public static final int MOSTRAR_TODOS_KO_VEHICULO=235;
+	//Mostrar uno ko
+	public static final int MOSTRAR_UNO_KO_ALUMNO=240;
+	public static final int MOSTRAR_UNO_KO_PROFESOR=241;
+	public static final int MOSTRAR_UNO_KO_SUCURSAL=242;
+	public static final int MOSTRAR_UNO_KO_SESION=243;
+	public static final int MOSTRAR_UNO_KO_TEST=244;
+	public static final int MOSTRAR_UNO_K0_VEHICULO=245;
+	//Baja ko
+	public static final int BAJA_KO_ALUMNO=250;
+	public static final int BAJA_KO_PROFESOR=251;
+	public static final int BAJA_KO_SUCURSAL=252;
+	public static final int BAJA_KO_SESION=253;
+	public static final int BAJA_KO_TEST=254;
+	public static final int BAJA_KO_VEHICULO=255;
 }

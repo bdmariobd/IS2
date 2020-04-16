@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import negocio.Vehiculo.TVehiculo;
@@ -46,18 +47,41 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 	public void update(int event, Object res) {
 		// TODO Auto-generated method stub
 		switch(event) {
+		case eventos.ALTA_OK_VEHICULO:
+			JOptionPane.showMessageDialog(null, "Añadido correctamente(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.ALTA_KO_VEHICULO:
+			String msg="";
+			if((int)res==-2)msg = "Error,matricula repetida.";
+			else if((int)res==-3) msg = "Error,compruebe tamaño y formato de los datos.";
+				JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.BAJA_OK_VEHICULO:
+			JOptionPane.showMessageDialog(null, "Borrado correctamente(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.BAJA_KO_VEHICULO:
+			String msg1="";
+			if((int)res==-1)msg = "Error,no existe.";
+			else if((int)res==-6) msg = "Error,ya se habia dado de baja.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+				JOptionPane.showMessageDialog(null, msg1,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
 		case eventos.MOSTRAR_TODOS_OK_VEHICULO:
 			gTodosVeh.mostrarVehiculos((List<TVehiculo>) res);
 			break;
 		
 		case eventos.MOSTRAR_UNO_OK_VEHICULO:
-			System.out.println("debugear con prints es de pros");
 			gMostrarVeh.mostrarUno((TVehiculo) res);
 			break;
 		case eventos.BUSCAR_VEHICULO_OK:
 			gModVeh.updatePanel((TVehiculo) res);
 			break;
 		}
+		String msg="";
+		if((int)res==-4) msg="Error de conexion con la base de datos.";
+		else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+		JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

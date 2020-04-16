@@ -9,7 +9,7 @@ public interface DAOVehiculo {
 
 	public TVehiculo read(int id);
 
-	public TVehiculo findByName(String nombre);
+	public int findByName(String nombre);
 
 	public List<TVehiculo> readAll();
 
@@ -18,4 +18,6 @@ public interface DAOVehiculo {
 	public int delete(int id);
 	
 	public int regDamage(String[] datos);
+	
+	public int isDeleted(int id);
 }

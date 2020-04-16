@@ -6,13 +6,23 @@ import integracion.FactoriaDAO;
 import integracion.Vehiculo.DAOVehiculo;
 
 public class SAVehiculoImp implements SAVehiculo {
-
+	/*ERRORES: 
+	 * -1: no existe
+	 * -2: elemento repetido
+	 * -3: datos no validos (numeros negativos, matricula que no cumple el formato...)
+	 * -4: error de la base de datos
+	 * -5: otros errores desconocidos
+	 * -6: el vehiculo ya estaba borrado
+	 * Si se devuelve un transfer con que se devuelva null ya vale
+	 */
 	@Override
 	public int create(TVehiculo v) {
-		// TODO Auto-generated method stub
-		int id=-1;
+		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		id=  dao.create(v);
+		if(v.getMatricula().length()>10 || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
+				|| v.getTipo().length()>20) return -3;
+		if (dao.findByName(v.getMatricula())!=0) return -2;
+		int id=  dao.create(v);
 		return id;
 	}
 
@@ -38,6 +48,8 @@ public class SAVehiculoImp implements SAVehiculo {
 	public int delete(int id) {
 		// TODO Auto-generated method stub
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		int deleted= dao.isDeleted(id);
+		if(deleted!=0) return deleted;
 		int result = dao.delete(id);
 		return result;
 	}

@@ -23,7 +23,7 @@ import javax.swing.WindowConstants;
 
 public class GuiMakerIMP extends GUIMaker {
 	private Image car;
-	private final static Dimension windowSize= new Dimension(500,500);
+	private final static Dimension windowSize= new Dimension(700,90);
 	private final static int carSize= 80, fontSize = 18;
 	
 	private int index;
@@ -59,7 +59,7 @@ public class GuiMakerIMP extends GUIMaker {
 		JPanel panel = new JPanel() {
 			@Override
 	         public void paintComponent(Graphics g) {
-	        	super.paintComponent(g);
+	        	/*super.paintComponent(g);
 	        	Graphics2D g2d = (Graphics2D) g;
 	        	//g2d.setFont(new Font("Arial", Font.PLAIN, fontSize));
 	        	if(index>windowSize.width/2 - 50) g2d.drawString(text, index,windowSize.height/5);
@@ -68,7 +68,7 @@ public class GuiMakerIMP extends GUIMaker {
 	            index-=10;
 	            try {
 					Thread.sleep(40);
-				} catch (InterruptedException e) {}
+				} catch (InterruptedException e) {}*/
 			}
 	  
 	      };
@@ -81,6 +81,16 @@ public class GuiMakerIMP extends GUIMaker {
 	}
 	
 	@Override
+	public void configurateSubWindow(JFrame window,int h, int w, String title) {
+		window.setPreferredSize(new Dimension(h,w));
+		window.setResizable(true);//cambiar a false cuando acabemos de fanciear
+		window.setTitle(title+"- Autoescuela PM");
+		window.setVisible(true);
+		window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		window.setLocationRelativeTo(null);
+		window.pack();
+		
+	}
 	public void configurateWindow(JFrame window) {
 
 		window.setPreferredSize(windowSize);

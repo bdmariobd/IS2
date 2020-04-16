@@ -44,10 +44,15 @@ public class ControllerIMP extends Controller {
 			break;
 			
 			case eventos.ALTA_VEHICULO: 
-				id = saVeh.create((TVehiculo) datos); //llamar a update
+				id = saVeh.create((TVehiculo) datos); 
+				if(id<0) GUIVehiculo.getInstance().update(eventos.ALTA_KO_VEHICULO, id);
+				else GUIVehiculo.getInstance().update(eventos.ALTA_OK_VEHICULO, id);
+				
 			break;
 			case eventos.BAJA_VEHICULO:
 				id= saVeh.delete((int) datos);
+				if(id<0) GUIVehiculo.getInstance().update(eventos.BAJA_KO_VEHICULO, id);
+				else GUIVehiculo.getInstance().update(eventos.BAJA_OK_VEHICULO, id);
 			break;
 			case eventos.MOSTRAR_TODOS_VEHICULO:
 				List<TVehiculo> list = saVeh.readAll();

@@ -2,6 +2,7 @@ package presentacion.Vehiculo;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,28 +20,29 @@ import presentacion.GUIMaker;
 import presentacion.eventos;
 
 public class GUIBajaVehiculo extends JFrame {
+	
+	private JButton btnBaja = new JButton("Dar de baja");
+	private JPanel prueba = new JPanel(new BorderLayout());
+	private JLabel tfLabel = new JLabel("Introduce id del vehiculo para darlo de baja: ");
+	private JTextField campoID= new JTextField();
+	private JButton btnCancelar = new JButton("Cancelar");
 	public void initGui() {
-		this.setLayout(new BorderLayout());
-		JPanel baja = new JPanel(new BorderLayout());
-		baja.setSize(675, 150);
-		this.add(baja);
-		GUIMaker.getInstance().configurateWindow(this);
-		JButton btnBaja = new JButton("Dar de baja");
-		JLabel tfLabel = new JLabel("Introduce id del vehiculo para darlo de baja: ");
-		JTextField campoID= new JTextField();
-		JButton btnCancelar = new JButton("Cancelar");
-		JPanel botonera = new JPanel(new FlowLayout());
-		botonera.add(btnBaja);
-		botonera.add(btnCancelar);
-		baja.add(tfLabel,BorderLayout.LINE_START);
-		baja.add(botonera,BorderLayout.SOUTH);
-		baja.add(campoID,BorderLayout.CENTER);
+	
+		this.setLayout(new GridLayout(2,2));
+		GUIMaker.getInstance().configurateSubWindow(this,675,150,"Registrar una baja ");
+		tfLabel.setHorizontalAlignment(JLabel.CENTER);
+		campoID.setColumns(5);
+		prueba.add(campoID,BorderLayout.LINE_START);
+		add(tfLabel);
+		add(prueba);
+		add(btnBaja);
+		add(btnCancelar);
+		/////////////////////
 		btnBaja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((String) campoID.getText()!=null) Controller.getInstance().accion(eventos.BAJA_VEHICULO,  Integer.parseInt(campoID.getText()));
-				else JOptionPane.showMessageDialog(null, "ID VACIA, por favor, inserta una ID valida.","ERROR",JOptionPane.WARNING_MESSAGE); // no funca esto
-				System.out.println((String) campoID.getText());
-			}
+				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_VEHICULO,  Integer.parseInt(campoID.getText()));
+				else JOptionPane.showMessageDialog(null, "ID VACIA, por favor, inserta una ID valida.","ERROR",JOptionPane.WARNING_MESSAGE);
+				}
 			});
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

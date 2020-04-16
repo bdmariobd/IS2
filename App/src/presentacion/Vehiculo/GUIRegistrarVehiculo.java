@@ -16,9 +16,14 @@ import presentacion.eventos;
 
 @SuppressWarnings("serial")
 public class GUIRegistrarVehiculo extends JFrame {
-	
+	private boolean init=false;
 	public void initGui() {
-		GUIMaker.getInstance().configurateWindow(this);
+		if(init) {
+			setVisible(true);
+			return;
+		}
+		init=true;
+		GUIMaker.getInstance().configurateSubWindow(this,840,120,"Registrar daños en un vehículo ");
 		JPanel reg = new JPanel(new GridLayout(3,2));
 		this.add(reg);
 		this.setVisible(true);
@@ -37,8 +42,6 @@ public class GUIRegistrarVehiculo extends JFrame {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String [] datos = {idCampo.getText(),danosCampo.getText()};
-				System.out.println(datos[0]);
-				System.out.println(datos[1]);
 				Controller.getInstance().accion(eventos.REGISTRAR_DANOS, datos);
 			}
 			
@@ -48,8 +51,6 @@ public class GUIRegistrarVehiculo extends JFrame {
 				dispose();
 				}
 			});
-		setLocationRelativeTo(null);
-		pack();
 		}
 		
 		

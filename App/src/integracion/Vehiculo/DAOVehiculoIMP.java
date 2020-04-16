@@ -13,6 +13,16 @@ import negocio.Vehiculo.TVehiculo;
 
 public class DAOVehiculoIMP implements DAOVehiculo {
 
+	/*ERRORES: 
+	 * -1: no existe
+	 * -2: ya existe
+	 * -3: datos no validos (numeros negativos, matricula que no cumple el formato...)
+	 * -4: error de la base de datos
+	 * -5: otros errores desconocidos
+	 * Si se devuelve un transfer con que se devuelva null ya vale
+	 */
+	
+	//metodo que genera las id
 	private int getID() {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
@@ -21,36 +31,33 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			ResultSet resultSet = statement.executeQuery(s);
 			if(resultSet.next()) {
 				int id = resultSet.getInt("maximoo");
-				System.out.println(id);
 				return id+1;
 			}
 		}
 		catch (Exception e) {	
-			e.printStackTrace();
+			return -4;
 		}
-		return -1;
+		return -5;
 	}
 	@Override
 	public int create(TVehiculo v) {
 		// TODO Auto-generated method stub
-		int id = 0;
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			id = getID();
+			int id = getID();
+			if(id<1) return id;
+			
 			String insertstm = "INSERT into Vehiculos VALUES ("+id+","+v.getIdSucursal()+",'"+v.getTipo()+"','"+
 			v.getDaños()+"',"+v.isActivo()+",'"+v.getMatricula()+"');";
-			
 			//ResultSet resultSet = statement.executeQuery(query);
 			int resultSet = statement.executeUpdate(insertstm);
-			/*if(resultSet.next()) {
-				System.out.print(resultSet.getString("uno"));
-			}*/
+			if(resultSet==0) return -5;
+			return id;
 		}
 		catch (Exception e) {	
-			e.printStackTrace();
+			return -4;
 		}
-		return id;
 	}
 
 	@Override
@@ -70,9 +77,19 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 		return null;
 	}
 	@Override
-	public TVehiculo findByName(String nombre) {
+	public int findByName(String nombre) { //busqueda de matriculas
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Vehiculos WHERE matricula='"+nombre+"';";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) return 1;
+			return 0;
+		}
+		catch (Exception e) {
+			return -4;
+		}
 	}
 
 	@Override
@@ -93,9 +110,8 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			return list;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	@Override
@@ -107,11 +123,12 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			String query = "UPDATE Vehiculos SET tipo='"+v.getTipo()+"',matricula='"+v.getMatricula()+
 					"',activo="+v.isActivo()+",danos='"+v.getDaños()+"' WHERE id="+v.getId()+";";
 			int resultSet = statement.executeUpdate(query);
+			if(resultSet==0) return -1;
+			return v.getId();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			return -4;
 		}
-		return 0;
 	}
 	
 	@Override
@@ -120,15 +137,13 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
 			String deletestm = "UPDATE Vehiculos SET activo="+0+" WHERE id="+id+";";
-			
-			
 			int resultSet = statement.executeUpdate(deletestm);
-			
+			if(resultSet==0) return -1;
+			return id;
 		}
 		catch (Exception e) {	
-			e.printStackTrace();
+			return -4;
 		}
-		return 1;
 	}
 
 	public int regDamage(String[] datos) {
@@ -141,12 +156,27 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			String updatestm = "UPDATE Vehiculos SET danos=concat(danos,'"+", "+datos[1]+"') WHERE id="+id+";";
 			//UPDATE `Vehiculos` SET `danos` = 'test' WHERE `Vehiculos`.`id` = 100
 			int resultSet = statement.executeUpdate(updatestm);
-			
+			if(resultSet==0) return -1;
+			return id;
 		}
 		catch (Exception e) {	
-			e.printStackTrace();
+			return -4;
 		}
-		return 0;
+	}
+	public int isDeleted(int id) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Vehiculos WHERE id="+id+";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) {
+				return resultSet.getBoolean("activo")? 0:-6;
+			}
+			return -1;
+		}
+		catch (Exception e) {
+			return -4;
+		}
 	}
 
 }
