@@ -21,7 +21,8 @@ public class SAVehiculoImp implements SAVehiculo {
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
 		if(v.getMatricula().length()>10 || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
 				|| v.getTipo().length()>20) return -3;
-		if (dao.findByName(v.getMatricula())!=0) return -2;
+		int aux= dao.findByName(v.getMatricula());
+		if (aux!=0) return aux;
 		int id=  dao.create(v);
 		return id;
 	}

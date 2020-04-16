@@ -84,7 +84,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			Statement statement = connection.createStatement();
 			String query = "SELECT * FROM Vehiculos WHERE matricula='"+nombre+"';";
 			ResultSet resultSet = statement.executeQuery(query);
-			if(resultSet.next()) return 1;
+			if(resultSet.next()) return -2;
 			return 0;
 		}
 		catch (Exception e) {

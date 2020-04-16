@@ -1,11 +1,21 @@
 package presentacion;
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
 public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 	
+	private final static String version = "Version 0.1";
+	private final static String credits = "Mario Blanco Dominguez, Javier I. Sotelino Barriga, [...]"; // poneros xd
 	public GuiPrincIMP(){
 		super();
 		initGui();
@@ -14,6 +24,12 @@ public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 		String[] botones = {"Alumno", "Profesor", "Sucursal", "Sesion", "Test", "Vehiculo"};
 		add(GUIMaker.getInstance().getPanel(botones,null, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
+		JLabel info= new JLabel(version+" "+credits);
+		Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
+		info.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Informacion", TitledBorder.LEFT,TitledBorder.TOP));
+		JPanel pinfo = new JPanel();
+		pinfo.add(info);
+		add(pinfo,BorderLayout.LINE_START);
 	}
 	public void reInit() {
 		this.setVisible(true);

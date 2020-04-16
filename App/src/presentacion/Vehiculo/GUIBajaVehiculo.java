@@ -20,24 +20,23 @@ import presentacion.GUIMaker;
 import presentacion.eventos;
 
 public class GUIBajaVehiculo extends JFrame {
-	
+	private JPanel principal = new JPanel(new GridLayout(2,2));
 	private JButton btnBaja = new JButton("Dar de baja");
 	private JPanel prueba = new JPanel(new BorderLayout());
 	private JLabel tfLabel = new JLabel("Introduce id del vehiculo para darlo de baja: ");
 	private JTextField campoID= new JTextField();
 	private JButton btnCancelar = new JButton("Cancelar");
 	public void initGui() {
-	
-		this.setLayout(new GridLayout(2,2));
-		GUIMaker.getInstance().configurateSubWindow(this,675,150,"Registrar una baja ");
+		
+		GUIMaker.getInstance().configurateSubWindow(this,520,100,"Registrar una baja ");
 		tfLabel.setHorizontalAlignment(JLabel.CENTER);
 		campoID.setColumns(5);
 		prueba.add(campoID,BorderLayout.LINE_START);
-		add(tfLabel);
-		add(prueba);
-		add(btnBaja);
-		add(btnCancelar);
-		/////////////////////
+		principal.add(tfLabel);
+		principal.add(prueba);
+		principal.add(btnBaja);
+		principal.add(btnCancelar);
+		add(principal);
 		btnBaja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_VEHICULO,  Integer.parseInt(campoID.getText()));

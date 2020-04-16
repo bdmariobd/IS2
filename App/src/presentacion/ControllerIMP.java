@@ -62,8 +62,8 @@ public class ControllerIMP extends Controller {
 			break;
 			case eventos.MOSTRAR_UNO_VEHICULO:
 				TVehiculo veh = saVeh.read((int) datos);
-				//if(veh!=null)
-				GUIVehiculo.getInstance().update(eventos.MOSTRAR_UNO_OK_VEHICULO, veh);
+				if(veh==null) GUIVehiculo.getInstance().update(eventos.MOSTRAR_UNO_K0_VEHICULO, veh);
+				else GUIVehiculo.getInstance().update(eventos.MOSTRAR_UNO_OK_VEHICULO, veh);
 				//else ventana error
 			break;
 			case eventos.REGISTRAR_DANOS:
