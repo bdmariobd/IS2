@@ -17,17 +17,21 @@ import presentacion.eventos;
 
 @SuppressWarnings("serial")
 public class GUIAltaVehiculo extends JFrame {
-	
-	JButton btnAlta = new JButton("Dar de alta");
-	JButton btnCancelar = new JButton("Cancelar");
-	String[] labels = {"Insertar matricula","Insertar ID sucursal", "Insertar tipo",
+	private boolean init=false;
+	private JButton btnAlta = new JButton("Dar de alta");
+	private JButton btnCancelar = new JButton("Cancelar");
+	private String[] labels = {"Insertar matricula","Insertar ID sucursal", "Insertar tipo",
 			"Insertar daños"};
-	JLabel etiqgeneral;
-	JCheckBox actividad = new JCheckBox("¿Está activo?",true);
-	JTextField[] inputs = new JTextField[labels.length];
+	private JLabel etiqgeneral;
+	private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
+	private JTextField[] inputs = new JTextField[labels.length];
 	
 	public void initGui() {
-	
+	if(init) {
+		this.setVisible(true);
+		return;
+	}
+	init=true;
 	this.setLayout(new GridLayout(6,2,5,10));
 	for(int i = 0; i<labels.length;i++) {
 		etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);

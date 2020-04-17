@@ -26,8 +26,7 @@ public class GUIMostrarVehiculo extends JFrame {
 	
 	JPanel panelcentro = new JPanel(new FlowLayout());
 	
-
-	@SuppressWarnings("deprecation")
+	private boolean init=false;
 	public void mostrarUno(TVehiculo veh) {
 		String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
 		String[][]datos = {{Integer.toString(veh.getId()),Integer.toString(veh.getIdSucursal()),
@@ -46,8 +45,12 @@ public class GUIMostrarVehiculo extends JFrame {
 		this.setVisible(true);
 	}
 	public void initGui() {
+		if(init) {
+			setVisible(true);
+			return;
+		}
 		this.setLayout(new BorderLayout());
-		GUIMaker.getInstance().configurateSubWindow(this,200,200,"Mostrar un vehiculo ");
+		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un vehiculo ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
 		JLabel lbl= new JLabel ("Inserta una ID, por favor: ");
 		JTextField idCampo = new JTextField();

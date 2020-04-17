@@ -32,7 +32,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class GuiMakerIMP extends GUIMaker {
 	private Image car,pressman;
-	private final static Dimension windowSize= new Dimension(700,90);
+	private final static Dimension windowSize= new Dimension(720,210);
 	private final static int carSize= 80, fontSize = 18;
 	
 	private int index;
@@ -49,7 +49,7 @@ public class GuiMakerIMP extends GUIMaker {
 	public JPanel getPanel(String[]botones, String[]extra, String text, JFrame window) {
 		JPanel mainP= new JPanel();
 		mainP.setLayout(new BorderLayout());
-		mainP.add(getBotones(botones,window), BorderLayout.SOUTH);
+		mainP.add(getBotones(botones,window), BorderLayout.NORTH);
 		//animation = getAnimation(text);
 		//mainP.add(animation, BorderLayout.CENTER);
 		
@@ -92,10 +92,11 @@ public class GuiMakerIMP extends GUIMaker {
 	}
 	
 	@Override
+	//metodo que se va a llamar para configurar las ventanas auxiliares
 	public void configurateSubWindow(JFrame window,int h, int w, String title) {
 		window.setIconImage(pressman);
 		window.setPreferredSize(new Dimension(h,w));
-		window.setResizable(true);//cambiar a false cuando acabemos de fanciear
+		window.setResizable(false);//cambiar a false cuando acabemos de fanciear
 		window.setTitle(title+"- Autoescuela PM");
 		window.setVisible(true);
 		window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -103,8 +104,9 @@ public class GuiMakerIMP extends GUIMaker {
 		window.pack();
 		
 	}
+	
 	public void configurateWindow(JFrame window) {
-
+		//window.setLayout(new BorderLayout());
 		window.setIconImage(pressman);
 		window.setPreferredSize(windowSize);
 		window.setTitle("Autoescuela PM");
@@ -112,7 +114,6 @@ public class GuiMakerIMP extends GUIMaker {
 		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		window.pack();
 		window.setLocationRelativeTo(null);
-		animateCar();
 	}
 	@Override
 	public void reInit() {

@@ -9,6 +9,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libreria/mysql-connector-java-5.1.48.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mario/Desktop/syntheticaDark.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

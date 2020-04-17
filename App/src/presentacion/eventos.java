@@ -37,6 +37,15 @@ public class eventos {
 	
 	//Temporal cosas personalizadas
 	public static final int REGISTRAR_DANOS=45;
+	public static final int REGISTRAR_DANOS_OK=46;
+	public static final int REGISTRAR_DANOS_KO=47;
+	
+	//Mostrar uno
+	public static final int MOSTRAR_UNO_ALUMNO=50;
+	public static final int MOSTRAR_UNO_PROFESOR=51;
+	public static final int MOSTRAR_UNO_SUCURSAL=52;
+	public static final int MOSTRAR_UNO_SESION=53;
+	public static final int MOSTRAR_UNO_TEST=54;
 	public static final int MOSTRAR_UNO_VEHICULO=55;
 	
 	//Modificar
@@ -78,6 +87,14 @@ public class eventos {
 	public static final int MOSTRAR_UNO_OK_TEST=144;
 	public static final int MOSTRAR_UNO_OK_VEHICULO=145;
 	
+	//Modificar ok
+	public static final int MODIFICAR_OK_ALUMNO=160;
+	public static final int MODIFICAR_OK_PROFESOR=161;
+	public static final int MODIFICAR_OK_SUCURSAL=162;
+	public static final int MODIFICAR_OK_SESION=163;
+	public static final int MODIFICAR_OK_TEST=164;
+	public static final int MODIFICAR_OK_VEHICULO=165;
+		
 	//Buscar transfer en la bdd
 	public static final int BUSCAR_ALUMNO=200;
 	public static final int BUSCAR_PROFESOR=201;
@@ -113,7 +130,7 @@ public class eventos {
 	public static final int MOSTRAR_UNO_KO_SUCURSAL=242;
 	public static final int MOSTRAR_UNO_KO_SESION=243;
 	public static final int MOSTRAR_UNO_KO_TEST=244;
-	public static final int MOSTRAR_UNO_K0_VEHICULO=245;
+	public static final int MOSTRAR_UNO_KO_VEHICULO=245;
 	//Baja ko
 	public static final int BAJA_KO_ALUMNO=250;
 	public static final int BAJA_KO_PROFESOR=251;
@@ -121,4 +138,12 @@ public class eventos {
 	public static final int BAJA_KO_SESION=253;
 	public static final int BAJA_KO_TEST=254;
 	public static final int BAJA_KO_VEHICULO=255;
+	//Modificar ok
+	public static final int MODIFICAR_KO_ALUMNO=260;
+	public static final int MODIFICAR_KO_PROFESOR=261;
+	public static final int MODIFICAR_KO_SUCURSAL=262;
+	public static final int MODIFICAR_KO_SESION=263;
+	public static final int MODIFICAR_KO_TEST=264;
+	public static final int MODIFICAR_KO_VEHICULO=265;
+	//public static final int BUSCAR_VEHICULO_KO = ;
 }

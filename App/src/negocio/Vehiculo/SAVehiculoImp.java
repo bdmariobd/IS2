@@ -15,11 +15,17 @@ public class SAVehiculoImp implements SAVehiculo {
 	 * -6: el vehiculo ya estaba borrado
 	 * Si se devuelve un transfer con que se devuelva null ya vale
 	 */
+	private boolean matriculaCorrecta(String m) {
+		if(m.length()!=7) return false;
+		if(!m.substring(0, 4).chars().allMatch(Character::isDigit)) return false;
+		if(!m.substring(4, 7).chars().allMatch(Character::isLetter)) return false;
+		return true;
+	}
 	@Override
 	public int create(TVehiculo v) {
 		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		if(v.getMatricula().length()>10 || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
+		if(matriculaCorrecta(v.getMatricula()) || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
 				|| v.getTipo().length()>20) return -3;
 		int aux= dao.findByName(v.getMatricula());
 		if (aux!=0) return aux;

@@ -1,0 +1,8 @@
+Puede comunicarse el controller con un dao que simplemente se conecta a la base de datos?
+Como hacemos para vincular profesor con vehiculo?
+
+ERRORES:
+repetidas?
+cuando devuelves un tVehiculo o una lista de el no se sabe la causa del error
+No salen los errores cuando pones mal una id, rollo al buscar
+revisar el controlador

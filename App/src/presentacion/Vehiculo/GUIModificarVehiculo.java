@@ -20,8 +20,18 @@ import presentacion.eventos;
 
 public class GUIModificarVehiculo extends JFrame {
 	
-	private boolean init=false;
-	//panel que solo pregunta por la id
+	private boolean init=false, init2=false;
+	JPanel centerPanel= new JPanel(new GridLayout(5,2));
+	JLabel lblTipo = new JLabel("Tipo: ");
+	JLabel lblDanos = new JLabel("Daños: ");
+	JLabel lblActivo = new JLabel("¿Está activo?: ");
+	JCheckBox tfActivo = new JCheckBox();
+	JLabel lblMatricula = new JLabel("Matricula: ");
+	JTextField tfTipo= new JTextField();
+	JTextField tfDanos = new JTextField();
+	JTextField tfMatricula = new JTextField();
+	JButton actualizar = new JButton("Actualizar");
+	JButton btnCancelar=new JButton("Cancelar");
 	public void initGui() {
 		if(init) {
 			setVisible(true);
@@ -50,23 +60,15 @@ public class GUIModificarVehiculo extends JFrame {
 	}
 	//panel con los datos cargados
 	public void updatePanel(TVehiculo veh) {
-		JPanel centerPanel= new JPanel(new GridLayout(5,2));
-		JLabel lblTipo = new JLabel("Tipo: ");
-		JTextField tfTipo= new JTextField(veh.getTipo());
-		JLabel lblDanos = new JLabel("Daños: ");
-		JTextField tfDanos = new JTextField(veh.getDaños());
-		JLabel lblActivo = new JLabel("¿Está activo?: ");
-		JCheckBox tfActivo = new JCheckBox();
+		tfTipo.setText(veh.getTipo());
+		tfDanos.setText(veh.getDaños());
 		tfActivo.setSelected(veh.isActivo());
-		JLabel lblMatricula = new JLabel("Matricula: ");
-		JTextField tfMatricula = new JTextField(veh.getMatricula());
+		tfMatricula.setText(veh.getMatricula());
 		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
 		centerPanel.add(lblDanos);centerPanel.add(tfDanos);
 		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
 		centerPanel.add(lblMatricula);centerPanel.add(tfMatricula);
 		tfDanos.setColumns(30);
-		JButton actualizar = new JButton("Actualizar");
-		JButton btnCancelar=new JButton("Cancelar");
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TVehiculo v= new TVehiculo(veh.getId(),veh.getIdSucursal(),

@@ -91,6 +91,20 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			return -4;
 		}
 	}
+	public int findbyID(String id) { //busqueda de matriculas
+		// TODO Auto-generated method stub
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Vehiculos WHERE id="+id+";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) return 1;
+			else return -1;
+		}
+		catch (Exception e) {
+			return -4;
+		}
+	}
 
 	@Override
 	public List<TVehiculo> readAll() {
@@ -178,5 +192,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			return -4;
 		}
 	}
+	
+	
 
 }

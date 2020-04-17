@@ -15,7 +15,8 @@ import presentacion.GUIMaker;
 
 
 public class GUIMostrarTodos extends JFrame {
-	
+	private boolean init=false;
+	//panel que solo pregunta por la id
 	public String getValueAt(List<TVehiculo> lista, int arg0, int arg1) {
 		// TODO Auto-generated method stub
 		String s = null;
@@ -42,7 +43,12 @@ public class GUIMostrarTodos extends JFrame {
 		return s;
 	}
 	public void mostrarVehiculos(List<TVehiculo> lista) {
-		GUIMaker.getInstance().configurateWindow(this);
+		if(init) {
+			setVisible(true);
+			return;
+		}
+		init=true;
+		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los vehiculos");
 		String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
 		String[][]datos= new String[lista.size()][colNames.length];
 		for(int i=0;i<lista.size();++i) {
@@ -63,7 +69,7 @@ public class GUIMostrarTodos extends JFrame {
 		JScrollPane p= new JScrollPane(jt);
 		this.pack();
 		this.add(p);
-		this.setSize(300,400);
+		this.setSize(420,550);
 		this.setVisible(true);
 		
 	}

@@ -44,42 +44,76 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		
 	}
 	@Override
+	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {
 		// TODO Auto-generated method stub
 		String msg="";
+		
+		//errores de las operaciones. Más detalles en SAVehiculo
 		switch(event) {
 		case eventos.ALTA_OK_VEHICULO:
 			JOptionPane.showMessageDialog(null, "Añadido correctamente(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.ALTA_KO_VEHICULO:
-			if((int)res==-2)msg = "Error,matricula repetida.";
-			else if((int)res==-3) msg = "Error,compruebe tamaño y formato de los datos.";
+			if((int)res==-2)msg = "Error, matricula repetida.";
+			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
+			else if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
 				JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.BAJA_OK_VEHICULO:
-			JOptionPane.showMessageDialog(null, "Borrado correctamente(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Borrado correctamente (id= "+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.BAJA_KO_VEHICULO:
-			if((int)res==-1)msg = "Error,no existe.";
-			else if((int)res==-6) msg = "Error,ya se habia dado de baja.";
+			if((int)res==-6) msg = "Error, ya se habia dado de baja.";
+			if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_TODOS_OK_VEHICULO:
 			gTodosVeh.mostrarVehiculos((List<TVehiculo>) res);
 			break;
-		
+		case eventos.MOSTRAR_TODOS_KO_VEHICULO:
+			msg= "No se han podido mostrar los vehiculos";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
 		case eventos.MOSTRAR_UNO_OK_VEHICULO:
 			gMostrarVeh.mostrarUno((TVehiculo) res);
+			break;
+		case eventos.MOSTRAR_UNO_KO_VEHICULO:
+			msg= "No se han podido mostrar el vehiculos";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.BUSCAR_VEHICULO_OK:
 			gModVeh.updatePanel((TVehiculo) res);
 			break;
+		case eventos.MODIFICAR_OK_VEHICULO:
+			JOptionPane.showMessageDialog(null, "Modificado correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.MODIFICAR_KO_VEHICULO:
+			if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.REGISTRAR_DANOS_OK:
+			JOptionPane.showMessageDialog(null, "Añadido correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.REGISTRAR_DANOS_KO:
+			if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			break;
+		default:
+			
 		}
-		if((int)res==-4) msg="Error de conexion con la base de datos.";
-		else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
-		JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 	}
 	@Override
+	//Llamada a las operaciones
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand()=="Dar de alta un vehiculo") {
 			gAltaVeh.initGui();
