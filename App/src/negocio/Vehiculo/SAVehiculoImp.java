@@ -25,7 +25,7 @@ public class SAVehiculoImp implements SAVehiculo {
 	public int create(TVehiculo v) {
 		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		if(matriculaCorrecta(v.getMatricula()) || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
+		if(/*matriculaCorrecta(v.getMatricula()) ||*/ v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
 				|| v.getTipo().length()>20) return -3;
 		int aux= dao.findByName(v.getMatricula());
 		if (aux!=0) return aux;
@@ -52,13 +52,17 @@ public class SAVehiculoImp implements SAVehiculo {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(String id) {
 		// TODO Auto-generated method stub
-		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		int deleted= dao.isDeleted(id);
-		if(deleted!=0) return deleted;
-		int result = dao.delete(id);
-		return result;
+		if(isNumeric(id)) {
+			DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+			int deleted= dao.isDeleted(Integer.parseInt(id));
+			if(deleted!=0) return deleted;
+			int result = dao.delete(Integer.parseInt(id));
+			return result;
+		}
+		else return -3;
+		
 	}
 
 	@Override
@@ -68,4 +72,16 @@ public class SAVehiculoImp implements SAVehiculo {
 		return result;
 	}
 
+	private boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        int d = Integer.parseInt(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
+	
 }

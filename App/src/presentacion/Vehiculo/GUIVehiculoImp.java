@@ -68,6 +68,7 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		case eventos.BAJA_KO_VEHICULO:
 			if((int)res==-6) msg = "Error, ya se habia dado de baja.";
 			if((int)res==-1)msg = "Error, no existe.";
+			if((int)res==-3)msg = "Error, invalidez de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
@@ -125,7 +126,6 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 			gRegVeh.initGui();
 		}
 		else if(e.getActionCommand()=="Mostrar un vehiculo") {
-			System.out.println("debugear con prints es de pros");
 			gMostrarVeh.initGui();
 		}
 		else if(e.getActionCommand()=="Mostrar todos los vehiculos") {

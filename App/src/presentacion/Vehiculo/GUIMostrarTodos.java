@@ -16,7 +16,10 @@ import presentacion.GUIMaker;
 
 public class GUIMostrarTodos extends JFrame {
 	private boolean init=false;
-	//panel que solo pregunta por la id
+	JTable jt;
+	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
+	
+	
 	public String getValueAt(List<TVehiculo> lista, int arg0, int arg1) {
 		// TODO Auto-generated method stub
 		String s = null;
@@ -42,35 +45,38 @@ public class GUIMostrarTodos extends JFrame {
 		}
 		return s;
 	}
+	
 	public void mostrarVehiculos(List<TVehiculo> lista) {
 		if(init) {
 			setVisible(true);
+			actualizarTabla(lista);
 			return;
 		}
 		init=true;
 		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los vehiculos");
-		String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
-		String[][]datos= new String[lista.size()][colNames.length];
-		for(int i=0;i<lista.size();++i) {
-			for(int j=0;j<colNames.length;++j) {
-				datos[i][j]= getValueAt(lista,i,j);
-			}
-		}
+		jt= new JTable();
+		actualizarTabla(lista);
+		jt.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p= new JScrollPane(jt);
+		this.pack();
+		this.add(p);
+		this.setSize(720,450);
+		this.setVisible(true);
 		
+	}
+	private void actualizarTabla(List<TVehiculo> lista) {
+		String[][]datos= new String[lista.size()][colNames.length];
+		for(int i=0;i<lista.size();++i) 
+			for(int j=0;j<colNames.length;++j) 
+				datos[i][j]= getValueAt(lista,i,j);
+				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
-			
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
-		JTable jt= new JTable(tmodel);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p= new JScrollPane(jt);
-		this.pack();
-		this.add(p);
-		this.setSize(420,550);
-		this.setVisible(true);
-		
+		jt.setModel(tmodel);
 	}
 }
+

@@ -39,7 +39,7 @@ public class GUIBajaVehiculo extends JFrame {
 		add(principal);
 		btnBaja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_VEHICULO,  Integer.parseInt(campoID.getText()));
+				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_VEHICULO, (campoID.getText()));
 				else JOptionPane.showMessageDialog(null, "ID VACIA, por favor, inserta una ID valida.","ERROR",JOptionPane.WARNING_MESSAGE);
 				}
 			});

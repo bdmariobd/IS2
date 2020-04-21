@@ -50,7 +50,7 @@ public class ControllerIMP extends Controller {
 				
 			break;
 			case eventos.BAJA_VEHICULO:
-				id= saVeh.delete((int) datos);
+				id= saVeh.delete((String) datos);
 				if(id<0) GUIVehiculo.getInstance().update(eventos.BAJA_KO_VEHICULO, id);
 				else GUIVehiculo.getInstance().update(eventos.BAJA_OK_VEHICULO, id);
 			break;
