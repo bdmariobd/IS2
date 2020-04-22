@@ -1,6 +1,7 @@
 package integracion;
 
 import integracion.Vehiculo.DAOVehiculo;
+import integracion.Alumno.DAOAlumno;
 
 public abstract class FactoriaDAO {
 	private static FactoriaDAO instance;
@@ -15,6 +16,8 @@ public abstract class FactoriaDAO {
 	}
 
 	public abstract DAOVehiculo generateDAOVehiculo();
+	
+	public abstract DAOAlumno generateDAOAlumno();
 /*
 	public abstract DAOMarca generateDAOMarca();
 

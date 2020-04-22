@@ -6,20 +6,25 @@ import java.util.List;
 import negocio.FactoriaSA;
 import negocio.Vehiculo.SAVehiculo;
 import negocio.Vehiculo.TVehiculo;
+import presentacion.Alumno.GUIAlumno;
 import presentacion.Vehiculo.GUIVehiculo;
+import negocio.Alumno.SAalumno;
+import negocio.Alumno.TAlumno;
 
 public class ControllerIMP extends Controller {
 	private SAVehiculo saVeh;
+	private SAalumno saAlu;
 	public ControllerIMP() {
 		FactoriaSA factoria= FactoriaSA.getInstance();
 		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
+		saAlu = FactoriaSA.getInstance().generateSAalumno();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
 		// TODO Auto-generated method stub
 		int id;
 		switch(evento) {
-			case eventos.GUI_ALUMNO:
+			case eventos.GUI_ALUMNO: GUIAlumno.getInstance();
 				
 			break;
 			
@@ -79,6 +84,17 @@ public class ControllerIMP extends Controller {
 				TVehiculo v = saVeh.read((int) datos);
 				if(v!=null)GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_OK, v);
 				//else GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_KO, v);
+			
+			case eventos.ALTA_ALUMNO:
+				id = saAlu.create((TAlumno) datos); 
+				if(id<0) GUIAlumno.getInstance().update(eventos.ALTA_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.ALTA_OK_ALUMNO, id);
+			break;
+			
+			case eventos.BAJA_ALUMNO:
+				id= saAlu.delete((String) datos);
+				if(id<0) GUIAlumno.getInstance().update(eventos.BAJA_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.BAJA_OK_ALUMNO, id);
 			break;
 		}
 	}
