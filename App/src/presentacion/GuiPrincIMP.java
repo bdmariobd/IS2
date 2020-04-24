@@ -15,7 +15,7 @@ import javax.swing.border.TitledBorder;
 public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 	
 	private final static String version = "Version 0.1";
-	private final static String credits = "Mario Blanco Dominguez\n Javier I. Sotelino Barriga, [...]"; // poneros xd
+	private final static String credits = "Mario Blanco Dominguez\n Javier I. Sotelino Barriga, Alberto Chaves, Francisco Boccassi"; // poneros xd
 	public GuiPrincIMP(){
 		super();
 		initGui();

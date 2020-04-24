@@ -30,7 +30,7 @@ public class ControllerIMP extends Controller {
 			case eventos.GUI_VEHICULO: GUIVehiculo.getInstance();
 			break;
 			
-			case eventos.GUI_SUCURSAL:
+			case eventos.GUI_SUCURSAL: GUISucursal.getInstance();
 			
 			break;
 			case eventos.GUI_TEST:
