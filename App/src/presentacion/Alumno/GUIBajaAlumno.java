@@ -27,8 +27,8 @@ public class GUIBajaAlumno extends JFrame{
 	private JLabel tfLabel = new JLabel("Introduce el ID del alumno para darlo de baja: ");
 	private JTextField campoID= new JTextField();
 	private JButton btnCancelar = new JButton("Cancelar");
+	
 	public void initGui() {
-		
 		GUIMaker.getInstance().configurateSubWindow(this,520,100,"Registrar una baja ");
 		tfLabel.setHorizontalAlignment(JLabel.CENTER);
 		campoID.setColumns(5);

@@ -55,7 +55,7 @@ public class DAOAlumnoIMP implements DAOAlumno{
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Alumnos WHERE id="+id+";";
+			String query = "SELECT * FROM Alumno WHERE id="+id+";";
 			ResultSet resultSet = statement.executeQuery(query);
 			if(resultSet.next()) return new TAlumno(resultSet.getInt("id"),resultSet.getString("DNI"), 
 					resultSet.getString("nombre"), resultSet.getString("apellidos"),
@@ -68,9 +68,18 @@ public class DAOAlumnoIMP implements DAOAlumno{
 	}
 
 	@Override
-	public int findByName(String nombre) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int findByID(String id) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Alumno WHERE id="+id+";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) return 1;
+			else return -1;
+		}
+		catch (Exception e) {
+			return -4;
+		}
 	}
 
 	@Override
@@ -79,13 +88,12 @@ public class DAOAlumnoIMP implements DAOAlumno{
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Alumnos;";
-			
+			String query = "SELECT * FROM Alumno;";
 			List<TAlumno> list = new ArrayList<TAlumno>();
 			ResultSet resultSet = statement.executeQuery(query);
 			while(resultSet.next()) {
 				list.add(new TAlumno(resultSet.getInt("id"),resultSet.getString("DNI"), 
-						resultSet.getString("nombre"), resultSet.getString("apellido"),
+						resultSet.getString("nombre"), resultSet.getString("apellidos"),
 						resultSet.getString("telefono"),resultSet.getString("email"),resultSet.getBoolean("amaxofobia"),resultSet.getBoolean("activo")));
 			}
 			return list;
@@ -99,7 +107,19 @@ public class DAOAlumnoIMP implements DAOAlumno{
 	@Override
 	public int update(TAlumno a) {
 		// TODO Auto-generated method stub
-		return 0;
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "UPDATE Alumno SET DNI='"+a.getDNI()+"',nombre='"+a.getNombre()+"',apellidos='"+a.getApellidos()+"',telefono='"+a.getTelefono()+"',email='"+a.getEmail()+"',amaxofobia="+a.getAmaxofobia()+",Activo="+a.getActivo()+" WHERE id="+a.getId()+";";
+			int resultSet = statement.executeUpdate(query);
+			if(resultSet==0) return -1;
+			return a.getId();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return -4;
+		}
+			
 	}
 
 	@Override

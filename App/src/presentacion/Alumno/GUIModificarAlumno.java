@@ -21,6 +21,7 @@ import presentacion.eventos;
 
 public class GUIModificarAlumno extends JFrame{
 	private boolean init=false, init2=false;
+	
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
 	JLabel lblDNI = new JLabel("DNI: ");
 	JLabel lblNombre = new JLabel("Nombre: ");
@@ -38,6 +39,7 @@ public class GUIModificarAlumno extends JFrame{
 	JTextField tfTelefono = new JTextField();
 	JButton actualizar = new JButton("Actualizar");
 	JButton btnCancelar=new JButton("Cancelar");
+	
 	public void initGui() {
 		if(init) {
 			setVisible(true);
@@ -54,7 +56,7 @@ public class GUIModificarAlumno extends JFrame{
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int aux = Integer.parseInt(tfID.getText());
-				Controller.getInstance().accion(eventos.BUSCAR_ALUMNO,aux );
+				Controller.getInstance().accion(eventos.BUSCAR_ALUMNO, aux);
 				}
 			});
 		upPanel.add(lblID,BorderLayout.NORTH);
@@ -76,13 +78,16 @@ public class GUIModificarAlumno extends JFrame{
 		centerPanel.add(lblDNI); centerPanel.add(tfDNI);
 		centerPanel.add(lblNombre);centerPanel.add(tfNombre);
 		centerPanel.add(lblApellido);centerPanel.add(tfApellidos);
+		centerPanel.add(lbltelefono);centerPanel.add(tfTelefono);
+		centerPanel.add(lblemail);centerPanel.add(tfEmail);
 		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		centerPanel.add(lblAmaxofobia);centerPanel.add(tfAmaxofobia);
 		
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TAlumno v= new TAlumno(0,tfDNI.getText(),
+				TAlumno alu= new TAlumno(a.getId(),tfDNI.getText(),
 						tfNombre.getText(),tfApellidos.getText(),tfTelefono.getText(),tfEmail.getText(),tfAmaxofobia.isSelected(), tfActivo.isSelected());
-				Controller.getInstance().accion(eventos.MODIFICAR_VEHICULO, v);
+				Controller.getInstance().accion(eventos.MODIFICAR_ALUMNO, alu);
 			}
 			});
 		btnCancelar.addActionListener(new ActionListener() {

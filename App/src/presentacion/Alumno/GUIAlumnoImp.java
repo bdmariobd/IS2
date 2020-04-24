@@ -36,7 +36,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 	
 	public void initGui() {
 		String[] botones = {"Dar de alta un alumno", "Dar de baja un alumno", "Modificar un alumno", 
-				"Mostrar un alumno", "Motrar todos los alumnos", "R"};
+				"Mostrar un alumno", "Mostrar todos los alumnos"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -88,7 +88,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 			break;
 			
 		case eventos.MOSTRAR_TODOS_OK_ALUMNO:
-			//gTodosAlu.mostrarAlumnos((List<Alumno>) res);
+			gTodosAlu.mostrarAlumnos((List<TAlumno>) res);
 			break;
 			
 		case eventos.MOSTRAR_TODOS_KO_ALUMNO:
@@ -97,7 +97,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 			break;
 			
 		case eventos.MOSTRAR_UNO_OK_ALUMNO:
-			//gMostrarAlu.mostrarUno((TAlumno) res);
+			gMostrarAlu.mostrarUno((TAlumno) res);
 			break;
 			
 		case eventos.MOSTRAR_UNO_KO_ALUMNO:
@@ -125,14 +125,14 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		}
 		
 		else if(e.getActionCommand()=="Mostrar un alumno") {
-			//gMostrarAlu.initGui();
+			gMostrarAlu.initGui();
 		}
 		
 		else if(e.getActionCommand()=="Mostrar todos los alumnos") {
 			Controller.getInstance().accion(eventos.MOSTRAR_TODOS_ALUMNO, null);
 		}
 		
-		else if(e.getActionCommand()=="Modificar un alumnos") {
+		else if(e.getActionCommand()=="Modificar un alumno") {
 			gModAlu.initGui();
 		}
 	}

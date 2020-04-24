@@ -9,7 +9,7 @@ public interface DAOAlumno {
 
 	public TAlumno read(int id);
 
-	public int findByName(String nombre);
+	public int findByID(String id);
 
 	public List<TAlumno> readAll();
 
