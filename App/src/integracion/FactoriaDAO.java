@@ -1,27 +1,29 @@
 package integracion;
 
+import integracion.Sucursal.DAOSucursal;
 import integracion.Vehiculo.DAOVehiculo;
 
 public abstract class FactoriaDAO {
-	private static FactoriaDAO instance;
+    private static FactoriaDAO instance;
 
-	public static FactoriaDAO getInstance() {
-		
-		if(instance==null) {
-			instance = new FactoriaDAOIMP();
-		}
-		
-		return instance;
-	}
+    public static FactoriaDAO getInstance() {
 
-	public abstract DAOVehiculo generateDAOVehiculo();
+        if(instance==null) {
+            instance = new FactoriaDAOIMP();
+        }
+
+        return instance;
+    }
+
+    public abstract DAOVehiculo generateDAOVehiculo();
+    public abstract DAOSucursal generateDAOSucursal();
 /*
-	public abstract DAOMarca generateDAOMarca();
+    public abstract DAOMarca generateDAOMarca();
 
-	public abstract DAOProducto generateDAOProducto();
+    public abstract DAOProducto generateDAOProducto();
 
-	public abstract DAOVenta generateDAOVenta();
+    public abstract DAOVenta generateDAOVenta();
 
-	public abstract DAOCliente generateDAOCliente();
-	*/
+    public abstract DAOCliente generateDAOCliente();
+    */
 }

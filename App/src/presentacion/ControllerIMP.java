@@ -6,13 +6,18 @@ import java.util.List;
 import negocio.FactoriaSA;
 import negocio.Vehiculo.SAVehiculo;
 import negocio.Vehiculo.TVehiculo;
+import presentacion.Sucursal.GUISucursal;
 import presentacion.Vehiculo.GUIVehiculo;
+import negocio.Sucursal.SASucursal;
+import negocio.Sucursal.TSucursal;
 
 public class ControllerIMP extends Controller {
 	private SAVehiculo saVeh;
+	private SASucusal saSuc;
 	public ControllerIMP() {
 		FactoriaSA factoria= FactoriaSA.getInstance();
 		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
+		saSuc = FactoriaSA.getInstance().generateSASucursal();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
@@ -80,6 +85,38 @@ public class ControllerIMP extends Controller {
 				if(v!=null)GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_OK, v);
 				//else GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_KO, v);
 			break;
+			case eventos.ALTA_SUCURSAL: 
+                id = saSuc.create((TSucursal) datos); 
+                if(id<0) GUISucursal.getInstance().update(eventos.ALTA_KO_SUCURSAL, id);
+                else GUISucursal.getInstance().update(eventos.ALTA_OK_SUCURSAL, id);
+
+            break;
+            case eventos.BAJA_SUCURSAL:
+                id= saSuc.delete((String) datos);
+                if(id<0) GUISucursal.getInstance().update(eventos.BAJA_KO_SUCURSAL, id);
+                else GUIVehiculo.getInstance().update(eventos.BAJA_OK_SUCURSAL, id);
+            break;
+            case eventos.MOSTRAR_TODOS_SUCURSAL:
+                List<TSucursal> list = saSuc.readAll();
+                //if(list!=null)
+                GUISucursal.getInstance().update(eventos.MOSTRAR_TODOS_OK_SUCURSAL, list);
+                //else //ventana error
+            break;
+            case eventos.MOSTRAR_UNO_SUCURSAL:
+                TSucursal suc = saSuc.read((int) datos);
+                if(suc==null) GUISucursal.getInstance().update(eventos.MOSTRAR_UNO_KO_SUCURSAL, veh);
+                else GUISucursal.getInstance().update(eventos.MOSTRAR_UNO_OK_SUCURSAL, veh);
+            break;
+            case eventos.MODIFICAR_SUCURSAL:
+                id= saSuc.update((TSucursal) datos);
+                if(id<0) GUISucursal.getInstance().update(eventos.MODIFICAR_KO_SUCURSAL, id);
+                else GUISucursal.getInstance().update(eventos.MODIFICAR_OK_SUCURSAL, id);
+            break;
+            case eventos.BUSCAR_SUCURSAL:
+                TSucursal suc = saSuc.read((int) datos);
+                if(s!GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_OK, s);
+                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+            break;
 		}
 	}
 

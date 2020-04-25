@@ -15,4 +15,5 @@ public abstract class FactoriaSA {
 	}
 
 	public abstract SAVehiculo generateSAVehiculo();
+    public abstract SASucursal generateSASucursal();
 }
