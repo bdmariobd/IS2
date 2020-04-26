@@ -59,8 +59,8 @@ package presentacion.Sucursal;
 				}
 				
 				try {
-					TSucursal s= new TSucursal(0,Integer.parseInt(inputs[1].getText()),
-							inputs[2].getText(),inputs[0].getText(),actividad.isSelected(),inputs[3].getText());
+					TSucursal s= new TSucursal(0,inputs[1].getText(), //ÍD 0 o imput(0)?
+							Integer.parseInt(inputs[2].getText()),inputs[3].getText(),actividad.isSelected());
 					Controller.getInstance().accion(eventos.ALTA_SUCURSAL, s);
 				}
 				catch(Exception ex){

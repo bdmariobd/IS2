@@ -31,8 +31,8 @@ public class GUIMostrarSucursal extends JFrame {
 	private boolean init=false, init2=false;
 	public void mostrarUno(TSucursal suc) {
 		
-		String[][]datos = {{Integer.toString(suc.getId()),Integer.toString(suc.getCiudad()),
-			suc.getTelefono(),suc.getDireccion(), Boolean.toString(suc.isActiva())}};
+		String[][]datos = {{Integer.toString(suc.getId()),suc.getCiudad(),
+			Integer.toString(suc.getTelefono()),suc.getDireccion(), Boolean.toString(suc.isActivo())}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
 			@Override
 			public boolean isCellEditable(int row, int col) {

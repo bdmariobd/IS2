@@ -78,7 +78,7 @@ package integracion.Sucursal;
 		}
 		
 		@Override
-		public int findbyID(String id) { //busqueda por id
+		public int findbyID(int id) { //busqueda por id
 			// TODO Auto-generated method stub
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();

@@ -23,9 +23,9 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 	private GUIMostrarSucursal gMostrarSuc;
 	private GUIModificarSucursal gModSuc;
 	//private GUIRegistrarVehiculo gRegVeh;
-	private GUIMostrarTodasSucursales gTodasSuc;
+	private GUIMostrarTodasSucursales gTodosSuc;
 	
-	public GUIVehiculoImp() {
+	public GUISucursalImp() {
 		super();
 		gAltaSuc=new GUIAltaSucursal();
 		gBajaSuc=new GUIBajaSucursal();
@@ -74,14 +74,14 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_TODOS_OK_SUCURSAL:
-			gTodasSuc.mostrarSucursales((List<TSucursal>) res);
+			gTodosSuc.mostrarSucursales((List<TSucursal>) res);
 			break;
 		case eventos.MOSTRAR_TODOS_KO_SUCURSAL:
 			msg= "No se han podido mostrar las sucursales";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_UNO_OK_SUCURSAL:
-			gMostrarSuc.mostrarUna((TSucursal) res);
+			gMostrarSuc.mostrarUno((TSucursal) res);
 			break;
 		case eventos.MOSTRAR_UNO_KO_SUCURSAL:
 			msg= "No se han podido mostrar la sucursal";

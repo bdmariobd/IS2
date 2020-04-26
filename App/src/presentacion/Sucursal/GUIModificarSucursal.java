@@ -61,8 +61,9 @@ public class GUIModificarSucursal extends JFrame {
 	}
 	//panel con los datos cargados
 	public void updatePanel(TSucursal suc) {
+		String x = Integer.toString(suc.getTelefono());
 		tfCiudad.setText(suc.getCiudad());
-		tfTelefono.setText(suc.getTelefono());
+		tfTelefono.setText(x);
 		tfDireccion.setText(suc.getDireccion());
 		tfActivo.setSelected(suc.isActivo());
 		centerPanel.add(lblCiudad); centerPanel.add(tfCiudad);
@@ -72,7 +73,7 @@ public class GUIModificarSucursal extends JFrame {
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TSucursal s= new TSucursal(suc.getId(),
-						tfCiudad.getText(),tfTelefono.getText(),tfDireccion.getText(),tfActivo.isSelected());
+						tfCiudad.getText(),Integer.parseInt(tfTelefono.getText()),tfDireccion.getText(),tfActivo.isSelected());
 				Controller.getInstance().accion(eventos.MODIFICAR_SUCURSAL, s);
 			}
 			});

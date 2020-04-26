@@ -8,7 +8,7 @@ package integracion.Sucursal;
 
         public TSucursal read(int id);
 
-        public int findbyID(String id);
+        public int findbyID(int i);
 
         public List<TSucursal> readAll();
 
@@ -19,4 +19,3 @@ package integracion.Sucursal;
         public int isDeleted(int id);
     }
 
-}
