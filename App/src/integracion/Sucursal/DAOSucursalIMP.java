@@ -27,7 +27,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String s= "SELECT IFNULL(MAX(id),0) as maximoo FROM Sucursales;";
+				String s= "SELECT IFNULL(MAX(id),0) as maximoo FROM Sucursal;";
 				ResultSet resultSet = statement.executeQuery(s);
 				if(resultSet.next()) {
 					int id = resultSet.getInt("maximoo");
@@ -48,7 +48,7 @@ package integracion.Sucursal;
 				int id = getID();
 				if(id<1) return id;
 				
-				String insertstm = "INSERT into Vehiculos VALUES ("+id+","+suc.getCiudad()+",'"+suc.getTelefono()+"','"+
+				String insertstm = "INSERT into Sucursal VALUES ("+id+","+suc.getCiudad()+",'"+suc.getTelefono()+"','"+
 						suc.getDireccion()+"',"+suc.isActivo()+"');";
 				//ResultSet resultSet = statement.executeQuery(query);
 				int resultSet = statement.executeUpdate(insertstm);
@@ -65,7 +65,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String query = "SELECT * FROM Sucursales WHERE id="+id+";";
+				String query = "SELECT * FROM Sucursal WHERE id="+id+";";
 				ResultSet resultSet = statement.executeQuery(query);
 				if(resultSet.next()) return new TSucursal(resultSet.getInt("id"),resultSet.getString("ciudad"), 
 						resultSet.getInt("telefono"), resultSet.getString("direccion"),
@@ -83,7 +83,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String query = "SELECT * FROM Sucursales WHERE id="+id+";";
+				String query = "SELECT * FROM Sucursal WHERE id="+id+";";
 				ResultSet resultSet = statement.executeQuery(query);
 				if(resultSet.next()) return 1;
 				else return -1;
@@ -100,7 +100,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String query = "SELECT * FROM Sucursales;";
+				String query = "SELECT * FROM Sucursal;";
 				
 				List<TSucursal> list = new ArrayList<TSucursal>();
 				ResultSet resultSet = statement.executeQuery(query);
@@ -122,7 +122,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String query = "UPDATE Sucursales SET ciudad='"+suc.getCiudad()+"',telefono='"+suc.getTelefono()+
+				String query = "UPDATE Sucursal SET ciudad='"+suc.getCiudad()+"',telefono='"+suc.getTelefono()+
 						",direccion='"+suc.getDireccion()+"',activo="+suc.isActivo()+"' WHERE id="+suc.getId()+";";
 				int resultSet = statement.executeUpdate(query);
 				if(resultSet==0) return -1;
@@ -138,7 +138,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String deletestm = "UPDATE Sucursales SET activo="+0+" WHERE id="+id+";";
+				String deletestm = "UPDATE Sucursal SET activo="+0+" WHERE id="+id+";";
 				int resultSet = statement.executeUpdate(deletestm);
 				if(resultSet==0) return -1;
 				return id;
@@ -152,7 +152,7 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String query = "SELECT * FROM Sucursales WHERE id="+id+";";
+				String query = "SELECT * FROM Sucursal WHERE id="+id+";";
 				ResultSet resultSet = statement.executeQuery(query);
 				if(resultSet.next()) {
 					return resultSet.getBoolean("activo")? 0:-6;

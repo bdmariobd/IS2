@@ -16,8 +16,9 @@ public class ControllerIMP extends Controller {
 	private SASucursal saSuc;
 	public ControllerIMP() {
 		FactoriaSA factoria= FactoriaSA.getInstance();
-		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
+		
 		saSuc = FactoriaSA.getInstance().generateSASucursal();
+		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
