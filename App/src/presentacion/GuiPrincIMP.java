@@ -15,7 +15,7 @@ import javax.swing.border.TitledBorder;
 public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 	
 	private final static String version = "Version 0.1";
-	private final static String credits = "Mario Blanco Dominguez\n Javier I. Sotelino Barriga, [...]"; // poneros xd
+	private final static String credits = "Mario Blanco Dominguez\n Javier I. Sotelino Barriga, Alberto Chaves, Francisco Boccassi"; // poneros xd
 	public GuiPrincIMP(){
 		super();
 		initGui();
@@ -28,7 +28,7 @@ public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 	        buff.append("<html><table>");
 	        buff.append(String.format("<tr>Mario Blanco Domínguez</tr>"));
 	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
-	        buff.append(String.format("<tr>Javier de Vicente Vázquez</tr>"));
+	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
 	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
 	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
 	        buff.append(String.format("<tr>"+version+"</tr>"));
