@@ -1,6 +1,7 @@
 package negocio;
 
 import negocio.Vehiculo.SAVehiculo;
+import negocio.Alumno.SAalumno;
 
 public abstract class FactoriaSA {
 	private static FactoriaSA instance;
@@ -15,4 +16,6 @@ public abstract class FactoriaSA {
 	}
 
 	public abstract SAVehiculo generateSAVehiculo();
+	
+	public abstract SAalumno generateSAalumno();
 }

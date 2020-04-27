@@ -28,7 +28,7 @@ public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 	        buff.append("<html><table>");
 	        buff.append(String.format("<tr>Mario Blanco Domínguez</tr>"));
 	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
-	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
+	        buff.append(String.format("<tr>Javier de Vicente Vázquez</tr>"));
 	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
 	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
 	        buff.append(String.format("<tr>"+version+"</tr>"));
