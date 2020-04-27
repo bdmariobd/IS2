@@ -33,21 +33,24 @@ public class GUIAltaAlumno extends JFrame{
 			return;
 		}
 		init=true;
-		this.setLayout(new GridLayout(6,2,5,10));
-		for(int i = 0; i<labels.length;i++) {
-			etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
-			inputs[i] = new JTextField(20);
-			add(etiqgeneral);
-			etiqgeneral.setLabelFor(inputs[i]);
-			add(inputs[i]);
-		}
-	
-		add(new JPanel());
-		add(btnAlta);
-		add(actividad);
-		add(amaxofobia);
-		add(btnCancelar);
-		setVisible(true);
+		this.setLayout(new GridLayout(8,2,5,10));
+        for(int i = 0; i<labels.length;i++) {
+            etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
+            inputs[i] = new JTextField(20);
+            add(etiqgeneral);
+            etiqgeneral.setLabelFor(inputs[i]);
+            add(inputs[i]);
+        }
+
+        add(new JPanel());
+
+        add(actividad);
+        add(new JPanel());
+        add(amaxofobia);
+        add(btnAlta);
+        add(btnCancelar);
+        setVisible(true);
+
 		GUIMaker.getInstance().configurateSubWindow(this,410,250,"Registrar un alta");
 		
 		//Botones

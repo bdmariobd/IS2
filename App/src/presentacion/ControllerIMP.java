@@ -4,8 +4,11 @@ package presentacion;
 import java.util.List;
 
 import negocio.FactoriaSA;
+import negocio.Alumno.SAalumno;
+import negocio.Alumno.TAlumno;
 import negocio.Vehiculo.SAVehiculo;
 import negocio.Vehiculo.TVehiculo;
+import presentacion.Alumno.GUIAlumno;
 import presentacion.Sucursal.GUISucursal;
 import presentacion.Vehiculo.GUIVehiculo;
 import negocio.Sucursal.SASucursal;
@@ -14,17 +17,19 @@ import negocio.Sucursal.TSucursal;
 public class ControllerIMP extends Controller {
 	private SAVehiculo saVeh;
 	private SASucursal saSuc;
+	private SAalumno saAlu;
 	public ControllerIMP() {
 		FactoriaSA factoria= FactoriaSA.getInstance();
 		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
 		saSuc = FactoriaSA.getInstance().generateSASucursal();
+		saAlu = FactoriaSA.getInstance().generateSAalumno();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
 		// TODO Auto-generated method stub
 		int id;
 		switch(evento) {
-			case eventos.GUI_ALUMNO:
+			case eventos.GUI_ALUMNO: GUIAlumno.getInstance();
 				
 			break;
 			
@@ -46,6 +51,38 @@ public class ControllerIMP extends Controller {
 			break;
 			
 			case eventos.GUI_PRINC: GUIPrinc.getInstance().reInit();
+			break;
+			case eventos.ALTA_ALUMNO:
+				id = saAlu.create((TAlumno) datos); 
+				if(id<0) GUIAlumno.getInstance().update(eventos.ALTA_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.ALTA_OK_ALUMNO, id);
+			break;
+			
+			case eventos.BAJA_ALUMNO:
+				id= saAlu.delete((String) datos);
+				if(id<0) GUIAlumno.getInstance().update(eventos.BAJA_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.BAJA_OK_ALUMNO, id);
+			break;
+			case eventos.MODIFICAR_ALUMNO:
+				id= saAlu.update((TAlumno) datos);
+				if(id<0) GUIAlumno.getInstance().update(eventos.MODIFICAR_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.MODIFICAR_OK_ALUMNO, id);
+			break;
+			case eventos.BUSCAR_ALUMNO:
+				TAlumno a = saAlu.read((int) datos);
+				if(a!=null)GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_OK, a);
+				//else GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_KO, a);
+			break;
+			case eventos.MOSTRAR_UNO_ALUMNO:
+				TAlumno alu = saAlu.read((int) datos);
+				if(alu==null) GUIAlumno.getInstance().update(eventos.MOSTRAR_UNO_KO_ALUMNO, alu);
+				else GUIAlumno.getInstance().update(eventos.MOSTRAR_UNO_OK_ALUMNO, alu);
+			break;
+			case eventos.MOSTRAR_TODOS_ALUMNO:
+				List<TAlumno> lista = saAlu.readAll();
+				//if(list!=null)
+				GUIAlumno.getInstance().update(eventos.MOSTRAR_TODOS_OK_ALUMNO, lista);
+				//else //ventana error
 			break;
 			
 			case eventos.ALTA_VEHICULO: 

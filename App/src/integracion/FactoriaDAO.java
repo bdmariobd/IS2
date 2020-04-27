@@ -1,5 +1,6 @@
 package integracion;
 
+import integracion.Alumno.DAOAlumno;
 import integracion.Sucursal.DAOSucursal;
 import integracion.Vehiculo.DAOVehiculo;
 
@@ -26,4 +27,6 @@ public abstract class FactoriaDAO {
 
     public abstract DAOCliente generateDAOCliente();
     */
+
+	public abstract DAOAlumno generateDAOAlumno();
 }
