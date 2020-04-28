@@ -3,6 +3,7 @@ package integracion;
 import integracion.Alumno.DAOAlumno;
 import integracion.Sucursal.DAOSucursal;
 import integracion.Vehiculo.DAOVehiculo;
+import integracion.Test.DAOTest;
 
 public abstract class FactoriaDAO {
     private static FactoriaDAO instance;
@@ -29,4 +30,5 @@ public abstract class FactoriaDAO {
     */
 
 	public abstract DAOAlumno generateDAOAlumno();
+	public abstract DAOTest generateDAOTest();
 }
