@@ -30,7 +30,7 @@ package presentacion.Test;
 		public void initGui() {
 		if(init) {
 			this.setVisible(true);
-			return;
+			return; //a
 		}
 		init=true;
 		this.setLayout(new GridLayout(6,2,5,10));
