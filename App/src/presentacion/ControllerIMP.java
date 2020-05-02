@@ -131,7 +131,7 @@ public class ControllerIMP extends Controller {
             case eventos.BAJA_SUCURSAL:
                 id= saSuc.delete((String) datos);
                 if(id<0) GUISucursal.getInstance().update(eventos.BAJA_KO_SUCURSAL, id);
-                else GUIVehiculo.getInstance().update(eventos.BAJA_OK_SUCURSAL, id);
+                else GUISucursal.getInstance().update(eventos.BAJA_OK_SUCURSAL, id);
             break;
             case eventos.MOSTRAR_TODOS_SUCURSAL:
                 List<TSucursal>list2 = saSuc.readAll();
