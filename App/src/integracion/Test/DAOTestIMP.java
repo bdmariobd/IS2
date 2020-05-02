@@ -104,7 +104,7 @@ public class DAOTestIMP implements DAOTest {
 			ResultSet resultSet = statement.executeQuery(query);
 			while(resultSet.next()) {
 				list.add(new TTest(resultSet.getInt("id"),resultSet.getString("tipo"), 
-						resultSet.getInt("numpreguntas"), resultSet.getBoolean("activo"));
+						resultSet.getInt("numpreguntas"), resultSet.getBoolean("activo")));
 			}
 			return list;
 		}

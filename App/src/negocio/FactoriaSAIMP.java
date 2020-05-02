@@ -6,6 +6,8 @@ import negocio.Alumno.SAalumno;
 import negocio.Alumno.SAalumnoImp;
 import negocio.Sucursal.SASucursal;
 import negocio.Sucursal.SASucursalIMP;
+import negocio.Test.SATest;
+import negocio.Test.SATestIMP;
 
 public class FactoriaSAIMP extends FactoriaSA {
 
@@ -26,5 +28,11 @@ public class FactoriaSAIMP extends FactoriaSA {
 	public SAalumno generateSAalumno() {
 		// TODO Auto-generated method stub
 		return new SAalumnoImp();
+	}
+
+	@Override
+	public SATest generateSATest() {
+		// TODO Auto-generated method stub
+		return new SATestIMP();
 	}
 }

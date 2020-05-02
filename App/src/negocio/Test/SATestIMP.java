@@ -19,8 +19,8 @@ public class SATestIMP implements SATest{
 	@Override
 	public int create(TTest t) {
 		DAOTest dao = FactoriaDAO.getInstance().generateDAOTest();
-		if(t.getNumpreguntas().length()>300 // preguntar cuantas preguntas son
-				|| t.getTipo().length()>20) return -3;
+		if(t.getNumpreguntas()>50||t.getNumpreguntas()<1|| // preguntar cuantas preguntas son
+				 t.getTipo().length()>20) return -3;
 		int id=  dao.create(t);
 		return id;
 	}
@@ -40,7 +40,7 @@ public class SATestIMP implements SATest{
 	@Override
 	public int update(TTest t) {
 		// TODO Auto-generated method stub
-		return FactoriaDAO.getInstance().generateDAOTest().update(v);
+		return FactoriaDAO.getInstance().generateDAOTest().update(t);
 	}
 
 	@Override

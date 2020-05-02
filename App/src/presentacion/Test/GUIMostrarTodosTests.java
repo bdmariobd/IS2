@@ -18,10 +18,10 @@ import presentacion.GUIMaker;
 public class GUIMostrarTodosTests extends JFrame {
 	private boolean init=false;
 	JTable jt;
-	String[] colNames ={"id", "ciudad","telefono","direccion","activo"};
+	String[] colNames ={"id", "tipo","numero de preguntas","activo"};
 	
 	
-	public String getValueAt(List<TSucursal> lista, int arg0, int arg1) {
+	public String getValueAt(List<TTest> lista, int arg0, int arg1) {
 		// TODO Auto-generated method stub
 		String s = null;
 		switch (arg1) {
@@ -29,29 +29,26 @@ public class GUIMostrarTodosTests extends JFrame {
 			s = Integer.toString(lista.get(arg0).getId());
 			break;
 		case 1:
-			s = lista.get(arg0).getCiudad();
+			s = lista.get(arg0).getTipo();
 			break;
 		case 2:
-			s = Integer.toString(lista.get(arg0).getTelefono());
+			s = Integer.toString(lista.get(arg0).getNumpreguntas());
 			break;
 		case 3:
-			s = lista.get(arg0).getDireccion();
-			break;
-		case 4:
 			s = Boolean.toString(lista.get(arg0).isActivo());
 			break;
 		}
 		return s;
 	}
 	
-	public void mostrarSucursales(List<TSucursal> lista) {
+	public void mostrarTest(List<TTest> lista) {
 		if(init) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 		}
 		init=true;
-		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos las sucursales");
+		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los test");
 		jt= new JTable();
 		actualizarTabla(lista);
 		jt.getTableHeader().setReorderingAllowed(false);
@@ -62,7 +59,7 @@ public class GUIMostrarTodosTests extends JFrame {
 		this.setVisible(true);
 		
 	}
-	private void actualizarTabla(List<TSucursal> lista) {
+	private void actualizarTabla(List<TTest> lista) {
 		String[][]datos= new String[lista.size()][colNames.length];
 		for(int i=0;i<lista.size();++i) 
 			for(int j=0;j<colNames.length;++j) 

@@ -36,7 +36,7 @@ public class GUITestImp extends GUITest implements ActionListener {
 	}
 	public void initGui() {
 		String[] botones = {"Dar de alta un test", "Dar de baja un test",
-				"Mostrar un test", "Mostrar toos los tests", "Modificar un test"};
+				"Mostrar un test", "Mostrar todos los tests", "Modificar un test"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -54,7 +54,7 @@ public class GUITestImp extends GUITest implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Añadido correctamente(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.ALTA_KO_TEST:
-			if((int)res==-2)msg = "Error, id Sucursal repetido.";
+			if((int)res==-2)msg = "Error, id Test repetido.";
 			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
 			else if((int)res==-1)msg = "Error, no existe.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
@@ -73,21 +73,21 @@ public class GUITestImp extends GUITest implements ActionListener {
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_TODOS_OK_TEST:
-			gTodosSuc.mostrarSucursales((List<TSucursal>) res);
+			gTodosT.mostrarTest((List<TTest>) res);
 			break;
 		case eventos.MOSTRAR_TODOS_KO_TEST:
-			msg= "No se han podido mostrar las sucursales";
+			msg= "No se han podido mostrar los test";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_UNO_OK_TEST:
-			gMostrarSuc.mostrarUno((TSucursal) res);
+			gMostrarT.mostrarUno((TTest) res);
 			break;
 		case eventos.MOSTRAR_UNO_KO_TEST:
-			msg= "No se han podido mostrar la sucursal";
+			msg= "No se han podido mostrar la test";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.BUSCAR_TEST_OK:
-			gModSuc.updatePanel((TSucursal) res);
+			gModT.updatePanel((TTest) res);
 			break;
 		case eventos.MODIFICAR_OK_TEST:
 			JOptionPane.showMessageDialog(null, "Modificada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
@@ -106,20 +106,20 @@ public class GUITestImp extends GUITest implements ActionListener {
 	@Override
 	//Llamada a las operaciones
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand()=="Dar de alta una sucursal") {
-			gAltaSuc.initGui();
+		if(e.getActionCommand()=="Dar de alta un test") {
+			gAltaT.initGui();
 		}
-		else if(e.getActionCommand()=="Dar de baja una sucursal") {
-			gBajaSuc.initGui();
+		else if(e.getActionCommand()=="Dar de baja un test") {
+			gBajaT.initGui();
 		}
-		else if(e.getActionCommand()=="Mostrar una sucursal") {
-			gMostrarSuc.initGui();
+		else if(e.getActionCommand()=="Mostrar un test") {
+			gMostrarT.initGui();
 		}
-		else if(e.getActionCommand()=="Mostrar todas las sucursales") {
-			Controller.getInstance().accion(eventos.MOSTRAR_TODOS_SUCURSAL, null);
+		else if(e.getActionCommand()=="Mostrar todos los tests") {
+			Controller.getInstance().accion(eventos.MOSTRAR_TODOS_TEST, null);
 		}
-		else if(e.getActionCommand()=="Modificar una sucursal") {
-			gModSuc.initGui();
+		else if(e.getActionCommand()=="Modificar un test") {
+			gModT.initGui();
 		}
 		
 	}

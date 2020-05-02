@@ -8,6 +8,7 @@ package integracion.Sucursal;
 	import java.util.List;
 
 	import integracion.DAOConnect;
+    import integracion.DAOConnect;
 	import negocio.Sucursal.TSucursal;
 
 	public class DAOSucursalIMP implements DAOSucursal {

@@ -26,13 +26,13 @@ import java.awt.event.ActionListener;
 public class GUIMostrarTest extends JFrame {
 	
 	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "ciudad","telefono","direccion","activo"};
+	String[] colNames = {"id", "tipo","numpreguntas","activo"};
 	JTable jt;
 	private boolean init=false, init2=false;
-	public void mostrarUno(TSucursal suc) {
+	public void mostrarUno(TTest suc) {
 		
-		String[][]datos = {{Integer.toString(suc.getId()),suc.getCiudad(),
-			Integer.toString(suc.getTelefono()),suc.getDireccion(), Boolean.toString(suc.isActivo())}};
+		String[][]datos = {{Integer.toString(suc.getId()),suc.getTipo(),
+			Integer.toString(suc.getNumpreguntas()), Boolean.toString(suc.isActivo())}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
 			@Override
 			public boolean isCellEditable(int row, int col) {
@@ -62,7 +62,7 @@ public class GUIMostrarTest extends JFrame {
 		init=true;
 		jt= new JTable();
 		this.setLayout(new BorderLayout());
-		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un vehiculo ");
+		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un test ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
 		JLabel lbl= new JLabel ("Inserta una ID, por favor: ");
 		JTextField idCampo = new JTextField();
@@ -75,7 +75,7 @@ public class GUIMostrarTest extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dato = Integer.parseInt(idCampo.getText());
-				Controller.getInstance().accion(eventos.MOSTRAR_UNO_SUCURSAL,dato);
+				Controller.getInstance().accion(eventos.MOSTRAR_UNO_TEST,dato);
 				}
 			});
 		

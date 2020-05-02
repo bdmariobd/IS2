@@ -24,7 +24,7 @@ public class GUIBajaTest extends JFrame {
 	private JPanel principal = new JPanel(new GridLayout(2,2));
 	private JButton btnBaja = new JButton("Dar de baja");
 	private JPanel prueba = new JPanel(new BorderLayout());
-	private JLabel tfLabel = new JLabel("Introduce id de la sucursal para darle de baja: ");
+	private JLabel tfLabel = new JLabel("Introduce id del test para darle de baja: ");
 	private JTextField campoID= new JTextField();
 	private JButton btnCancelar = new JButton("Cancelar");
 	public void initGui() {
@@ -40,7 +40,7 @@ public class GUIBajaTest extends JFrame {
 		add(principal);
 		btnBaja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_SUCURSAL, (campoID.getText()));
+				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_TEST, (campoID.getText()));
 				else JOptionPane.showMessageDialog(null, "ID VACIA, por favor, inserta una ID valida.","ERROR",JOptionPane.WARNING_MESSAGE);
 				}
 			});

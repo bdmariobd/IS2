@@ -22,7 +22,7 @@ package presentacion.Test;
 		private boolean init=false;
 		private JButton btnAlta = new JButton("Dar de alta");
 		private JButton btnCancelar = new JButton("Cancelar");
-		private String[] labels = {"Insertar ciudad","Insertar telefono","Insertar direccion" };
+		private String[] labels = {"Insertar tipo","Insertar numero de preguntas" };
 		private JLabel etiqgeneral;
 		private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];
@@ -53,15 +53,15 @@ package presentacion.Test;
 			public void actionPerformed(ActionEvent e) {
 				for(int i=0;i<labels.length;i++) { // Menos uno por que danos que es la ultima puede ser vacia,jjaja aqui no salu2
 					if(inputs[i].getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "ciudad, telefono y direccion no pueden estar vacias","ERROR",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "tipo y numero de preguntas no pueden estar vacias","ERROR",JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 				}
 				
 				try {
-					TSucursal s= new TSucursal(0,inputs[0].getText(), 
-							Integer.parseInt(inputs[1].getText()),inputs[2].getText(),actividad.isSelected());
-					Controller.getInstance().accion(eventos.ALTA_SUCURSAL, s);
+					TTest s= new TTest(0,inputs[0].getText(), 
+							Integer.parseInt(inputs[1].getText()),actividad.isSelected());
+					Controller.getInstance().accion(eventos.ALTA_TEST, s);
 				}
 				catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Compruebe formato de los datos. \n ("+ex.toString()+")","Información",JOptionPane.WARNING_MESSAGE);

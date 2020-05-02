@@ -23,14 +23,12 @@ public class GUIModificarTest extends JFrame {
 	
 	private boolean init=false, init2=false;
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
-	JLabel lblCiudad = new JLabel("Ciudad: ");
-	JLabel lblTelefono = new JLabel("Telefono: ");
-	JLabel lblDireccion = new JLabel("Direccion: ");
+	JLabel lblTipo = new JLabel("Tipo: ");
+	JLabel lblNpreguntas = new JLabel("Numero de preguntas: ");
 	JLabel lblActivo = new JLabel("¿Está activa?: ");
 	JCheckBox tfActivo = new JCheckBox();
-	JTextField tfCiudad= new JTextField();
-	JTextField tfTelefono = new JTextField();
-	JTextField tfDireccion = new JTextField();
+	JTextField tfTipo= new JTextField();
+	JTextField tfNpreguntas = new JTextField();
 	JButton actualizar = new JButton("Actualizar");
 	JButton btnCancelar=new JButton("Cancelar");
 	public void initGui() {
@@ -39,7 +37,7 @@ public class GUIModificarTest extends JFrame {
 			return;
 		}
 		init=true;
-		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar una sucursal ");
+		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar un test ");
 		this.setLayout(new FlowLayout());
 		JPanel upPanel = new JPanel(new BorderLayout());
 		JLabel lblID = new JLabel("Introduce ID: ");
@@ -49,7 +47,7 @@ public class GUIModificarTest extends JFrame {
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int aux = Integer.parseInt(tfID.getText());
-				Controller.getInstance().accion(eventos.BUSCAR_SUCURSAL,aux );
+				Controller.getInstance().accion(eventos.BUSCAR_TEST,aux );
 				}
 			});
 		upPanel.add(lblID,BorderLayout.NORTH);
@@ -60,21 +58,19 @@ public class GUIModificarTest extends JFrame {
 		this.setVisible(true);
 	}
 	//panel con los datos cargados
-	public void updatePanel(TSucursal suc) {
-		String x = Integer.toString(suc.getTelefono());
-		tfCiudad.setText(suc.getCiudad());
-		tfTelefono.setText(x);
-		tfDireccion.setText(suc.getDireccion());
-		tfActivo.setSelected(suc.isActivo());
-		centerPanel.add(lblCiudad); centerPanel.add(tfCiudad);
-		centerPanel.add(lblTelefono);centerPanel.add(tfTelefono);
-		centerPanel.add(lblDireccion);centerPanel.add(tfDireccion);
+	public void updatePanel(TTest t) {
+		String x = Integer.toString(t.getNumpreguntas());
+		tfTipo.setText(t.getTipo());
+		tfNpreguntas.setText(x);
+		tfActivo.setSelected(t.isActivo());
+		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
+		centerPanel.add(lblNpreguntas);centerPanel.add(tfNpreguntas);
 		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TSucursal s= new TSucursal(suc.getId(),
-						tfCiudad.getText(),Integer.parseInt(tfTelefono.getText()),tfDireccion.getText(),tfActivo.isSelected());
-				Controller.getInstance().accion(eventos.MODIFICAR_SUCURSAL, s);
+				TTest s= new TTest(t.getId(),
+						tfTipo.getText(),Integer.parseInt(tfNpreguntas.getText()),tfActivo.isSelected());
+				Controller.getInstance().accion(eventos.MODIFICAR_TEST, s);
 			}
 			});
 		btnCancelar.addActionListener(new ActionListener() {
