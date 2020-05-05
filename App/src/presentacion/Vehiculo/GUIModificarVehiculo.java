@@ -19,7 +19,7 @@ import presentacion.GUIMaker;
 import presentacion.eventos;
 
 public class GUIModificarVehiculo extends JFrame {
-	
+	private static final long serialVersionUID = 1L;
 	private boolean init=false, init2=false;
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
 	JLabel lblTipo = new JLabel("Tipo: ");

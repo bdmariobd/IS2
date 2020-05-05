@@ -1,10 +1,11 @@
-package presentacion.Vehiculo;
+package presentacion.Profesor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,23 +16,23 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import negocio.Vehiculo.TVehiculo;
+import negocio.Profesor.TProfesor;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
 
-public class GUIMostrarVehiculo extends JFrame {
+public class GUIMostrarProfesor extends JFrame{
 	private static final long serialVersionUID = 1L;
 	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
+	String[] colNames = {"id", "DNI","nombre","apellidos","telefono","email","sueldo","activo"};
 	JTable jt;
 	private boolean init=false, init2=false;
-	public void mostrarUno(TVehiculo veh) {
+	public void mostrarUno(TProfesor a) {
 		
-		String[][]datos = {{Integer.toString(veh.getId()),Integer.toString(veh.getIdSucursal()),
-			veh.getTipo(),veh.getDaños(), Boolean.toString(veh.isActivo()),veh.getMatricula()}};
+		String[][]datos = {{Integer.toString(a.getId()),a.getDNI(),
+			a.getNombre(),a.getApellidos(),Integer.toString(a.getTelefono()),a.getEmail(), Integer.toString(a.getSueldo()), Boolean.toString(a.getActivo())}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
-			private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = 2L;
 
 			@Override
 			public boolean isCellEditable(int row, int col) {
@@ -50,6 +51,7 @@ public class GUIMostrarVehiculo extends JFrame {
 		Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
 		p.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Resultado", TitledBorder.LEFT,TitledBorder.TOP));
 		panelcentro.add(p);
+		
 		panelcentro.setSize(600, 200);
 		this.setVisible(true);
 	}
@@ -61,7 +63,7 @@ public class GUIMostrarVehiculo extends JFrame {
 		init=true;
 		jt= new JTable();
 		this.setLayout(new BorderLayout());
-		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un vehiculo ");
+		GUIMaker.getInstance().configurateSubWindow(this,650,200,"Mostrar un profesor ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
 		JLabel lbl= new JLabel ("Inserta una ID, por favor: ");
 		JTextField idCampo = new JTextField();
@@ -70,11 +72,11 @@ public class GUIMostrarVehiculo extends JFrame {
 		panelEtiq.add(idCampo);
 		add(panelEtiq, BorderLayout.NORTH);
 		
-		JButton btnBuscar = new JButton("Buscar!");
+		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dato = Integer.parseInt(idCampo.getText());
-				Controller.getInstance().accion(eventos.MOSTRAR_UNO_VEHICULO,dato);
+				Controller.getInstance().accion(eventos.MOSTRAR_UNO_PROFESOR,dato);
 				}
 			});
 		
@@ -83,5 +85,4 @@ public class GUIMostrarVehiculo extends JFrame {
 		this.setVisible(true);
 		
 	}
-	
 }
