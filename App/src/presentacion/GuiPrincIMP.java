@@ -24,22 +24,6 @@ public class GuiPrincIMP extends GUIPrinc implements ActionListener {
 		String[] botones = {"Alumno", "Profesor", "Sucursal", "Sesion", "Test", "Vehiculo"};
 		add(GUIMaker.getInstance().getPanel(botones,null, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
-		 StringBuilder buff = new StringBuilder();
-	        buff.append("<html><table>");
-	        buff.append(String.format("<tr>Mario Blanco Domínguez</tr>"));
-	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
-	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
-	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
-	        buff.append(String.format("<tr>Javier I. Sotelino Barriga</tr>"));
-	        buff.append(String.format("<tr>"+version+"</tr>"));
-	        buff.append("</table></html>");
-		
-		JLabel info= new JLabel(buff.toString());
-		Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
-		info.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Informacion", TitledBorder.LEFT,TitledBorder.TOP));
-		JPanel pinfo = new JPanel();
-		pinfo.add(info);
-		add(pinfo,BorderLayout.LINE_START);
 	}
 	public void reInit() {
 		this.setVisible(true);

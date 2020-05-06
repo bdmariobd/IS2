@@ -34,7 +34,7 @@ public class GUIAltaProfesor extends JFrame {
 		}
 		init = true;
 		this.setLayout(new GridLayout(8, 2, 5, 10));
-		for (int i = 0; i < labels.length; i++) {
+		for (int i = 0; i < labels.length-1; i++) {
 			etiqgeneral = new JLabel(labels[i] + ": ", SwingConstants.CENTER);
 			inputs[i] = new JTextField(20);
 			add(etiqgeneral);
@@ -42,7 +42,7 @@ public class GUIAltaProfesor extends JFrame {
 			add(inputs[i]);
 		}
 
-		add(new JPanel());
+		//add(new JPanel());
 		add(actividad);
 		add(new JPanel());
 		add(btnAlta);

@@ -72,5 +72,7 @@ public class SASucursalIMP implements SASucursal {
 	    }
 	    return true;
 	}
-	
+	 public int findByID(int id) {
+		 return FactoriaDAO.getInstance().generateDAOSucursal().findbyID(id);
+	 }
 }
