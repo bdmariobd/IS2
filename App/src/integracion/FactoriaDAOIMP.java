@@ -8,6 +8,8 @@ import integracion.Profesor.DAOProfesor;
 import integracion.Profesor.DAOProfesorIMP;
 import integracion.Sucursal.DAOSucursal;
 import integracion.Sucursal.DAOSucursalIMP;
+import integracion.Sesion.DAOSesion;
+import integracion.Sesion.DAOSesionIMP;
 
 public class FactoriaDAOIMP extends FactoriaDAO {
 
@@ -29,5 +31,10 @@ public class FactoriaDAOIMP extends FactoriaDAO {
 	public DAOProfesor generateDAOProfesor() {
 		// TODO Auto-generated method stub
 		return new DAOProfesorIMP();
+	}
+	@Override
+	public DAOSesion generateDAOSesion() {
+		// TODO Auto-generated method stub
+		return new DAOSesionIMP();
 	}
 }

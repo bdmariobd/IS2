@@ -8,6 +8,8 @@ import negocio.Sucursal.SASucursal;
 import negocio.Sucursal.SASucursalIMP;
 import negocio.Vehiculo.SAVehiculo;
 import negocio.Vehiculo.SAVehiculoImp;
+import negocio.Sesion.SASesion;
+import negocio.Sesion.SASesionIMP;
 
 public class FactoriaSAIMP extends FactoriaSA {
 
@@ -33,5 +35,10 @@ public class FactoriaSAIMP extends FactoriaSA {
 	@Override
 	public SAProfesor generateSAProfesor() {
 		return new SAProfesorImp();
+	}
+
+	@Override
+	public SASesion generateSASesion() {
+		return new SASesionIMP();
 	}
 }

@@ -16,18 +16,23 @@ import presentacion.Alumno.GUIAlumno;
 import presentacion.Profesor.GUIProfesor;
 import presentacion.Sucursal.GUISucursal;
 import presentacion.Vehiculo.GUIVehiculo;
+import negocio.Sesion.SASesion;
+import negocio.Sesion.TSesion;
+import presentacion.Sesion.GUISesion;
 
 public class ControllerIMP extends Controller {
 	private SAVehiculo saVeh;
 	private SASucursal saSuc;
 	private SAalumno saAlu;
 	private SAProfesor saProfe;
+	private SASesion saSesion;
 	public ControllerIMP() {
 		//FactoriaSA factoria= FactoriaSA.getInstance();
 		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
 		saSuc = FactoriaSA.getInstance().generateSASucursal();
 		saAlu = FactoriaSA.getInstance().generateSAalumno();
 		saProfe = FactoriaSA.getInstance().generateSAProfesor();
+		saSesion=FactoriaSA.getInstance().generateSASesion();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
@@ -48,7 +53,7 @@ public class ControllerIMP extends Controller {
 			case eventos.GUI_SUCURSAL: GUISucursal.getInstance();
 			
 			break;
-			case eventos.GUI_TEST:
+			case eventos.GUI_TEST: GUISesion.getInstance();
 				
 			break;
 			
@@ -190,6 +195,39 @@ public class ControllerIMP extends Controller {
             case eventos.BUSCAR_SUCURSAL:
                 TSucursal s = saSuc.read((int) datos);
                 if(s!=null)GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_OK, s);
+                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+            break;
+            
+            case eventos.ALTA_SESION: 
+                id = saSesion.create((TSesion) datos); 
+                if(id<0) GUISesion.getInstance().update(eventos.ALTA_KO_SESION, id);
+                else GUISesion.getInstance().update(eventos.ALTA_OK_SESION, id);
+
+            break;
+            case eventos.BAJA_SESION:
+                id= saSesion.delete((String) datos);
+                if(id<0) GUISesion.getInstance().update(eventos.BAJA_KO_SESION, id);
+                else GUISesion.getInstance().update(eventos.BAJA_OK_SESION, id);
+            break;
+            case eventos.MOSTRAR_TODOS_SESION:
+                List<TSucursal>listS = saSuc.readAll();
+                //if(list!=null)
+                GUISucursal.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION, listS);
+                //else //ventana error
+            break;
+            case eventos.MOSTRAR_UNO_SESION:
+                TSesion se = saSesion.read((int) datos);
+                if(se==null) GUISesion.getInstance().update(eventos.MOSTRAR_UNO_KO_SESION, se);
+                else GUISesion.getInstance().update(eventos.MOSTRAR_UNO_OK_SESION, se);
+            break;
+            case eventos.MODIFICAR_SESION:
+                id= saSesion.update((TSesion) datos);
+                if(id<0) GUISesion.getInstance().update(eventos.MODIFICAR_KO_SESION, id);
+                else GUISesion.getInstance().update(eventos.MODIFICAR_OK_SESION, id);
+            break;
+            case eventos.BUSCAR_SESION:
+                TSesion se2 = saSesion.read((int) datos);
+                if(se2!=null)GUISesion.getInstance().update(eventos.BUSCAR_SESION_OK, se2);
                 //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
             break;
 		}

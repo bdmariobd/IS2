@@ -1,5 +1,6 @@
 package negocio.Sesion;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import integracion.FactoriaDAO;
@@ -12,7 +13,7 @@ public class SASesionIMP implements SASesion {
 	 * -3: datos no validos (numeros negativos, matricula que no cumple el formato...)
 	 * -4: error de la base de datos
 	 * -5: otros errores desconocidos
-	 * -6: el vehiculo ya estaba borrado
+	 * -6: la sesion ya estaba borrada
 	 * Si se devuelve un transfer con que se devuelva null ya vale
 	 */
 		private boolean telefonoCorrecto(int m) {
@@ -21,10 +22,10 @@ public class SASesionIMP implements SASesion {
 		}
 	@Override
 	public int create(TSesion s) {
-		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
 		DAOSesion dao = FactoriaDAO.getInstance().generateDAOSesion();
-		if(!telefonoCorrecto(s.getTelefono()) || s.getCiudad().length()>100 
-				|| s.getDireccion().length()>150) return -3;
+		long totalMiliSeconds = (s.getHorafin()-s.getHoraini());
+		if(!telefonoCorrecto(s.getTelefono()) || (s.getHorafin()-s.getHoraini())>4|| 
+				|| s.getTipo().length()>150) return -3;
 		int id=  dao.create(s);
 		return id;
 	}

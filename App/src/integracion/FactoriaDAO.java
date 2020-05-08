@@ -4,6 +4,7 @@ import integracion.Alumno.DAOAlumno;
 import integracion.Profesor.DAOProfesor;
 import integracion.Sucursal.DAOSucursal;
 import integracion.Vehiculo.DAOVehiculo;
+import integracion.Sesion.DAOSesion;
 
 public abstract class FactoriaDAO {
     private static FactoriaDAO instance;
@@ -31,4 +32,5 @@ public abstract class FactoriaDAO {
 
 	public abstract DAOAlumno generateDAOAlumno();
 	public abstract DAOProfesor generateDAOProfesor();
+	public abstract DAOSesion generateDAOSesion();
 }
