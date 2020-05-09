@@ -1,11 +1,12 @@
-package negocio.Sucursal;
+package negocio.Test;
+
 
 import java.util.List;
 
 import integracion.FactoriaDAO;
-import integracion.Sucursal.DAOSucursal;
+import integracion.Test.DAOTest;
 
-public class SASucursalIMP implements SASucursal {
+public class SATestIMP implements SATest{
 	/*ERRORES: 
 	 * -1: no existe
 	 * -2: elemento repetido
@@ -15,44 +16,38 @@ public class SASucursalIMP implements SASucursal {
 	 * -6: el vehiculo ya estaba borrado
 	 * Si se devuelve un transfer con que se devuelva null ya vale
 	 */
-	private boolean telefonoCorrecto(int m) {
-		String x = Integer.toString(m);
-		if(x.length()!=9) return false;
-		return true;
-	}
 	@Override
-	public int create(TSucursal s) {
-		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
-		DAOSucursal dao = FactoriaDAO.getInstance().generateDAOSucursal();
-		if(!telefonoCorrecto(s.getTelefono()) || s.getCiudad().length()>100 
-				|| s.getDireccion().length()>150) return -3;
-		int id=  dao.create(s);
+	public int create(TTest t) {
+		DAOTest dao = FactoriaDAO.getInstance().generateDAOTest();
+		if(t.getNumpreguntas()>50||t.getNumpreguntas()<1|| // preguntar cuantas preguntas son
+				 t.getTipo().length()>20) return -3;
+		int id=  dao.create(t);
 		return id;
 	}
 
 	@Override
-	public TSucursal read(int id) {
+	public TTest read(int id) {
 		// TODO Auto-generated method stub
-		return FactoriaDAO.getInstance().generateDAOSucursal().read(id);
+		return FactoriaDAO.getInstance().generateDAOTest().read(id);
 	}
 
 	@Override
-	public List<TSucursal> readAll() {
+	public List<TTest> readAll() {
 		// TODO Auto-generated method stub
-		return FactoriaDAO.getInstance().generateDAOSucursal().readAll();
+		return FactoriaDAO.getInstance().generateDAOTest().readAll();
 	}
 
 	@Override
-	public int update(TSucursal s) {
+	public int update(TTest t) {
 		// TODO Auto-generated method stub
-		return FactoriaDAO.getInstance().generateDAOSucursal().update(s);
+		return FactoriaDAO.getInstance().generateDAOTest().update(t);
 	}
 
 	@Override
 	public int delete(String id) {
 		// TODO Auto-generated method stub
 		if(isNumeric(id)) {
-			DAOSucursal dao = FactoriaDAO.getInstance().generateDAOSucursal();
+			DAOTest dao = FactoriaDAO.getInstance().generateDAOTest();
 			int deleted= dao.isDeleted(Integer.parseInt(id));
 			if(deleted!=0) return deleted;
 			int result = dao.delete(Integer.parseInt(id));

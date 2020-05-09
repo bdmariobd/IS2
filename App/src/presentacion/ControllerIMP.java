@@ -4,28 +4,38 @@ package presentacion;
 import java.util.List;
 
 import negocio.FactoriaSA;
+import negocio.Alumno.SAalumno;
+import negocio.Alumno.TAlumno;
+import negocio.Alumno.TRelleno;
 import negocio.Vehiculo.SAVehiculo;
 import negocio.Vehiculo.TVehiculo;
+import presentacion.Alumno.GUIAlumno;
 import presentacion.Sucursal.GUISucursal;
+import presentacion.Test.GUITest;
 import presentacion.Vehiculo.GUIVehiculo;
 import negocio.Sucursal.SASucursal;
 import negocio.Sucursal.TSucursal;
+import negocio.Test.SATest;
+import negocio.Test.TTest;
 
 public class ControllerIMP extends Controller {
 	private SAVehiculo saVeh;
 	private SASucursal saSuc;
+	private SAalumno saAlu;
+	private SATest saTest;
 	public ControllerIMP() {
 		FactoriaSA factoria= FactoriaSA.getInstance();
-		
-		saSuc = FactoriaSA.getInstance().generateSASucursal();
 		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
+		saSuc = FactoriaSA.getInstance().generateSASucursal();
+		saAlu = FactoriaSA.getInstance().generateSAalumno();
+		saTest = FactoriaSA.getInstance().generateSATest();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
 		// TODO Auto-generated method stub
 		int id;
 		switch(evento) {
-			case eventos.GUI_ALUMNO:
+			case eventos.GUI_ALUMNO: GUIAlumno.getInstance();
 				
 			break;
 			
@@ -39,7 +49,7 @@ public class ControllerIMP extends Controller {
 			case eventos.GUI_SUCURSAL: GUISucursal.getInstance();
 			
 			break;
-			case eventos.GUI_TEST:
+			case eventos.GUI_TEST: GUITest.getInstance();
 				
 			break;
 			
@@ -47,6 +57,48 @@ public class ControllerIMP extends Controller {
 			break;
 			
 			case eventos.GUI_PRINC: GUIPrinc.getInstance().reInit();
+			break;
+			case eventos.ALTA_ALUMNO:
+				id = saAlu.create((TAlumno) datos); 
+				if(id<0) GUIAlumno.getInstance().update(eventos.ALTA_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.ALTA_OK_ALUMNO, id);
+			break;
+			
+			case eventos.BAJA_ALUMNO:
+				id= saAlu.delete((String) datos);
+				if(id<0) GUIAlumno.getInstance().update(eventos.BAJA_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.BAJA_OK_ALUMNO, id);
+			break;
+			case eventos.MODIFICAR_ALUMNO:
+				id= saAlu.update((TAlumno) datos);
+				if(id<0) GUIAlumno.getInstance().update(eventos.MODIFICAR_KO_ALUMNO, id);
+				else GUIAlumno.getInstance().update(eventos.MODIFICAR_OK_ALUMNO, id);
+			break;
+			case eventos.BUSCAR_ALUMNO:
+				TAlumno a = saAlu.read((int) datos);
+				if(a!=null)GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_OK, a);
+				//else GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_KO, a);
+			break;
+			case eventos.MOSTRAR_UNO_ALUMNO:
+				TAlumno alu = saAlu.read((int) datos);
+				if(alu==null) GUIAlumno.getInstance().update(eventos.MOSTRAR_UNO_KO_ALUMNO, alu);
+				else GUIAlumno.getInstance().update(eventos.MOSTRAR_UNO_OK_ALUMNO, alu);
+			break;
+			case eventos.MOSTRAR_TODOS_ALUMNO:
+				List<TAlumno> lista = saAlu.readAll();
+				//if(list!=null)
+				GUIAlumno.getInstance().update(eventos.MOSTRAR_TODOS_OK_ALUMNO, lista);
+				//else //ventana error
+			break;
+			case eventos.RELLENAR_TEST:
+				id = saAlu.rellenar((TRelleno) datos); 
+				if(id<0) GUIAlumno.getInstance().update(eventos.RELLENAR_KO_TEST, id);
+				else GUIAlumno.getInstance().update(eventos.RELLENAR_OK_TEST, id);
+			break;
+			case eventos.MOSTRAR_TEST_ALUMNO: /////7
+				List<TRelleno> listaR = saAlu.readAllR((int)datos);
+				//if(list!=null)
+				GUIAlumno.getInstance().update(eventos.MOSTRAR_OK_TEST_ALUMNO, listaR);
 			break;
 			
 			case eventos.ALTA_VEHICULO: 
@@ -116,6 +168,39 @@ public class ControllerIMP extends Controller {
             case eventos.BUSCAR_SUCURSAL:
                 TSucursal s = saSuc.read((int) datos);
                 if(s!=null)GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_OK, s);
+                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+            break;
+            //ajdjd
+            case eventos.ALTA_TEST: 
+                id = saTest.create((TTest) datos); 
+                if(id<0) GUITest.getInstance().update(eventos.ALTA_KO_TEST, id);
+                else GUITest.getInstance().update(eventos.ALTA_OK_TEST, id);
+
+            break;
+            case eventos.BAJA_TEST:
+            	id= saTest.delete((String) datos);
+                if(id<0) GUITest.getInstance().update(eventos.BAJA_KO_TEST, id);
+                else GUITest.getInstance().update(eventos.BAJA_OK_TEST, id);
+            break;
+            case eventos.MOSTRAR_TODOS_TEST:
+            	List<TTest> list3 = saTest.readAll();
+				//if(list!=null)
+				GUITest.getInstance().update(eventos.MOSTRAR_TODOS_OK_TEST, list3);
+				//else //ventana error
+            break;
+            case eventos.MOSTRAR_UNO_TEST:
+                TTest test = saTest.read((int) datos);
+                if(test==null) GUITest.getInstance().update(eventos.MOSTRAR_UNO_KO_TEST, test);
+                else GUITest.getInstance().update(eventos.MOSTRAR_UNO_OK_TEST, test);
+            break;
+            case eventos.MODIFICAR_TEST:
+            	id= saTest.update((TTest) datos);
+                if(id<0) GUITest.getInstance().update(eventos.MODIFICAR_KO_TEST, id);
+                else GUITest.getInstance().update(eventos.MODIFICAR_OK_TEST, id);
+            break;
+            case eventos.BUSCAR_TEST:
+                TTest t = saTest.read((int) datos);
+                if(t!=null)GUITest.getInstance().update(eventos.BUSCAR_TEST_OK, t);
                 //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
             break;
 		}

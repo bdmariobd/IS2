@@ -21,6 +21,7 @@ package integracion.Sucursal;
 		 * -5: otros errores desconocidos
 		 * Si se devuelve un transfer con que se devuelva null ya vale
 		 */
+		//a
 		
 		//metodo que genera las id
 		private int getID() {
@@ -48,8 +49,8 @@ package integracion.Sucursal;
 				int id = getID();
 				if(id<1) return id;
 				
-				String insertstm = "INSERT into Sucursal VALUES ("+id+","+suc.getCiudad()+",'"+suc.getTelefono()+"','"+
-						suc.getDireccion()+"',"+suc.isActivo()+"');";
+				String insertstm = "INSERT into Sucursal VALUES ("+id+",'"+suc.getCiudad()+"',"+suc.getTelefono()+",'"+
+						suc.getDireccion()+"',"+suc.isActivo()+");";
 				//ResultSet resultSet = statement.executeQuery(query);
 				int resultSet = statement.executeUpdate(insertstm);
 				if(resultSet==0) return -5;
@@ -122,8 +123,8 @@ package integracion.Sucursal;
 			try {
 				Connection connection = DAOConnect.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				String query = "UPDATE Sucursal SET ciudad='"+suc.getCiudad()+"',telefono='"+suc.getTelefono()+
-						",direccion='"+suc.getDireccion()+"',activo="+suc.isActivo()+"' WHERE id="+suc.getId()+";";
+				String query = "UPDATE Sucursal SET ciudad='"+suc.getCiudad()+"',telefono="+suc.getTelefono()+
+						",direccion='"+suc.getDireccion()+"',activo="+suc.isActivo()+" WHERE id="+suc.getId()+";";
 				int resultSet = statement.executeUpdate(query);
 				if(resultSet==0) return -1;
 				return suc.getId();
