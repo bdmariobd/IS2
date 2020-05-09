@@ -5,6 +5,7 @@ import java.util.List;
 import integracion.FactoriaDAO;
 import integracion.Alumno.DAOAlumno;
 import integracion.Test.DAOTest;
+import negocio.Test.TTest;
 
 public class SAalumnoImp implements SAalumno{
 
@@ -18,14 +19,16 @@ public class SAalumnoImp implements SAalumno{
 	}
 	public boolean existeIDAlumno(int s) {
 		DAOAlumno dao = FactoriaDAO.getInstance().generateDAOAlumno();
+		TAlumno a = dao.read(s);
 		int id=  dao.findByID(Integer.toString(s));
-		if(id==1)return true;
+		if(id==1&& a.getActivo())return true;
 		else return false;
 	}
 	public boolean existeIDTest(int s) {
 		DAOTest dao = FactoriaDAO.getInstance().generateDAOTest();
+		TTest t= dao.read(s);
 		int id=  dao.findbyID(s);
-		if(id==1)return true;
+		if(id==1&& t.isActivo())return true;
 		else return false;
 	}
 	public boolean numF(int fallos, int id) {

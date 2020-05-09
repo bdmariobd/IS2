@@ -73,20 +73,19 @@ public class GUIMostrarTestAlumno extends JFrame {
 			});
 		
 		panelcentro.add(btnBuscar);
-		add(panelcentro,BorderLayout.CENTER);
+		add(panelcentro,BorderLayout.WEST);
 		this.setVisible(true);
 		
 	}
 	public void mostrarTest(List<TRelleno> lista) {
 		
-		if(init) {
+		/*if(init) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
-		}
+		}*/
 		init=true;
-		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar test de alumno");
-		jt= new JTable();
+		GUIMaker.getInstance().configurateSubWindow(this, 2200, 800, "Mostrar test de alumno");
 		actualizarTabla(lista);
 		jt.getTableHeader().setReorderingAllowed(false);
 		JScrollPane p= new JScrollPane(jt);
