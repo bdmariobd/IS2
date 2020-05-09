@@ -24,7 +24,7 @@ public class SAalumnoImp implements SAalumno{
 		if(id==1&& a.getActivo())return true;
 		else return false;
 	}
-	public boolean existeIDTest(int s) {
+	public boolean existeIDTest(int s) {//
 		DAOTest dao = FactoriaDAO.getInstance().generateDAOTest();
 		TTest t= dao.read(s);
 		int id=  dao.findbyID(s);
