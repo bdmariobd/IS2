@@ -19,6 +19,7 @@ public class DAOAlumnoIMP implements DAOAlumno{
 			Statement statement = connection.createStatement();
 			String s= "SELECT IFNULL(MAX(id),0) as maximoo FROM Alumno;";
 			ResultSet resultSet = statement.executeQuery(s);
+			
 			if(resultSet.next()) {
 				int id = resultSet.getInt("maximoo");
 				return id+1;
@@ -33,20 +34,24 @@ public class DAOAlumnoIMP implements DAOAlumno{
 	@Override
 	public int create(TAlumno a) {
 		// TODO Auto-generated method stub
+		int id=-1;
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			int id = getID();
+			id = getID();
 			if(id<1) return id;
 			
 			String insertstm = "INSERT into Alumno VALUES ("+id+",'"+a.getDNI()+"','"+a.getNombre()+"','"+a.getApellidos()+"','"+a.getTelefono()+"','"+a.getEmail()+"',"+a.getAmaxofobia()+","+a.getActivo()+");";
 			
 			int resultSet = statement.executeUpdate(insertstm);
+			if(resultSet==0) return -5;
+			return id;
 		}
 		catch (Exception e) {	
-			e.printStackTrace();
+		
+			return -4;
 		}
-		return 1;
+		
 	}
 
 	@Override
@@ -67,6 +72,20 @@ public class DAOAlumnoIMP implements DAOAlumno{
 		return null;
 	}
 
+	@Override
+	public int findByDNI(String dni) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Alumno WHERE dni='"+dni+"';";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) return 1;
+			else return -1;
+		}
+		catch (Exception e) {
+			return -4;
+		}
+	}
 	@Override
 	public int findByID(String id) {
 		try {
@@ -156,4 +175,6 @@ public class DAOAlumnoIMP implements DAOAlumno{
 			return -4;
 		}
 	}
+
+	
 }

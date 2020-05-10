@@ -18,4 +18,6 @@ public interface DAOAlumno {
 	public int delete(int id);
 	
 	public int isDeleted(int id);
+
+	public int findByDNI(String dni);
 }
