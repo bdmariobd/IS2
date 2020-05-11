@@ -39,7 +39,7 @@ public class GUIMostrarTestAlumno extends JFrame {
 			s = Integer.toString(lista.get(arg0).getIdAlumno());
 			break;
 		case 1:
-			s = Integer.toString(lista.get(arg0).getIdAlumno());
+			s = Integer.toString(lista.get(arg0).getIdTest());
 			break;
 		case 2:
 			s = Integer.toString(lista.get(arg0).getNumFallos());
