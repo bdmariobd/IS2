@@ -1,4 +1,5 @@
-package presentacion.Vehiculo;
+package presentacion.Test;
+
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -14,16 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import negocio.Vehiculo.TVehiculo;
+import negocio.Test.TTest;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
 
-public class GUIBajaVehiculo extends JFrame {
+public class GUIBajaTest extends JFrame {
 	private JPanel principal = new JPanel(new GridLayout(2,2));
 	private JButton btnBaja = new JButton("Dar de baja");
 	private JPanel prueba = new JPanel(new BorderLayout());
-	private JLabel tfLabel = new JLabel("Introduce id del vehiculo para darlo de baja: ");
+	private JLabel tfLabel = new JLabel("Introduce id del test para darle de baja: ");
 	private JTextField campoID= new JTextField();
 	private JButton btnCancelar = new JButton("Cancelar");
 	public void initGui() {
@@ -39,7 +40,7 @@ public class GUIBajaVehiculo extends JFrame {
 		add(principal);
 		btnBaja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_VEHICULO, (campoID.getText()));
+				if(!campoID.getText().isEmpty()) Controller.getInstance().accion(eventos.BAJA_TEST, (campoID.getText()));
 				else JOptionPane.showMessageDialog(null, "ID VACIA, por favor, inserta una ID valida.","ERROR",JOptionPane.WARNING_MESSAGE);
 				}
 			});

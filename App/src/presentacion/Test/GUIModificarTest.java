@@ -1,4 +1,5 @@
-package presentacion.Vehiculo;
+package presentacion.Test;
+
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,23 +14,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import negocio.Vehiculo.TVehiculo;
+import negocio.Test.TTest;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
 
-public class GUIModificarVehiculo extends JFrame {
+public class GUIModificarTest extends JFrame {
 	
 	private boolean init=false, init2=false;
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
 	JLabel lblTipo = new JLabel("Tipo: ");
-	JLabel lblDanos = new JLabel("Daños: ");
-	JLabel lblActivo = new JLabel("¿Está activo?: ");
+	JLabel lblNpreguntas = new JLabel("Numero de preguntas: ");
+	JLabel lblActivo = new JLabel("¿Está activa?: ");
 	JCheckBox tfActivo = new JCheckBox();
-	JLabel lblMatricula = new JLabel("Matricula: ");
 	JTextField tfTipo= new JTextField();
-	JTextField tfDanos = new JTextField();
-	JTextField tfMatricula = new JTextField();
+	JTextField tfNpreguntas = new JTextField();
 	JButton actualizar = new JButton("Actualizar");
 	JButton btnCancelar=new JButton("Cancelar");
 	public void initGui() {
@@ -38,7 +37,7 @@ public class GUIModificarVehiculo extends JFrame {
 			return;
 		}
 		init=true;
-		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar un vehículo ");
+		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar un test ");
 		this.setLayout(new FlowLayout());
 		JPanel upPanel = new JPanel(new BorderLayout());
 		JLabel lblID = new JLabel("Introduce ID: ");
@@ -48,7 +47,7 @@ public class GUIModificarVehiculo extends JFrame {
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int aux = Integer.parseInt(tfID.getText());
-				Controller.getInstance().accion(eventos.BUSCAR_VEHICULO,aux );
+				Controller.getInstance().accion(eventos.BUSCAR_TEST,aux );
 				}
 			});
 		upPanel.add(lblID,BorderLayout.NORTH);
@@ -59,21 +58,19 @@ public class GUIModificarVehiculo extends JFrame {
 		this.setVisible(true);
 	}
 	//panel con los datos cargados
-	public void updatePanel(TVehiculo veh) {
-		tfTipo.setText(veh.getTipo());
-		tfDanos.setText(veh.getDaños());
-		tfActivo.setSelected(veh.isActivo());
-		tfMatricula.setText(veh.getMatricula());
+	public void updatePanel(TTest t) {
+		String x = Integer.toString(t.getNumpreguntas());
+		tfTipo.setText(t.getTipo());
+		tfNpreguntas.setText(x);
+		tfActivo.setSelected(t.isActivo());
 		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
-		centerPanel.add(lblDanos);centerPanel.add(tfDanos);
+		centerPanel.add(lblNpreguntas);centerPanel.add(tfNpreguntas);
 		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
-		centerPanel.add(lblMatricula);centerPanel.add(tfMatricula);
-		tfDanos.setColumns(30);
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TVehiculo v= new TVehiculo(veh.getId(),veh.getIdSucursal(),
-						tfTipo.getText(),tfMatricula.getText(),tfActivo.isSelected(),tfDanos.getText());
-				Controller.getInstance().accion(eventos.MODIFICAR_VEHICULO, v);
+				TTest s= new TTest(t.getId(),
+						tfTipo.getText(),Integer.parseInt(tfNpreguntas.getText()),tfActivo.isSelected());
+				Controller.getInstance().accion(eventos.MODIFICAR_TEST, s);
 			}
 			});
 		btnCancelar.addActionListener(new ActionListener() {

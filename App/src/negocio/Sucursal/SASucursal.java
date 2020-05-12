@@ -8,5 +8,5 @@ public interface SASucursal {
     public List<TSucursal> readAll();
     public int update(TSucursal suc);
     public int delete (String id);
-    public int findByID(int id);
+
 }

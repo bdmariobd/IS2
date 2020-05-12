@@ -2,7 +2,8 @@ package integracion.Alumno;
 
 import java.util.List;
 
-import negocio.Alumno.TAlumno;;
+import negocio.Alumno.TAlumno;
+import negocio.Alumno.TRelleno;;
 
 public interface DAOAlumno {
 	public int create(TAlumno a);
@@ -18,6 +19,8 @@ public interface DAOAlumno {
 	public int delete(int id);
 	
 	public int isDeleted(int id);
-
-	public int findByDNI(String dni);
+	
+	public int rellenar(TRelleno r);
+	
+	public List<TRelleno> readAllR(int id) ;
 }

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import negocio.Alumno.TAlumno;
+import negocio.Alumno.TRelleno;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
@@ -23,7 +24,8 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 	private GUIModificarAlumno gModAlu;
 	private GUIMostrarAlumno gMostrarAlu;
 	private GUIMostrarTodos gTodosAlu;
-	
+	private GUIRellenar gRellenar;
+	private GUIMostrarTestAlumno gMostarT;
 	public GUIAlumnoImp() {
 		super();
 		gAltaAlu = new GUIAltaAlumno();
@@ -31,12 +33,14 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		gModAlu = new GUIModificarAlumno();
 		gMostrarAlu = new GUIMostrarAlumno();
 		gTodosAlu = new GUIMostrarTodos();
+		gRellenar= new GUIRellenar();
+		gMostarT=new GUIMostrarTestAlumno();
 		initGui();
 	}
 	
 	public void initGui() {
 		String[] botones = {"Dar de alta un alumno", "Dar de baja un alumno", "Modificar un alumno", 
-				"Mostrar un alumno", "Mostrar todos los alumnos"};
+				"Mostrar un alumno", "Mostrar todos los alumnos","Rellenar test", "Mostrar test de alumno"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -108,7 +112,28 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		case eventos.BUSCAR_ALUMNO_OK:
 			gModAlu.updatePanel((TAlumno) res);
 			break;
+		case eventos.RELLENAR_OK_TEST:
+			JOptionPane.showMessageDialog(null, "Test rellenado correctamente para el alumno(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
 			
+		case eventos.RELLENAR_KO_TEST:
+			if((int)res==-1)msg = "Error, no existe el alumno.";
+			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			else if((int)res==-6) msg="Error, no existe el test.";
+			else if((int)res==-7) msg="Error, el numero de respuestas incorrectas supera el numero de respuestas total.";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.MOSTRAR_OK_TEST_ALUMNO:
+			gMostarT.mostrarTest((List<TRelleno>) res);
+			break;
+		case eventos.MOSTRAR_KO_TEST_ALUMNO:
+			if((int)res==-1)msg = "Error, no existe.";
+			if((int)res==-3)msg = "Error, invalidez de los datos.";
+			else if((int)res==-4) msg="Error de conexion con la base de datos.";
+			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			break;
 		default:
 		}
 	}
@@ -134,6 +159,12 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		
 		else if(e.getActionCommand()=="Modificar un alumno") {
 			gModAlu.initGui();
+		}
+		else if(e.getActionCommand()=="Rellenar test") {
+			gRellenar.initGui();
+		}
+		else if(e.getActionCommand()=="Mostrar test de alumno") {
+			gMostarT.initGui();
 		}
 	}
 }

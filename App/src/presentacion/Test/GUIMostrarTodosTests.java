@@ -1,4 +1,5 @@
-package presentacion.Vehiculo;
+package presentacion.Test;
+
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -10,17 +11,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import negocio.Vehiculo.TVehiculo;
+import negocio.Test.TTest;
 import presentacion.GUIMaker;
 
 
-public class GUIMostrarTodos extends JFrame {
+public class GUIMostrarTodosTests extends JFrame {
 	private boolean init=false;
 	JTable jt;
-	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
+	String[] colNames ={"id", "tipo","numero de preguntas","activo"};
 	
 	
-	public String getValueAt(List<TVehiculo> lista, int arg0, int arg1) {
+	public String getValueAt(List<TTest> lista, int arg0, int arg1) {
 		// TODO Auto-generated method stub
 		String s = null;
 		switch (arg1) {
@@ -28,32 +29,26 @@ public class GUIMostrarTodos extends JFrame {
 			s = Integer.toString(lista.get(arg0).getId());
 			break;
 		case 1:
-			s = Integer.toString(lista.get(arg0).getIdSucursal());
-			break;
-		case 2:
 			s = lista.get(arg0).getTipo();
 			break;
+		case 2:
+			s = Integer.toString(lista.get(arg0).getNumpreguntas());
+			break;
 		case 3:
-			s = lista.get(arg0).getDaños();
-			break;
-		case 4:
 			s = Boolean.toString(lista.get(arg0).isActivo());
-			break;
-		case 5:
-			s = lista.get(arg0).getMatricula();
 			break;
 		}
 		return s;
 	}
 	
-	public void mostrarVehiculos(List<TVehiculo> lista) {
+	public void mostrarTest(List<TTest> lista) {
 		if(init) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 		}
 		init=true;
-		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los vehiculos");
+		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los test");
 		jt= new JTable();
 		actualizarTabla(lista);
 		jt.getTableHeader().setReorderingAllowed(false);
@@ -64,7 +59,7 @@ public class GUIMostrarTodos extends JFrame {
 		this.setVisible(true);
 		
 	}
-	private void actualizarTabla(List<TVehiculo> lista) {
+	private void actualizarTabla(List<TTest> lista) {
 		String[][]datos= new String[lista.size()][colNames.length];
 		for(int i=0;i<lista.size();++i) 
 			for(int j=0;j<colNames.length;++j) 
@@ -79,4 +74,3 @@ public class GUIMostrarTodos extends JFrame {
 		jt.setModel(tmodel);
 	}
 }
-
