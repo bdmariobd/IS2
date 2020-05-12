@@ -60,6 +60,13 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 			else if((int)res==-1)msg = "Error, no existe.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			else if((int)res==-7) msg="Error, el profesor no figura en la base de datos.";
+			else if((int)res==-8) msg="Error, el alumno no figura en la base de datos.";
+			else if((int)res==-9) msg="Error, el profesor ya esta asignado a otra sesion.";
+			else if((int)res==-10) msg="Error, el alumno ya esta asignado a otra sesion.";
+
+
+
 				JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.BAJA_OK_SESION:

@@ -71,8 +71,8 @@ import javax.swing.JButton;
 					DateFormat formatter = new SimpleDateFormat("HH:mm");
 					Time horaI = (Time)formatter.parse(inputs[1].getText());
 					Time horaF = (Time)formatter.parse(inputs[2].getText());
-					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(), Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
-					Controller.getInstance().accion(eventos.ALTA_SUCURSAL, s);
+					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(),actividad.isSelected(), Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
+					Controller.getInstance().accion(eventos.ALTA_SESION, s);
 				}
 				catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Compruebe formato de los datos. \n ("+ex.toString()+")","Información",JOptionPane.WARNING_MESSAGE);

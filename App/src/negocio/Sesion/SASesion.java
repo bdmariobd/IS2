@@ -1,5 +1,7 @@
 package negocio.Sesion;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 public interface SASesion {
@@ -11,4 +13,8 @@ public interface SASesion {
     public int findByID(int id);
 	public List<TSesion> readAllA(int id);
 	public List<TSesion> readAllP(int id);
+	public boolean disponibleProfesor(int id, Date fecha, Time horaIni, Time horaFin);
+	public boolean disponibleAlumno(int id, Date fecha, Time horaIni, Time horaFin);
+	public boolean existeIDProfesor(int s);
+	public boolean existeIDAlumno(int s);
 }

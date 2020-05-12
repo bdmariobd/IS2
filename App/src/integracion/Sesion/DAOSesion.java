@@ -1,5 +1,6 @@
 package integracion.Sesion;
 
+import java.util.Date;
 import java.util.List;
 
 import negocio.Sesion.TSesion;;
@@ -20,4 +21,8 @@ public interface DAOSesion {
 	public List<TSesion> readAllProfesor(int id);
 	
 	public List<TSesion> readAllAlumno(int id);
+
+	public List<TSesion> ocupadoProfesor(int id, Date fecha);
+
+	public List<TSesion> ocupadoAlumno(int id, Date fecha);
 }

@@ -22,14 +22,14 @@ import presentacion.eventos;
 
 public class GUIBajaSesion extends JFrame {
 	private JPanel principal = new JPanel(new GridLayout(2,2));
-	private JButton btnBaja = new JButton("Dar de baja");
+	private JButton btnBaja = new JButton("Borrar");
 	private JPanel prueba = new JPanel(new BorderLayout());
 	private JLabel tfLabel = new JLabel("Introduce id de la Sesion para darle de baja: ");
 	private JTextField campoID= new JTextField();
 	private JButton btnCancelar = new JButton("Cancelar");
 	public void initGui() {
 		
-		GUIMaker.getInstance().configurateSubWindow(this,520,100,"Registrar una baja ");
+		GUIMaker.getInstance().configurateSubWindow(this,520,100,"Borrar sesion ");
 		tfLabel.setHorizontalAlignment(JLabel.CENTER);
 		campoID.setColumns(5);
 		prueba.add(campoID,BorderLayout.LINE_START);

@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import integracion.DAOConnect;
@@ -64,7 +65,48 @@ public class DAOSesionIMP implements DAOSesion{
 			return -4;
 		}
 	}
-
+	@Override
+	public List<TSesion> ocupadoProfesor(int id, Date fecha) {
+		// TODO Auto-generated method stub
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Sesion;";
+			List<TSesion> list = new ArrayList<TSesion>();
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				if(id==resultSet.getInt("idProfesor")&& fecha==resultSet.getDate("fecha"))
+				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
+						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
+			return list;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public List<TSesion> ocupadoAlumno(int id, Date fecha) {
+		// TODO Auto-generated method stub
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Sesion;";
+			List<TSesion> list = new ArrayList<TSesion>();
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				if(id==resultSet.getInt("idAlumno")&& fecha==resultSet.getDate("fecha"))
+				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
+						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
+			return list;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	@Override
 	public List<TSesion> readAllProfesor(int id) {
 		// TODO Auto-generated method stub
