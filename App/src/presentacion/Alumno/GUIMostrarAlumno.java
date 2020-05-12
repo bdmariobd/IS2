@@ -6,9 +6,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -23,6 +23,7 @@ import presentacion.GUIMaker;
 import presentacion.eventos;
 
 public class GUIMostrarAlumno extends JFrame{
+	private static final long serialVersionUID = 1L;
 	JPanel panelcentro = new JPanel(new FlowLayout());
 	String[] colNames = {"id", "DNI","nombre","apellidos","telefono","email","amaxofobia","activo"};
 	JTable jt;
@@ -30,8 +31,10 @@ public class GUIMostrarAlumno extends JFrame{
 	public void mostrarUno(TAlumno a) {
 		
 		String[][]datos = {{Integer.toString(a.getId()),a.getDNI(),
-			a.getNombre(),a.getApellidos(),a.getTelefono(),a.getEmail(), Boolean.toString(a.getAmaxofobia()), Boolean.toString(a.getActivo())}};
+			a.getNombre(),a.getApellidos(),Integer.toString(a.getTelefono()),a.getEmail(), Boolean.toString(a.getAmaxofobia()), Boolean.toString(a.getActivo())}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = -3918467539897813165L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;

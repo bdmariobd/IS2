@@ -14,6 +14,8 @@ public class SAProfesorImp implements SAProfesor {
 
 		if (datosIncorrectos(a))
 			id = -3;
+		else if (dao.existeDNI(a.getDNI()))
+			id = -2;
 		else if (!dao.existeIdSucursal(a.getIdSucursal()))
 			id = -6;
 		else
@@ -46,12 +48,29 @@ public class SAProfesorImp implements SAProfesor {
 		return id;
 	}
 
+	private boolean DNICorrecto(String DNI) {
+		boolean dniCorrecto = false;
+		if (DNI.length() == 9) {
+			String numerosDNI = DNI.substring(0, DNI.length() - 1);
+			try {
+				Integer.parseInt(numerosDNI);
+				try {
+					Integer.parseInt(DNI);
+				} catch (Exception e) {
+					dniCorrecto = true;
+				}
+			} catch (Exception e) {
+				dniCorrecto = false;
+			}
+		}
+		return dniCorrecto;
+	}
 	private boolean telefonoCorrecto(int m) {
 		String x = Integer.toString(m);
 		return (x.length() == 9);
 	}
 	private boolean datosIncorrectos(TProfesor a) {
-		return (a.getDNI().length() != 9 || a.getNombre().length() > 20 || a.getApellidos().length() > 20
+		return (!DNICorrecto(a.getDNI()) || a.getNombre().length() > 20 || a.getApellidos().length() > 20
 				|| !telefonoCorrecto(a.getTelefono()) || a.getEmail().length() > 100);
 	}
 

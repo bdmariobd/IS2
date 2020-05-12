@@ -4,6 +4,7 @@ import java.util.List;
 
 import integracion.FactoriaDAO;
 import integracion.Vehiculo.DAOVehiculo;
+import negocio.FactoriaSA;
 
 public class SAVehiculoImp implements SAVehiculo {
 	/*ERRORES: 
@@ -15,18 +16,24 @@ public class SAVehiculoImp implements SAVehiculo {
 	 * -6: el vehiculo ya estaba borrado
 	 * Si se devuelve un transfer con que se devuelva null ya vale
 	 */
-	private boolean matriculaCorrecta(String m) {
-		if(m.length()!=7) return false;
-		if(!m.substring(0, 4).chars().allMatch(Character::isDigit)) return false;
-		if(!m.substring(4, 7).chars().allMatch(Character::isLetter)) return false;
-		return true;
+	private boolean valid(char c) {
+		return Character.isLetter(c) && c!='A' && c!='E' &&c!='I' &&c!='O' && c!='U';
 	}
+	private boolean matriculaCorrecta(String m) {
+        if(m.length()!=7) return false;
+        if(!m.substring(0, 4).chars().allMatch(Character::isDigit)) return false;
+        String letters = m.substring(4, 7);
+        for(int i=0;i<letters.length();++i) {
+        	if(!valid(letters.charAt(i)))return false;
+        }
+        return true;
+    }
 	@Override
 	public int create(TVehiculo v) {
 		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		if(/*matriculaCorrecta(v.getMatricula()) ||*/ v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
-				|| v.getTipo().length()>20) return -3;
+		if(!matriculaCorrecta(v.getMatricula()) || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
+			|| v.getTipo().length()>20 || FactoriaSA.getInstance().generateSASucursal().findByID(v.getIdSucursal()) !=1 ) return -3;
 		int aux= dao.findByName(v.getMatricula());
 		if (aux!=0) return aux;
 		int id=  dao.create(v);

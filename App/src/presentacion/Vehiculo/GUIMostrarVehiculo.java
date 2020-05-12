@@ -1,30 +1,27 @@
 package presentacion.Vehiculo;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
-
-import negocio.Vehiculo.TVehiculo;
-import presentacion.Controller;
-import presentacion.GUIMaker;
-import presentacion.eventos;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import negocio.Vehiculo.TVehiculo;
+import presentacion.Controller;
+import presentacion.GUIMaker;
+import presentacion.eventos;
 
 public class GUIMostrarVehiculo extends JFrame {
-	
+	private static final long serialVersionUID = 1L;
 	JPanel panelcentro = new JPanel(new FlowLayout());
 	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
 	JTable jt;
@@ -34,6 +31,8 @@ public class GUIMostrarVehiculo extends JFrame {
 		String[][]datos = {{Integer.toString(veh.getId()),Integer.toString(veh.getIdSucursal()),
 			veh.getTipo(),veh.getDaños(), Boolean.toString(veh.isActivo()),veh.getMatricula()}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;

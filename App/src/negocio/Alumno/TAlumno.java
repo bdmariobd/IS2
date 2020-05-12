@@ -1,11 +1,11 @@
 package negocio.Alumno;
 
 public class TAlumno {
-	private int id;
-	private String DNI, nombre, apellidos, telefono, email;
+	private int id, telefono;
+	private String DNI, nombre, apellidos, email;
 	private boolean amaxofobia, activo;
 	
-	public TAlumno (int id, String DNI, String nombre, String apellidos, String telefono, String email, boolean amaxofobia, boolean activo) {
+	public TAlumno (int id, String DNI, String nombre, String apellidos, int telefono, String email, boolean amaxofobia, boolean activo) {
 		this.id = id;
 		this.DNI = DNI;
 		this.nombre = nombre;
@@ -32,7 +32,7 @@ public class TAlumno {
 		return apellidos;
 	}
 	
-	public String getTelefono() {
+	public int getTelefono() {
 		return telefono;
 	}
 	

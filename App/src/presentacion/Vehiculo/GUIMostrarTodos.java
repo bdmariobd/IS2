@@ -1,20 +1,16 @@
 package presentacion.Vehiculo;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import negocio.Vehiculo.TVehiculo;
 import presentacion.GUIMaker;
 
 
 public class GUIMostrarTodos extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private boolean init=false;
 	JTable jt;
 	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
@@ -71,6 +67,8 @@ public class GUIMostrarTodos extends JFrame {
 				datos[i][j]= getValueAt(lista,i,j);
 				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;

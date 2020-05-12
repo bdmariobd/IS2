@@ -20,7 +20,9 @@ import presentacion.eventos;
 
 
 public class GUIModificarAlumno extends JFrame{
-	private boolean init=false, init2=false;
+	private static final long serialVersionUID = 1L;
+
+	private boolean init=false;
 	
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
 	JLabel lblDNI = new JLabel("DNI: ");
@@ -72,7 +74,7 @@ public class GUIModificarAlumno extends JFrame{
 		tfNombre.setText(a.getNombre());
 		tfApellidos.setText(a.getApellidos());
 		tfEmail.setText(a.getEmail());
-		tfTelefono.setText(a.getTelefono());
+		tfTelefono.setText(String.valueOf(a.getTelefono()));
 		tfAmaxofobia.setSelected(a.getAmaxofobia());
 		tfActivo.setSelected(a.getActivo());
 		centerPanel.add(lblDNI); centerPanel.add(tfDNI);
@@ -86,7 +88,7 @@ public class GUIModificarAlumno extends JFrame{
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TAlumno alu= new TAlumno(a.getId(),tfDNI.getText(),
-						tfNombre.getText(),tfApellidos.getText(),tfTelefono.getText(),tfEmail.getText(),tfAmaxofobia.isSelected(), tfActivo.isSelected());
+						tfNombre.getText(),tfApellidos.getText(),Integer.valueOf(tfTelefono.getText()),tfEmail.getText(),tfAmaxofobia.isSelected(), tfActivo.isSelected());
 				Controller.getInstance().accion(eventos.MODIFICAR_ALUMNO, alu);
 			}
 			});

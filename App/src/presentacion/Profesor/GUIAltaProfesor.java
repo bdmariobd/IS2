@@ -33,8 +33,8 @@ public class GUIAltaProfesor extends JFrame {
 			return;
 		}
 		init = true;
-		this.setLayout(new GridLayout(8, 2, 5, 10));
-		for (int i = 0; i < labels.length-1; i++) {
+		this.setLayout(new GridLayout(9, 2, 5, 10));
+		for (int i = 0; i < labels.length; i++) {
 			etiqgeneral = new JLabel(labels[i] + ": ", SwingConstants.CENTER);
 			inputs[i] = new JTextField(20);
 			add(etiqgeneral);
@@ -54,7 +54,7 @@ public class GUIAltaProfesor extends JFrame {
 		// Botones
 		btnAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < labels.length - 1; i++) {
+				for (int i = 0; i < labels.length; i++) {
 					if (inputs[i].getText().isEmpty()) {
 						JOptionPane.showMessageDialog(null,
 								"Los campos no pueden ser vacíos", "ERROR",
