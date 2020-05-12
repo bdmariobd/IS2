@@ -43,7 +43,6 @@ public class GUIAltaAlumno extends JFrame{
         }
 
         add(new JPanel());
-
         add(actividad);
         add(new JPanel());
         add(amaxofobia);
@@ -64,7 +63,7 @@ public class GUIAltaAlumno extends JFrame{
 				}
 				
 				try {
-					TAlumno a = new TAlumno(0,inputs[0].getText(),inputs[1].getText(),inputs[2].getText(),inputs[3].getText(),inputs[4].getText(),amaxofobia.isSelected(),actividad.isSelected());
+					TAlumno a = new TAlumno(0,inputs[0].getText(),inputs[1].getText(),inputs[2].getText(),Integer.valueOf(inputs[3].getText()),inputs[4].getText(),amaxofobia.isSelected(),actividad.isSelected());
 					Controller.getInstance().accion(eventos.ALTA_ALUMNO, a);
 				}
 				catch(Exception ex){

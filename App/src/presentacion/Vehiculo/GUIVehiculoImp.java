@@ -1,16 +1,9 @@
 package presentacion.Vehiculo;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import negocio.Vehiculo.TVehiculo;
 import presentacion.Controller;
 import presentacion.GUIMaker;
@@ -24,20 +17,23 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 	private GUIModificarVehiculo gModVeh;
 	private GUIRegistrarVehiculo gRegVeh;
 	private GUIMostrarTodos gTodosVeh;
+	private boolean init=false;
 	
-	public GUIVehiculoImp() {
-		super();
+	
+	public void initGui() {
+		if(init) {
+			setVisible(true); 
+			return;
+		}
+		init=true;
 		gAltaVeh=new GUIAltaVehiculo();
 		gBajaVeh=new GUIBajaVehiculo();
 		gMostrarVeh=new GUIMostrarVehiculo();
 		gModVeh=new GUIModificarVehiculo();
 		gRegVeh=new GUIRegistrarVehiculo();
 		gTodosVeh= new GUIMostrarTodos();
-		initGui();
-	}
-	public void initGui() {
 		String[] botones = {"Dar de alta un vehiculo", "Dar de baja un vehiculo", "Registrar daños de un vehiculo", 
-				"Mostrar un vehiculo", "Mostrar todos los vehiculos", "Modificar un vehiculo"};
+				"Mostrar un vehiculo", "Mostrar todos los vehiculos", "Modificar un vehiculo","Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -134,7 +130,12 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		else if(e.getActionCommand()=="Modificar un vehiculo") {
 			gModVeh.initGui();
 		}
-		
+		else if(e.getActionCommand()=="Volver"){
+			this.dispose();
+			Controller.getInstance().accion(eventos.GUI_PRINC, null);
+			
+		}
+				
 	}
 }
 

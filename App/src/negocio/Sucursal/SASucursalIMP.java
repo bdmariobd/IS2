@@ -15,11 +15,10 @@ public class SASucursalIMP implements SASucursal {
 	 * -6: el vehiculo ya estaba borrado
 	 * Si se devuelve un transfer con que se devuelva null ya vale
 	 */
-	private boolean telefonoCorrecto(int m) {
-		String x = Integer.toString(m);
-		if(x.length()!=9) return false;
-		return true;
-	}
+		private boolean telefonoCorrecto(int m) {
+			String x = Integer.toString(m);
+			return (x.length()==9);
+		}
 	@Override
 	public int create(TSucursal s) {
 		// TODO comprobar que no hay matriculas repetidas y que la sucursal existe
@@ -73,5 +72,7 @@ public class SASucursalIMP implements SASucursal {
 	    }
 	    return true;
 	}
-	
+	 public int findByID(int id) {
+		 return FactoriaDAO.getInstance().generateDAOSucursal().findbyID(id);
+	 }
 }

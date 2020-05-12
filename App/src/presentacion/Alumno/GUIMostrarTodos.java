@@ -1,11 +1,8 @@
 package presentacion.Alumno;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +12,7 @@ import presentacion.GUIMaker;
 
 
 public class GUIMostrarTodos extends JFrame{
+	private static final long serialVersionUID = 1L;
 	private boolean init=false;
 	JTable jt;
 	String[] colNames = {"id", "DNI","nombre","apellidos","telefono","email","amaxofobia","activo"};
@@ -37,7 +35,7 @@ public class GUIMostrarTodos extends JFrame{
 			s = lista.get(arg0).getApellidos();
 			break;
 		case 4:
-			s = lista.get(arg0).getTelefono();
+			s = Integer.toString(lista.get(arg0).getTelefono());
 			break;
 		case 5:
 			s = lista.get(arg0).getEmail();
@@ -76,6 +74,8 @@ public class GUIMostrarTodos extends JFrame{
 				datos[i][j]= getValueAt(lista,i,j);
 				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;

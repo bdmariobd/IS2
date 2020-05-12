@@ -47,6 +47,23 @@ public class DAOProfesorIMP implements DAOProfesor {
 		return 1;
 	}
 
+	public boolean existeDNI(String DNI) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String consulta = "SELECT COUNT(*) FROM Profesor WHERE DNI = '" + DNI + "';";
+			ResultSet resultSet = statement.executeQuery(consulta);
+			if (resultSet.next())
+				return (resultSet.getInt(1) > 0);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
 	public boolean existeIdSucursal(int idSucursal) {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();

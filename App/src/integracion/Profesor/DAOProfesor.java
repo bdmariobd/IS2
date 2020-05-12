@@ -20,4 +20,6 @@ public interface DAOProfesor {
 	public int isDeleted(int id);
 
 	public boolean existeIdSucursal(int idSucursal);
+
+	public boolean existeDNI(String dni);
 }
