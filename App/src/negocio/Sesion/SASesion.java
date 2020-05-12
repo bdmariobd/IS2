@@ -9,4 +9,6 @@ public interface SASesion {
     public int update(TSesion ses);
     public int delete (String id);
     public int findByID(int id);
+	public List<TSesion> readAllA(int id);
+	public List<TSesion> readAllP(int id);
 }

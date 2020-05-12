@@ -20,23 +20,24 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private GUIAltaSesion gAltaSes;
 	private GUIBajaSesion gBajaSes;
-	private GUIMostrarSesion gMostrarSes;
+	private GUIMostrarTodasSesionesAlumno gMostrarSesA;
+	private GUIMostrarTodasSesionesProfesor gMostrarSesP;
 	private GUIModificarSesion gModSes;
-	//private GUIRegistrarVehiculo gRegVeh;
-	private GUIMostrarTodasSesiones gTodosSes;
+	private GUIMostrarSesion gMosSes;
 	
 	public GUISesionImp() {
 		super();
 		gAltaSes=new GUIAltaSesion();
 		gBajaSes=new GUIBajaSesion();
-		gMostrarSes=new GUIMostrarSesion();
+		gMostrarSesA=new GUIMostrarTodasSesionesAlumno();
+		gMostrarSesP=new GUIMostrarTodasSesionesProfesor();
 		gModSes=new GUIModificarSesion();
-		gTodosSes= new GUIMostrarTodasSesiones();
+		gMosSes= new GUIMostrarSesion();
 		initGui();
 	}
 	public void initGui() {
 		String[] botones = {"Dar de alta una sesion", "Dar de baja una sesion",
-				"Mostrar una sesion", "Mostrar todas las sesiones", "Modificar una sesion"};
+				"Mostrar una sesion", "Mostrar sesiones de un profesor","Mostrar sesiones de un alumno", "Modificar una sesion"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -72,15 +73,22 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
-		case eventos.MOSTRAR_TODOS_OK_SESION:
-			gTodosSes.mostrarSesiones((List<TSesion>) res);
+		case eventos.MOSTRAR_TODOS_OK_SESION_ALUMNO:
+			gMostrarSesA.mostrarSesiones((List<TSesion>) res);
 			break;
-		case eventos.MOSTRAR_TODOS_KO_SESION:
+		case eventos.MOSTRAR_TODOS_KO_SESION_ALUMNO:
+			msg= "No se han podido mostrar las sesiones";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case eventos.MOSTRAR_TODOS_OK_SESION_PROFESOR:
+			gMostrarSesP.mostrarSesiones((List<TSesion>) res);
+			break;
+		case eventos.MOSTRAR_TODOS_KO_SESION_PROFESOR:
 			msg= "No se han podido mostrar las sesiones";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_UNO_OK_SESION:
-			gMostrarSes.mostrarUno((TSesion) res);
+			gMosSes.mostrarUno((TSesion) res);
 			break;
 		case eventos.MOSTRAR_UNO_KO_SESION:
 			msg= "No se han podido mostrar la sesion";
@@ -113,10 +121,13 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 			gBajaSes.initGui();
 		}
 		else if(e.getActionCommand()=="Mostrar una sesion") {
-			gMostrarSes.initGui();
+			gMosSes.initGui();
 		}
-		else if(e.getActionCommand()=="Mostrar todas las sesiones") {
-			Controller.getInstance().accion(eventos.MOSTRAR_TODOS_SESION, null);
+		else if(e.getActionCommand()=="Mostrar sesiones de un alumno") {
+			gMostrarSesA.initGui();
+		}
+		else if(e.getActionCommand()=="Mostrar sesiones de un profesor") {
+			gMostrarSesP.initGui();
 		}
 		else if(e.getActionCommand()=="Modificar una sesion") {
 			gModSes.initGui();

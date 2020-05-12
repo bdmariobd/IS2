@@ -11,11 +11,13 @@ public interface DAOSesion {
 
 	public int findByID(String id);
 
-	public List<TSesion> readAll();
-
 	public int update(TSesion a);
 
 	public int delete(int id);
 	
 	public int isDeleted(int id);
+
+	public List<TSesion> readAllProfesor(int id);
+	
+	public List<TSesion> readAllAlumno(int id);
 }

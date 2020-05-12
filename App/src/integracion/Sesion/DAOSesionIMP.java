@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import integracion.DAOConnect;
+import negocio.Profesor.TProfesor;
 import negocio.Sesion.TSesion;
 
 public class DAOSesionIMP implements DAOSesion{
@@ -48,24 +49,7 @@ public class DAOSesionIMP implements DAOSesion{
 		return 1;
 	}
 
-	@Override
-	public TSesion read(int id) {
-		// TODO Auto-generated method stub
-		try {
-			Connection connection = DAOConnect.getInstance().getConnection();
-			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Sesion WHERE id="+id+";";
-			ResultSet resultSet = statement.executeQuery(query);
-			if(resultSet.next()) return new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
-					resultSet.getTime("horaini"), resultSet.getTime("horafin"),
-					resultSet.getString("tipo"),resultSet.getBoolean("activo"));
-		}
-		catch (Exception e) {
-			return null;
-		}
-		return null;
-	}
-
+	
 	@Override
 	public int findByID(String id) {
 		try {
@@ -82,7 +66,7 @@ public class DAOSesionIMP implements DAOSesion{
 	}
 
 	@Override
-	public List<TSesion> readAll() {
+	public List<TSesion> readAllProfesor(int id) {
 		// TODO Auto-generated method stub
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
@@ -91,9 +75,30 @@ public class DAOSesionIMP implements DAOSesion{
 			List<TSesion> list = new ArrayList<TSesion>();
 			ResultSet resultSet = statement.executeQuery(query);
 			while(resultSet.next()) {
+				if(id==resultSet.getInt("idProfesor"))
 				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
 						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
-						resultSet.getString("tipo"),resultSet.getBoolean("activo")));}
+						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
+			return list;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public List<TSesion> readAllAlumno(int id) {
+		// TODO Auto-generated method stub
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Sesion;";
+			List<TSesion> list = new ArrayList<TSesion>();
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				if(id==resultSet.getInt("idProfesor"))
+				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
+						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
 			return list;
 		}
 		catch (Exception e) {
@@ -153,5 +158,23 @@ public class DAOSesionIMP implements DAOSesion{
 		catch (Exception e) {
 			return -4;
 		}
+	}
+
+	@Override
+	public TSesion read(int id) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM Profesor WHERE id=" + id + ";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if (resultSet.next())
+				return new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
+						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor"));
+			} 
+	catch (Exception e) {
+			return null;
+		}
+		return null;
 	}
 }

@@ -37,11 +37,15 @@ public class SASesionIMP implements SASesion {
 	}
 
 	@Override
-	public List<TSesion> readAll() {
+	public List<TSesion> readAllP(int id) {
 		// TODO Auto-generated method stub
-		return FactoriaDAO.getInstance().generateDAOSesion().readAll();
+		return FactoriaDAO.getInstance().generateDAOSesion().readAllProfesor(id);
 	}
-
+	@Override
+	public List<TSesion> readAllA(int id) {
+		// TODO Auto-generated method stub
+		return FactoriaDAO.getInstance().generateDAOSesion().readAllAlumno(id);
+	}
 	@Override
 	public int update(TSesion s) {
 		// TODO Auto-generated method stub
@@ -73,7 +77,14 @@ public class SASesionIMP implements SASesion {
 	    }
 	    return true;
 	}
-	 public int findByID(int id) {
-		 return FactoriaDAO.getInstance().generateDAOSesion().findByID(id);
-	 }
+	@Override
+	public List<TSesion> readAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int findByID(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

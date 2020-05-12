@@ -1,39 +1,40 @@
 package presentacion.Sesion;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
-
-import negocio.Sesion.TSesion;
-import presentacion.Controller;
-import presentacion.GUIMaker;
-import presentacion.eventos;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIMostrarSesion extends JFrame {
-	
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import negocio.Sesion.TSesion;
+import presentacion.Controller;
+import presentacion.GUIMaker;
+import presentacion.eventos;
+
+public class GUIMostrarSesion extends JFrame{
+	private static final long serialVersionUID = 1L;
 	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "fecha","horaIni","horaFin","tipo","activo"};
+	String[] colNames = {"id", "DNI","nombre","apellidos","telefono","email","sueldo","activo"};
 	JTable jt;
 	private boolean init=false, init2=false;
-	public void mostrarUno(TSesion ses) {
+	public void mostrarUno(TSesion a) {
 		
-		String[][]datos = {{Integer.toString(suc.getId()),suc.getCiudad(),        //////////////
-			Integer.toString(suc.getTelefono()),suc.getDireccion(), Boolean.toString(suc.isActivo())}}; 
+		String[][]datos = {{Integer.toString(a.getId()),a.getFecha().toString(),a.getHoraini().toString(),
+			a.getHorafin().toString(),Boolean.toString(a.isActivo()), Integer.toString(a.getIdAlumno()),
+					Integer.toString(a.getIdProfesor())}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 2L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
@@ -51,6 +52,7 @@ public class GUIMostrarSesion extends JFrame {
 		Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
 		p.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Resultado", TitledBorder.LEFT,TitledBorder.TOP));
 		panelcentro.add(p);
+		
 		panelcentro.setSize(600, 200);
 		this.setVisible(true);
 	}
@@ -62,7 +64,7 @@ public class GUIMostrarSesion extends JFrame {
 		init=true;
 		jt= new JTable();
 		this.setLayout(new BorderLayout());
-		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar una Sesion ");
+		GUIMaker.getInstance().configurateSubWindow(this,650,200,"Mostrar una sesion ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
 		JLabel lbl= new JLabel ("Inserta una ID, por favor: ");
 		JTextField idCampo = new JTextField();
@@ -71,7 +73,7 @@ public class GUIMostrarSesion extends JFrame {
 		panelEtiq.add(idCampo);
 		add(panelEtiq, BorderLayout.NORTH);
 		
-		JButton btnBuscar = new JButton("Buscar!");
+		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dato = Integer.parseInt(idCampo.getText());
@@ -84,5 +86,4 @@ public class GUIMostrarSesion extends JFrame {
 		this.setVisible(true);
 		
 	}
-	
 }

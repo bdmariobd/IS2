@@ -4,7 +4,13 @@ package presentacion.Sesion;
 	import java.awt.GridLayout;
 	import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
-	import javax.swing.JButton;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import javax.swing.JButton;
 	import javax.swing.JCheckBox;
 	import javax.swing.JFrame;
 	import javax.swing.JLabel;
@@ -22,7 +28,7 @@ package presentacion.Sesion;
 		private boolean init=false;
 		private JButton btnAlta = new JButton("Dar de alta");
 		private JButton btnCancelar = new JButton("Cancelar");
-		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo" };
+		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo"," Insetar ID profesor", "Insertar ID alumno" };
 		private JLabel etiqgeneral;
 		private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];
@@ -53,14 +59,19 @@ package presentacion.Sesion;
 			public void actionPerformed(ActionEvent e) {
 				for(int i=0;i<labels.length;i++) { 
 					if(inputs[i].getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "fecha, horaIni, horaFin y tipo no pueden estar vacias","ERROR",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "fecha, horaIni, horaFin, tipo, id profesor e id alumno no pueden estar vacias","ERROR",JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 				}
 				
 				try {
-					TSesion s= new TSesion(0,inputs[0].getFecha(), 
-							Integer.parseInt(inputs[1].getText()),inputs[2].getText(),actividad.isSelected());  //VDFSFDSdsfDF
+					
+					DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+					Date date = format.parse(inputs[0].getText());
+					DateFormat formatter = new SimpleDateFormat("HH:mm");
+					Time horaI = (Time)formatter.parse(inputs[1].getText());
+					Time horaF = (Time)formatter.parse(inputs[2].getText());
+					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(), Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
 					Controller.getInstance().accion(eventos.ALTA_SUCURSAL, s);
 				}
 				catch(Exception ex){

@@ -53,7 +53,7 @@ public class ControllerIMP extends Controller {
 			case eventos.GUI_SUCURSAL: GUISucursal.getInstance();
 			
 			break;
-			case eventos.GUI_TEST: GUITest.getInstance();
+			case eventos.GUI_TEST: //GUITest.getInstance();
 				
 			break;
 			
@@ -210,14 +210,14 @@ public class ControllerIMP extends Controller {
                 else GUISesion.getInstance().update(eventos.BAJA_OK_SESION, id);
             break;
             case eventos.MOSTRAR_TODOS_SESION_PROFESOR:
-            	 List<TSesion>listS = saSuc.readAllP();
-                 //if(list!=null)
-                 GUISucursal.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION_PROFESOR, listS);
+            	 List<TSesion>listS = saSesion.readAllP((int) datos);
+                 if(listS.size()==0)GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_KO_SESION_PROFESOR, listS);
+                 else GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION_PROFESOR, listS);
             break;
             case eventos.MOSTRAR_TODOS_SESION_ALUMNO:
-            	List<TSesion>listSe = saSuc.readAllA();
-                //else //ventana error
-            	 GUISucursal.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION_PROFESOR, listSE);
+            	List<TSesion>listSe = saSesion.readAllA((int) datos);
+            	if(listSe.size()==0)GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_KO_SESION_ALUMNO, listSe);
+            	else GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION_ALUMNO, listSe);
             break;
             case eventos.MOSTRAR_UNO_SESION:
                 TSesion se = saSesion.read((int) datos);
