@@ -22,7 +22,7 @@ package presentacion.Sesion;
 		private boolean init=false;
 		private JButton btnAlta = new JButton("Dar de alta");
 		private JButton btnCancelar = new JButton("Cancelar");
-		private String[] labels = {"Insertar ciudad","Insertar telefono","Insertar direccion" };
+		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo" };
 		private JLabel etiqgeneral;
 		private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];

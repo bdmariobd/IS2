@@ -23,9 +23,9 @@ public class SASesionIMP implements SASesion {
 	@Override
 	public int create(TSesion s) {
 		DAOSesion dao = FactoriaDAO.getInstance().generateDAOSesion();
-		long totalMiliSeconds = (s.getHorafin()-s.getHoraini());
-		if(!telefonoCorrecto(s.getTelefono()) || (s.getHorafin()-s.getHoraini())>4|| 
-				|| s.getTipo().length()>150) return -3;
+		long duracionSesion = (s.getHorafin().getTime()-s.getHoraini().getTime());
+		
+		if(duracionSesion>0 ||s.getTipo().length()>150) return -3;
 		int id=  dao.create(s);
 		return id;
 	}
@@ -74,6 +74,6 @@ public class SASesionIMP implements SASesion {
 	    return true;
 	}
 	 public int findByID(int id) {
-		 return FactoriaDAO.getInstance().generateDAOSesion().findbyID(id);
+		 return FactoriaDAO.getInstance().generateDAOSesion().findByID(id);
 	 }
 }
