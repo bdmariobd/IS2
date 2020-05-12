@@ -15,4 +15,10 @@ public interface SAalumno {
 	
 	public int findByName(String nombre);
 	
+	public int rellenar(TRelleno r);
+	public boolean existeIDAlumno(int s);
+	public boolean existeIDTest(int s);
+	public boolean numF(int fallos, int preguntas);
+	public List<TRelleno> readAllR(int id);
+	
 }

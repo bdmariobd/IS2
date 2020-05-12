@@ -59,7 +59,7 @@ public class GUIAltaVehiculo extends JFrame {
 			
 			try {
 				TVehiculo v= new TVehiculo(0,Integer.parseInt(inputs[1].getText()),
-						inputs[2].getText(),inputs[0].getText().toUpperCase(),actividad.isSelected(),inputs[3].getText());
+						inputs[2].getText(),inputs[0].getText(),actividad.isSelected(),inputs[3].getText());
 				Controller.getInstance().accion(eventos.ALTA_VEHICULO, v);
 			}
 			catch(Exception ex){

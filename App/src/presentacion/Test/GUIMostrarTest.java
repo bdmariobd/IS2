@@ -1,4 +1,4 @@
-package presentacion.Vehiculo;
+package presentacion.Test;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import negocio.Vehiculo.TVehiculo;
+import negocio.Test.TTest;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
@@ -23,16 +23,16 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUIMostrarVehiculo extends JFrame {
+public class GUIMostrarTest extends JFrame {
 	
 	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
+	String[] colNames = {"id", "tipo","numpreguntas","activo"};
 	JTable jt;
 	private boolean init=false, init2=false;
-	public void mostrarUno(TVehiculo veh) {
+	public void mostrarUno(TTest suc) {
 		
-		String[][]datos = {{Integer.toString(veh.getId()),Integer.toString(veh.getIdSucursal()),
-			veh.getTipo(),veh.getDaños(), Boolean.toString(veh.isActivo()),veh.getMatricula()}};
+		String[][]datos = {{Integer.toString(suc.getId()),suc.getTipo(),
+			Integer.toString(suc.getNumpreguntas()), Boolean.toString(suc.isActivo())}};
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
 			@Override
 			public boolean isCellEditable(int row, int col) {
@@ -62,7 +62,7 @@ public class GUIMostrarVehiculo extends JFrame {
 		init=true;
 		jt= new JTable();
 		this.setLayout(new BorderLayout());
-		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un vehiculo ");
+		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un test ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
 		JLabel lbl= new JLabel ("Inserta una ID, por favor: ");
 		JTextField idCampo = new JTextField();
@@ -75,7 +75,7 @@ public class GUIMostrarVehiculo extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int dato = Integer.parseInt(idCampo.getText());
-				Controller.getInstance().accion(eventos.MOSTRAR_UNO_VEHICULO,dato);
+				Controller.getInstance().accion(eventos.MOSTRAR_UNO_TEST,dato);
 				}
 			});
 		
