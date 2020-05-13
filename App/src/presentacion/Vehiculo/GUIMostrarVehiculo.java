@@ -26,6 +26,7 @@ public class GUIMostrarVehiculo extends JFrame {
 	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
 	JTable jt;
 	private boolean init=false, init2=false;
+	
 	public void mostrarUno(TVehiculo veh) {
 		
 		String[][]datos = {{Integer.toString(veh.getId()),Integer.toString(veh.getIdSucursal()),
@@ -53,11 +54,13 @@ public class GUIMostrarVehiculo extends JFrame {
 		panelcentro.setSize(600, 200);
 		this.setVisible(true);
 	}
+	
 	public void initGui() {
 		if(init) {
 			setVisible(true);
 			return;
 		}
+		
 		init=true;
 		jt= new JTable();
 		this.setLayout(new BorderLayout());

@@ -40,21 +40,21 @@ public class ControllerIMP extends Controller {
 		// TODO Auto-generated method stub
 		int id;
 		switch(evento) {
-			case eventos.GUI_ALUMNO: GUIAlumno.getInstance();
+			case eventos.GUI_ALUMNO: GUIAlumno.getInstance().initGui();
 				
 			break;
 			
-			case eventos.GUI_PROFESOR: GUIProfesor.getInstance();
+			case eventos.GUI_PROFESOR: GUIProfesor.getInstance().initGui();;
 				
 			break;
 			
 			case eventos.GUI_VEHICULO: GUIVehiculo.getInstance().initGui();;
 			break;
 			
-			case eventos.GUI_SUCURSAL: GUISucursal.getInstance();
+			case eventos.GUI_SUCURSAL: GUISucursal.getInstance().initGui();
 			
 			break;
-			case eventos.GUI_TEST: GUITest.getInstance();
+			case eventos.GUI_TEST: GUITest.getInstance().initGui();
 				
 			break;
 			
@@ -228,7 +228,7 @@ public class ControllerIMP extends Controller {
             case eventos.BUSCAR_TEST:
                 TTest t = saTest.read((int) datos);
                 if(t!=null)GUITest.getInstance().update(eventos.BUSCAR_TEST_OK, t);
-                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+                //else GUITest.getInstance().update(eventos.BUSCAR_TEST_KO, v);
             break;
             case eventos.RELLENAR_TEST:
 				id = saAlu.rellenar((TRelleno) datos); 

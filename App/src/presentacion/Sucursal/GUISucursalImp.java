@@ -37,7 +37,7 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 	}
 	public void initGui() {
 		String[] botones = {"Dar de alta una sucursal", "Dar de baja una sucursal",
-				"Mostrar una sucursal", "Mostrar todas las sucursales", "Modificar una sucursal"};
+				"Mostrar una sucursal", "Mostrar todas las sucursales", "Modificar una sucursal", "Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -101,9 +101,10 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		default:
-			
+	
 		}
 	}
+	
 	@Override
 	//Llamada a las operaciones
 	public void actionPerformed(ActionEvent e) {
@@ -122,7 +123,10 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 		else if(e.getActionCommand()=="Modificar una sucursal") {
 			gModSuc.initGui();
 		}
-		
+		else if(e.getActionCommand()=="Volver"){
+			this.dispose();
+			Controller.getInstance().accion(eventos.GUI_PRINC, null);
+		}
 	}
 }
 

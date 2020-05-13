@@ -29,7 +29,7 @@ public class GUIProfesorImp extends GUIProfesor implements ActionListener{
 	
 	public void initGui() {
 		String[] botones = {"Dar de alta un Profesor", "Dar de baja un Profesor", "Modificar un Profesor", 
-				"Mostrar un Profesor", "Mostrar todos los Profesores"};
+				"Mostrar un Profesor", "Mostrar todos los Profesores", "Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -131,6 +131,10 @@ public class GUIProfesorImp extends GUIProfesor implements ActionListener{
 		
 		else if(e.getActionCommand()=="Modificar un Profesor") {
 			gModProfesor.initGui();
+		}
+		else if(e.getActionCommand()=="Volver"){
+			this.dispose();
+			Controller.getInstance().accion(eventos.GUI_PRINC, null);
 		}
 	}
 }

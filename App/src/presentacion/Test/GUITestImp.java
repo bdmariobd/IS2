@@ -36,7 +36,7 @@ public class GUITestImp extends GUITest implements ActionListener {
 	}
 	public void initGui() {
 		String[] botones = {"Dar de alta un test", "Dar de baja un test",
-				"Mostrar un test", "Mostrar todos los tests", "Modificar un test"};
+				"Mostrar un test", "Mostrar todos los tests", "Modificar un test", "Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -120,6 +120,10 @@ public class GUITestImp extends GUITest implements ActionListener {
 		}
 		else if(e.getActionCommand()=="Modificar un test") {
 			gModT.initGui();
+		}
+		else if(e.getActionCommand()=="Volver"){
+			this.dispose();
+			Controller.getInstance().accion(eventos.GUI_PRINC, null);
 		}
 		
 	}
