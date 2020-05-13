@@ -13,8 +13,8 @@ public interface SASesion {
     public int findByID(int id);
 	public List<TSesion> readAllA(int id);
 	public List<TSesion> readAllP(int id);
-	public boolean disponibleProfesor(int id, Date fecha, Time horaIni, Time horaFin);
-	public boolean disponibleAlumno(int id, Date fecha, Time horaIni, Time horaFin);
+	public boolean disponibleProfesor(int id, Date fecha, Date horaIni, Date horaFin);
+	public boolean disponibleAlumno(int id, Date fecha, Date horaIni, Date horaFin);
 	public boolean existeIDProfesor(int s);
 	public boolean existeIDAlumno(int s);
 }

@@ -40,7 +40,7 @@ public class DAOSesionIMP implements DAOSesion{
 			int id = getID();
 			if(id<1) return id;
 			
-			String insertstm = "INSERT into Sesion VALUES ("+id+","+a.getFecha()+","+a.getHoraini()+","+a.getHorafin()+",'"+a.getTipo()+"',"+a.isActivo()+");";
+			String insertstm = "INSERT into Sesion VALUES ("+id+",'"+a.getFecha().toString()+"','"+a.getHoraini().toString()+"','"+a.getHorafin().toString()+"','"+a.getTipo()+"',"+a.isActivo()+", "+a.getIdAlumno()+", "+a.getIdProfesor()+");";
 			
 			int resultSet = statement.executeUpdate(insertstm);
 		}
@@ -77,7 +77,7 @@ public class DAOSesionIMP implements DAOSesion{
 			while(resultSet.next()) {
 				if(id==resultSet.getInt("idProfesor")&& fecha==resultSet.getDate("fecha"))
 				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
-						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getDate("horaini"), resultSet.getDate("horafin"),
 						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
 			return list;
 		}
@@ -98,7 +98,7 @@ public class DAOSesionIMP implements DAOSesion{
 			while(resultSet.next()) {
 				if(id==resultSet.getInt("idAlumno")&& fecha==resultSet.getDate("fecha"))
 				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
-						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getDate("horaini"), resultSet.getDate("horafin"),
 						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
 			return list;
 		}
@@ -119,7 +119,7 @@ public class DAOSesionIMP implements DAOSesion{
 			while(resultSet.next()) {
 				if(id==resultSet.getInt("idProfesor"))
 				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
-						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getDate("horaini"), resultSet.getDate("horafin"),
 						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
 			return list;
 		}
@@ -139,7 +139,7 @@ public class DAOSesionIMP implements DAOSesion{
 			while(resultSet.next()) {
 				if(id==resultSet.getInt("idProfesor"))
 				list.add(new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
-						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getDate("horaini"), resultSet.getDate("horafin"),
 						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor")));}
 			return list;
 		}
@@ -155,7 +155,7 @@ public class DAOSesionIMP implements DAOSesion{
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "UPDATE Sesion SET fecha='"+a.getFecha()+"',horaini='"+a.getHoraini()+"',horafin='"+a.getHorafin()+"',tipo='"+a.getTipo()+",Activo="+a.isActivo()+" WHERE id="+a.getId()+";";
+			String query = "UPDATE Sesion SET fecha='"+a.getFecha()+"',horaini='"+a.getHoraini()+"',horafin='"+a.getHorafin()+"',tipo='"+a.getTipo()+",Activo="+a.isActivo()+"',idAlumno='"+a.getIdAlumno()+"',idProfesor='"+a.getIdProfesor()+" WHERE id="+a.getId()+";";
 			int resultSet = statement.executeUpdate(query);
 			if(resultSet==0) return -1;
 			return a.getId();
@@ -207,11 +207,11 @@ public class DAOSesionIMP implements DAOSesion{
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Profesor WHERE id=" + id + ";";
+			String query = "SELECT * FROM Sesion WHERE id=" + id + ";";
 			ResultSet resultSet = statement.executeQuery(query);
 			if (resultSet.next())
 				return new TSesion(resultSet.getInt("id"),resultSet.getDate("fecha"), 
-						resultSet.getTime("horaini"), resultSet.getTime("horafin"),
+						resultSet.getDate("horaini"), resultSet.getDate("horafin"),
 						resultSet.getString("tipo"), resultSet.getBoolean("activo"),resultSet.getInt("idAlumno"),resultSet.getInt("idProfesor"));
 			} 
 	catch (Exception e) {

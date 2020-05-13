@@ -36,7 +36,7 @@ public class SASesionIMP implements SASesion {
 		if(!existeIDAlumno(s.getIdAlumno())) return -8;
 		if(!disponibleProfesor(s.getIdProfesor(),s.getFecha(),s.getHoraini(), s.getHorafin())) return -9;
 		if(!disponibleAlumno(s.getIdAlumno(),s.getFecha(),s.getHoraini(), s.getHorafin())) return -10;
-		if(duracionSesion>0 ||s.getTipo().length()>150) return -3;
+		if(duracionSesion<0 ||s.getTipo().length()>150) return -3;
 		int id=  dao.create(s);
 		return id;
 	}
@@ -57,7 +57,7 @@ public class SASesionIMP implements SASesion {
 		else return false;
 	}
 	@Override
-	public boolean disponibleProfesor(int id, Date fecha, Time horaIni, Time horaFin) {
+	public boolean disponibleProfesor(int id, Date fecha, Date horaIni, Date horaFin) {
 		boolean ocupado=false;
 		List<TSesion> list= FactoriaDAO.getInstance().generateDAOSesion().ocupadoProfesor(id, fecha);
 		if(list.size()==0)return true;
@@ -77,7 +77,7 @@ public class SASesionIMP implements SASesion {
 		
 	}
 	@Override
-	public boolean disponibleAlumno(int id, Date fecha, Time horaIni, Time horaFin) {
+	public boolean disponibleAlumno(int id, Date fecha, Date horaIni, Date horaFin) {
 		boolean ocupado=false;
 		List<TSesion> list= FactoriaDAO.getInstance().generateDAOSesion().ocupadoAlumno(id, fecha);
 		if(list.size()==0)return true;

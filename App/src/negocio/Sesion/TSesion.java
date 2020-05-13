@@ -7,10 +7,10 @@ public class TSesion {
     private int id, idAlumno,idProfesor;
     private String tipo;
     private Date fecha;
-    private Time horaini, horafin;
+    private Date horaini, horafin;
     private boolean activo;
 
-    public TSesion(int id, Date fecha, Time horaini,Time horafin, String tipo ,boolean activo, int idAlumno, int idProfesor) {
+    public TSesion(int id, Date fecha, Date horaini,Date horafin, String tipo ,boolean activo, int idAlumno, int idProfesor) {
         this.id = id;
         this.fecha = fecha;
         this.horaini = horaini;
@@ -27,10 +27,10 @@ public class TSesion {
     public Date getFecha() {
         return fecha;
     }
-    public Time getHoraini() {
+    public Date getHoraini() {
         return horaini;
     }
-    public Time getHorafin() {
+    public Date getHorafin() {
         return horafin;
     }
     public String getTipo() {

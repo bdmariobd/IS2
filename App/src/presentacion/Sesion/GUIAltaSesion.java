@@ -69,8 +69,8 @@ import javax.swing.JButton;
 					DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
 					Date date = format.parse(inputs[0].getText());
 					DateFormat formatter = new SimpleDateFormat("HH:mm");
-					Time horaI = (Time)formatter.parse(inputs[1].getText());
-					Time horaF = (Time)formatter.parse(inputs[2].getText());
+					Date horaI = formatter.parse(inputs[1].getText());
+					Date horaF = formatter.parse(inputs[2].getText());
 					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(),actividad.isSelected(), Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
 					Controller.getInstance().accion(eventos.ALTA_SESION, s);
 				}
