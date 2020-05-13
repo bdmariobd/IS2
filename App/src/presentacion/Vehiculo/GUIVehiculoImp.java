@@ -133,7 +133,6 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		else if(e.getActionCommand()=="Volver"){
 			this.dispose();
 			Controller.getInstance().accion(eventos.GUI_PRINC, null);
-			
 		}
 				
 	}

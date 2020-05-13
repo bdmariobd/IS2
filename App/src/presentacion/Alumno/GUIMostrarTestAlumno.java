@@ -27,6 +27,7 @@ import presentacion.eventos;
 
 public class GUIMostrarTestAlumno extends JFrame {
 	private boolean init=false;
+	private boolean init2=false;
 	JPanel panelcentro = new JPanel(new FlowLayout());
 	JTable jt;
 	String[] colNames ={"idAlumno","idTest", "numero de fallos"};
@@ -46,16 +47,19 @@ public class GUIMostrarTestAlumno extends JFrame {
 			break;
 		}
 		return s;
+	
 	}
+	
 	public void initGui() {
 		if(init) {
 			setVisible(true);
 			return;
 		}
+		
 		init=true;
 		jt= new JTable();
 		this.setLayout(new BorderLayout());
-		GUIMaker.getInstance().configurateSubWindow(this,650,200,"Mostrar test de un alumno ");
+		GUIMaker.getInstance().configurateSubWindow(this,350,200,"Mostrar test de un alumno ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
 		JLabel lbl= new JLabel ("Inserta ID alumano, por favor: ");
 		JTextField idCampo = new JTextField();
@@ -79,22 +83,24 @@ public class GUIMostrarTestAlumno extends JFrame {
 	}
 	public void mostrarTest(List<TRelleno> lista) {
 		
-		/*if(init) {
+		if(init2) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
-		}*/
-		init=true;
-		GUIMaker.getInstance().configurateSubWindow(this, 2200, 800, "Mostrar test de alumno");
+			
+		}
+		init2=true;
+		GUIMaker.getInstance().configurateSubWindow(this, 230, 260, "Mostrar test de alumno");
 		actualizarTabla(lista);
 		jt.getTableHeader().setReorderingAllowed(false);
 		JScrollPane p= new JScrollPane(jt);
 		this.pack();
 		this.add(p);
-		this.setSize(720,450);
+		this.setSize(420,250);
 		this.setVisible(true);
 		
 	}
+	
 	private void actualizarTabla(List<TRelleno> lista) {
 		String[][]datos= new String[lista.size()][colNames.length];
 		for(int i=0;i<lista.size();++i) 

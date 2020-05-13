@@ -40,7 +40,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 	
 	public void initGui() {
 		String[] botones = {"Dar de alta un alumno", "Dar de baja un alumno", "Modificar un alumno", 
-				"Mostrar un alumno", "Mostrar todos los alumnos","Rellenar test", "Mostrar test de alumno"};
+				"Mostrar un alumno", "Mostrar todos los alumnos","Rellenar test", "Mostrar test de alumno", "Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -165,6 +165,10 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		}
 		else if(e.getActionCommand()=="Mostrar test de alumno") {
 			gMostarT.initGui();
+		}
+		else if(e.getActionCommand()=="Volver"){
+			this.dispose();
+			Controller.getInstance().accion(eventos.GUI_PRINC, null);
 		}
 	}
 }
