@@ -28,7 +28,7 @@ import javax.swing.JButton;
 		private boolean init=false;
 		private JButton btnAlta = new JButton("Dar de alta");
 		private JButton btnCancelar = new JButton("Cancelar");
-		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo"," Insetar ID profesor", "Insertar ID alumno" };
+		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo"," Insetar ID alumno", "Insertar ID profesor" };
 		private JLabel etiqgeneral;
 		private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];
@@ -39,7 +39,7 @@ import javax.swing.JButton;
 			return;
 		}
 		init=true;
-		this.setLayout(new GridLayout(6,2,5,10));
+		this.setLayout(new GridLayout(8,2,5,10));
 		for(int i = 0; i<labels.length;i++) {
 			etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
 			inputs[i] = new JTextField(20);

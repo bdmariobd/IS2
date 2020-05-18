@@ -40,7 +40,7 @@ public class DAOSesionIMP implements DAOSesion{
 			int id = getID();
 			if(id<1) return id;
 			
-			String insertstm = "INSERT into Sesion VALUES ("+id+",'"+a.getFecha().toString()+"','"+a.getHoraini().toString()+"','"+a.getHorafin().toString()+"','"+a.getTipo()+"',"+a.isActivo()+", "+a.getIdAlumno()+", "+a.getIdProfesor()+");";
+			String insertstm = "INSERT into Sesion VALUES ("+id+","+a.getFecha()+","+a.getHoraini().getTime()+","+a.getHorafin().getTime()+",'"+a.getTipo()+"',"+a.isActivo()+", "+a.getIdAlumno()+", "+a.getIdProfesor()+");";
 			
 			int resultSet = statement.executeUpdate(insertstm);
 		}
