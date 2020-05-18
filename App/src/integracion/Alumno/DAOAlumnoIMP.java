@@ -16,8 +16,8 @@ public class DAOAlumnoIMP implements DAOAlumno {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			int id = getID();
-			if(id<1) return id;
+			//int id = getID();
+			//if(id<1) return id;
 			
 			String insertstm = "INSERT into TestRealizados VALUES ("+r.getIdAlumno()+","+r.getIdTest()+","+r.getNumFallos()+");";
 			
@@ -51,7 +51,7 @@ public class DAOAlumnoIMP implements DAOAlumno {
 		return null;
 	}
 	
-	private int getID() {
+	public int getID() {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();

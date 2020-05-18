@@ -61,7 +61,7 @@ public class GUIMostrarTestAlumno extends JFrame {
 		this.setLayout(new BorderLayout());
 		GUIMaker.getInstance().configurateSubWindow(this,350,200,"Mostrar test de un alumno ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
-		JLabel lbl= new JLabel ("Inserta ID alumano, por favor: ");
+		JLabel lbl= new JLabel ("Inserta ID alumno, por favor: ");
 		JTextField idCampo = new JTextField();
 		idCampo.setColumns(5);
 		panelEtiq.add(lbl);

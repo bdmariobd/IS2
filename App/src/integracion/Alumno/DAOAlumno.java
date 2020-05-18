@@ -25,6 +25,7 @@ public interface DAOAlumno {
 	public boolean existeDNI(String DNI);
 	
 	public int rellenar(TRelleno r);
-	
+	// de momento
+	public int getID();
 	public List<TRelleno> readAllR(int id);
 }
