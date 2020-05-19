@@ -17,6 +17,7 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 	private GUIModificarVehiculo gModVeh;
 	private GUIRegistrarVehiculo gRegVeh;
 	private GUIMostrarTodos gTodosVeh;
+	private GUIAsignarVeh gAsigVeh;
 	private boolean init=false;
 	
 	
@@ -32,8 +33,9 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		gModVeh=new GUIModificarVehiculo();
 		gRegVeh=new GUIRegistrarVehiculo();
 		gTodosVeh= new GUIMostrarTodos();
+		gAsigVeh = new GUIAsignarVeh();
 		String[] botones = {"Dar de alta un vehiculo", "Dar de baja un vehiculo", "Registrar daños de un vehiculo", 
-				"Mostrar un vehiculo", "Mostrar todos los vehiculos", "Modificar un vehiculo","Volver"};
+				"Mostrar un vehiculo", "Mostrar todos los vehiculos", "Modificar un vehiculo","Asignar un vehículo a un profesor","Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -47,6 +49,13 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		
 		//errores de las operaciones. Más detalles en SAVehiculo
 		switch(event) {
+		case eventos.ASIGNAR_VEHPROF_OK:
+			JOptionPane.showMessageDialog(null,"Añadido correctamente(idcoche="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
+		case eventos.ASIGNAR_VEHPROF_KO:
+			if((int)res==-2)msg = "Error, ese vehiculo ya tiene un profesor asignado.";
+			else if((int)res==-1)msg = "Error, no existe.";
+				JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;	
 		case eventos.ALTA_OK_VEHICULO:
 			JOptionPane.showMessageDialog(null, "Añadido correctamente(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
@@ -129,6 +138,9 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		}
 		else if(e.getActionCommand()=="Modificar un vehiculo") {
 			gModVeh.initGui();
+		}
+		else if(e.getActionCommand()=="Asignar un vehículo a un profesor") {
+			gAsigVeh.initGui();
 		}
 		else if(e.getActionCommand()=="Volver"){
 			this.dispose();

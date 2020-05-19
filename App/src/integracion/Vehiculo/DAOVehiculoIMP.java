@@ -9,6 +9,7 @@ import java.util.List;
 
 import integracion.DAOConnect;
 import integracion.DAOConnect;
+import negocio.Vehiculo.TVehProf;
 import negocio.Vehiculo.TVehiculo;
 
 public class DAOVehiculoIMP implements DAOVehiculo {
@@ -91,7 +92,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			return -4;
 		}
 	}
-	public int findbyID(String id) { //busqueda de matriculas
+	public int findbyID(String id) { 
 		// TODO Auto-generated method stub
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
@@ -185,6 +186,22 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			ResultSet resultSet = statement.executeQuery(query);
 			if(resultSet.next()) {
 				return resultSet.getBoolean("activo")? 0:-6;
+			}
+			return -1;
+		}
+		catch (Exception e) {
+			return -4;
+		}
+	}
+	@Override
+	public int asignarVehProf(TVehProf datos) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String insertstm = "INSERT into VehiculoProfesor VALUES ("+datos.getIDV()+","+datos.getIDP()+");";
+			ResultSet resultSet = statement.executeQuery(insertstm);
+			if(resultSet.next()) {
+				return datos.getIDV();
 			}
 			return -1;
 		}

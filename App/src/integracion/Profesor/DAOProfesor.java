@@ -22,4 +22,6 @@ public interface DAOProfesor {
 	public boolean existeIdSucursal(int idSucursal);
 
 	public boolean existeDNI(String dni);
+	
+	public boolean existeID(String ID);
 }

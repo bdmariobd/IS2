@@ -1,28 +1,29 @@
-package presentacion.Alumno;
+package presentacion.Vehiculo;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import negocio.Alumno.TAlumno;
+
 import negocio.Alumno.TRelleno;
+import negocio.Vehiculo.TVehProf;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
 
 @SuppressWarnings("serial")
-public class GUIRellenar extends JFrame{
+public class GUIAsignarVeh extends JFrame {
 	private boolean init = false;
-	private JButton btnAlta = new JButton("Rellenar");
+	private JButton btnAsignar = new JButton("Asignar");
 	private JButton btnCancelar = new JButton("Cancelar");
-	private String[] labels = {"Insertar ID alumno","Insertar ID test", "Insertar numero de fallos"};
+	private String[] labels = {"Insertar ID vehiculo","Insertar ID profesor"};
 	private JLabel etiqgeneral;
 	private JTextField[] inputs = new JTextField[labels.length];
 	
@@ -32,7 +33,7 @@ public class GUIRellenar extends JFrame{
 			return;
 		}
 		init=true;
-		this.setLayout(new GridLayout(8,2,5,10));
+		this.setLayout(new GridLayout(3,2,5,10));
         for(int i = 0; i<labels.length;i++) {
             etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
             inputs[i] = new JTextField(20);
@@ -40,28 +41,25 @@ public class GUIRellenar extends JFrame{
             etiqgeneral.setLabelFor(inputs[i]);
             add(inputs[i]);
         }
-
-        add(new JPanel());
-        add(new JPanel());
-        add(btnAlta);
+        add(btnAsignar);
         add(btnCancelar);
         setVisible(true);
 
-		GUIMaker.getInstance().configurateSubWindow(this,410,250,"Rellenar un test");
+		GUIMaker.getInstance().configurateSubWindow(this,410,250,"Asignar un alumno");
 		
 		//Botones
-		btnAlta.addActionListener(new ActionListener() {
+		btnAsignar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(int i=0;i<labels.length-1;i++) { // Menos uno por que danos que es la ultima puede ser vacia
+				for(int i=0;i<2;i++) { 
 					if(inputs[i].getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "ID vehiculo o ID profesor vacios","ERROR",JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 				}
 				
 				try {
-					TRelleno a = new TRelleno(Integer.parseInt(inputs[0].getText()),Integer.parseInt(inputs[1].getText()),Integer.parseInt(inputs[2].getText()));
-					Controller.getInstance().accion(eventos.RELLENAR_TEST, a);
+					TVehProf pv = new TVehProf(Integer.parseInt(inputs[0].getText()),Integer.parseInt(inputs[1].getText()));
+					Controller.getInstance().accion(eventos.ASIGNAR_VEHPROF, pv);
 				}
 				catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Compruebe formato de los datos. \n ("+ex.toString()+")","Información",JOptionPane.WARNING_MESSAGE);
@@ -74,6 +72,4 @@ public class GUIRellenar extends JFrame{
 				}
 			});
 		}	
-
 }
-	

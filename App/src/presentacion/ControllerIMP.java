@@ -11,6 +11,7 @@ import negocio.Profesor.TProfesor;
 import negocio.Sucursal.SASucursal;
 import negocio.Sucursal.TSucursal;
 import negocio.Vehiculo.SAVehiculo;
+import negocio.Vehiculo.TVehProf;
 import negocio.Vehiculo.TVehiculo;
 import presentacion.Alumno.GUIAlumno;
 import presentacion.Profesor.GUIProfesor;
@@ -235,6 +236,10 @@ public class ControllerIMP extends Controller {
 				if(id<0) GUIAlumno.getInstance().update(eventos.RELLENAR_KO_TEST, id);
 				else GUIAlumno.getInstance().update(eventos.RELLENAR_OK_TEST, id);
 			break;
+            case eventos.ASIGNAR_VEHPROF:
+            	id= saVeh.asigVehProf((TVehProf) datos);
+            	if(id<0) GUIVehiculo.getInstance().update(eventos.ASIGNAR_VEHPROF_KO, id);
+            	else GUIVehiculo.getInstance().update(eventos.ASIGNAR_VEHPROF_OK, id);
             case eventos.MOSTRAR_TEST_ALUMNO: /////7
 				List<TRelleno> listaR = saAlu.readAllR((int)datos);
 				//if(list!=null)

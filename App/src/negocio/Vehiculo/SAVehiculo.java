@@ -9,4 +9,6 @@ public interface SAVehiculo {
 	public int update(TVehiculo v);
 	public int delete (String id);
 	public int regDmg(String[] datos);
+	public int asigVehProf(TVehProf datos);
+	
 }

@@ -185,4 +185,22 @@ public class DAOProfesorIMP implements DAOProfesor {
 			return -4;
 		}
 	}
+
+	@Override
+	public boolean existeID(String id) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String consulta = "SELECT COUNT(*) FROM Profesor WHERE id = '" + id+ "';";
+			ResultSet resultSet = statement.executeQuery(consulta);
+			if (resultSet.next())
+				return (resultSet.getInt(1) > 0);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 }

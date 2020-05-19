@@ -39,6 +39,9 @@ public class eventos {
 	public static final int REGISTRAR_DANOS=45;
 	public static final int REGISTRAR_DANOS_OK=46;
 	public static final int REGISTRAR_DANOS_KO=47;
+	public static final int ASIGNAR_VEHPROF=48;
+	public static final int ASIGNAR_VEHPROF_OK=49;
+	public static final int ASIGNAR_VEHPROF_KO=500; // esque el 50 ya estaba cogido >:(
 	
 	//Mostrar uno
 	public static final int MOSTRAR_UNO_ALUMNO=50;

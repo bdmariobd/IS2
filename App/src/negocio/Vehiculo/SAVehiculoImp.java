@@ -3,6 +3,7 @@ package negocio.Vehiculo;
 import java.util.List;
 
 import integracion.FactoriaDAO;
+import integracion.Profesor.DAOProfesor;
 import integracion.Vehiculo.DAOVehiculo;
 import negocio.FactoriaSA;
 
@@ -71,7 +72,17 @@ public class SAVehiculoImp implements SAVehiculo {
 		else return -3;
 		
 	}
-
+	private boolean vehExist(int idV) {
+		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		if(dao.findbyID(String.valueOf(idV)) == 1) return true;
+		return false;
+	}
+	private boolean profExist(int idP) {
+		
+		DAOProfesor dao = FactoriaDAO.getInstance().generateDAOProfesor();
+		if(dao.existeID(String.valueOf(idP))) return true;
+		return false;
+	}
 	@Override
 	public int regDmg(String[] datos) {
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
@@ -89,6 +100,14 @@ public class SAVehiculoImp implements SAVehiculo {
 	        return false;
 	    }
 	    return true;
+	}
+	@Override
+	public int asigVehProf(TVehProf datos) {
+		int result = -2; // Por defecto supongo.
+		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		if(vehExist(datos.getIDV()) && profExist(datos.getIDP()))  result = dao.asignarVehProf(datos);
+		return result;
+		
 	}
 	
 }
