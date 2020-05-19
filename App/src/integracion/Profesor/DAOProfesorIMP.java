@@ -191,16 +191,15 @@ public class DAOProfesorIMP implements DAOProfesor {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String consulta = "SELECT COUNT(*) FROM Profesor WHERE id = '" + id+ "';";
-			ResultSet resultSet = statement.executeQuery(consulta);
-			if (resultSet.next())
-				return (resultSet.getInt(1) > 0);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			String query = "SELECT * FROM Profesor WHERE id=" + id + ";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) return true;
+			else return false;
+		}
+		catch (Exception e) {
+			return false;
 		}
 
-		return false;
+		
 	}
 }

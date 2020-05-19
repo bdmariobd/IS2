@@ -240,6 +240,7 @@ public class ControllerIMP extends Controller {
             	id= saVeh.asigVehProf((TVehProf) datos);
             	if(id<0) GUIVehiculo.getInstance().update(eventos.ASIGNAR_VEHPROF_KO, id);
             	else GUIVehiculo.getInstance().update(eventos.ASIGNAR_VEHPROF_OK, id);
+            	break;
             case eventos.MOSTRAR_TEST_ALUMNO: /////7
 				List<TRelleno> listaR = saAlu.readAllR((int)datos);
 				//if(list!=null)

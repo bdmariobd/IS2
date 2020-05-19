@@ -72,17 +72,7 @@ public class SAVehiculoImp implements SAVehiculo {
 		else return -3;
 		
 	}
-	private boolean vehExist(int idV) {
-		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		if(dao.findbyID(String.valueOf(idV)) == 1) return true;
-		return false;
-	}
-	private boolean profExist(int idP) {
-		
-		DAOProfesor dao = FactoriaDAO.getInstance().generateDAOProfesor();
-		if(dao.existeID(String.valueOf(idP))) return true;
-		return false;
-	}
+	
 	@Override
 	public int regDmg(String[] datos) {
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
@@ -101,11 +91,48 @@ public class SAVehiculoImp implements SAVehiculo {
 	    }
 	    return true;
 	}
+	private boolean vehAvailable(int idV) { // comprobar que el vehiculo NO tiene
+		// un profesor es comprobar que el vehiculo NO está en la tabla.
+		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		if(dao.vehExist(idV)) return false;
+		return true;
+		
+		
+	}
+	private boolean vehActivo(int id) {
+		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		if(dao.isDeleted(id)==0) return true;
+		return false;
+	}
+	private boolean profActivo(int id) {
+		DAOProfesor dao = FactoriaDAO.getInstance().generateDAOProfesor();
+		if(dao.isDeleted(id)==0) return true;
+		return false;
+	}
+	
+	
+	private boolean vehExist(int idV) {
+		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		if(dao.findbyID(String.valueOf(idV)) == 1) return true;
+		return false;
+	}
+	private boolean profExist(int idP) {
+		
+		DAOProfesor dao = FactoriaDAO.getInstance().generateDAOProfesor();
+		if(dao.existeID(String.valueOf(idP))) return true;
+		return false;
+	}
 	@Override
 	public int asigVehProf(TVehProf datos) {
-		int result = -2; // Por defecto supongo.
+		int result=-2; // Por defecto supongo.
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
-		if(vehExist(datos.getIDV()) && profExist(datos.getIDP()))  result = dao.asignarVehProf(datos);
+		if(vehExist(datos.getIDV()) && profExist(datos.getIDP()) && vehActivo(datos.getIDV()) 
+				&& profActivo(datos.getIDP())) {
+			if(vehAvailable(datos.getIDV())) {
+				
+				result = dao.asignarVehProf(datos);
+			}
+		}
 		return result;
 		
 	}
