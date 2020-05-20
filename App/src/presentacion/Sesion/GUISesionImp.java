@@ -37,7 +37,7 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 	}
 	public void initGui() {
 		String[] botones = {"Dar de alta una sesion", "Dar de baja una sesion",
-				"Mostrar una sesion", "Mostrar sesiones de un profesor","Mostrar sesiones de un alumno", "Modificar una sesion"};
+				"Mostrar una sesion", "Mostrar sesiones de un profesor","Mostrar sesiones de un alumno", "Modificar una sesion","Volver"};
 		String[] extra = {"Principal"};
 		add(GUIMaker.getInstance().getPanel(botones,extra, "Autoescuela PM", this));
 		GUIMaker.getInstance().configurateWindow(this);
@@ -47,7 +47,7 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {
 		// TODO Auto-generated method stub
-		String msg="";
+		String msg="Error desconocido";
 		
 		//errores de las operaciones. Más detalles en SAVSucursal
 		switch(event) {
@@ -107,13 +107,19 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Modificada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MODIFICAR_KO_SESION:
-			if((int)res==-1)msg = "Error, no existe.";
+			if((int)res==-2)msg = "Error, id Sesion repetido.";
 			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
+			else if((int)res==-1)msg = "Error, no existe.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			else if((int)res==-7) msg="Error, el profesor no figura en la base de datos.";
+			else if((int)res==-8) msg="Error, el alumno no figura en la base de datos.";
+			else if((int)res==-9) msg="Error, el profesor no esta disponible en esa fecha";
+			else if((int)res==-10) msg="Error, el alumno no esta disponible en esa fecha";
+			else if((int)res==-11) msg="Error, hora con formato invalido. Pruebe 'HH:mm'";
+			else if((int)res==-12) msg="Error, fecha con formato invalido. Pruebe 'yyyy-MM-dd'";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
-		default:
 			
 		}
 	}
@@ -138,7 +144,10 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 		else if(e.getActionCommand()=="Modificar una sesion") {
 			gModSes.initGui();
 		}
-		
+		else if(e.getActionCommand()=="Volver"){
+			this.dispose();
+			Controller.getInstance().accion(eventos.GUI_PRINC, null);
+		}
 	}
 }
 

@@ -80,14 +80,13 @@ public class SASesionIMP implements SASesion {
 	@Override
 	public int update(TSesion s) {
 		DAOSesion dao = FactoriaDAO.getInstance().generateDAOSesion();
-		long duracionSesion = (s.getHorafin().getTime()-s.getHoraini().getTime());
 		if(!existeIDProfesor(s.getIdProfesor())) return -7;
 		if(!existeIDAlumno(s.getIdAlumno())) return -8;
 		if(s.getHoraini()==null || s.getHorafin()==null) return -11;
 		if(s.getFecha()==null) return -12;
+		if(s.getHorafin().getTime()-s.getHoraini().getTime()<0 ||s.getTipo().length()>150) return -3;
 		if(dao.ocupadoProfesor(s)) return -9;
 		if(dao.ocupadoAlumno(s)) return -10;
-		if(duracionSesion>0 ||s.getTipo().length()>150) return -3;
 		return FactoriaDAO.getInstance().generateDAOSesion().update(s);
 	}
 
