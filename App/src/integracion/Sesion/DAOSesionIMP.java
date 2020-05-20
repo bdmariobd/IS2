@@ -219,7 +219,6 @@ public class DAOSesionIMP implements DAOSesion{
 
 	@Override
 	public int isDeleted(int id) {
-		// TODO Auto-generated method stub
 	
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
