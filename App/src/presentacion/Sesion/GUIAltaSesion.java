@@ -71,8 +71,8 @@ import resources.fechasConverter;
 				
 				try {
 					Date date = fechasConverter.StringFechaToDate(inputs[0].getText());
-					Date horaI = fechasConverter.StringHoraToString(inputs[1].getText());
-					Date horaF = fechasConverter.StringHoraToString(inputs[2].getText());
+					Date horaI = fechasConverter.StringHoraToDate(inputs[1].getText());
+					Date horaF = fechasConverter.StringHoraToDate(inputs[2].getText());
 					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(),actividad.isSelected(), Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
 					Controller.getInstance().accion(eventos.ALTA_SESION, s);
 				}

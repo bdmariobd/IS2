@@ -80,7 +80,7 @@ public class DAOSesionIMP implements DAOSesion{
 			Statement statement = connection.createStatement();
 			String query = "SELECT count(*) as noValidos "
 					+ "FROM Sesion s "
-					+ "Where s.idProfesor="+ses.getIdProfesor()
+					+ "Where s.id<>"+ses.getId()+" AND s.idProfesor="+ses.getIdProfesor()
 					+ " AND s.fecha='"+fechasConverter.fechaToString(ses.getFecha())+"' AND "
 					//lo que viene a continuacion comprueba la validez de las horas
 					+"("
@@ -113,7 +113,7 @@ public class DAOSesionIMP implements DAOSesion{
 			Statement statement = connection.createStatement();
 			String query = "SELECT count(*) as noValidos "
 					+ "FROM Sesion s "
-					+ "Where s.idAlumno="+ses.getIdAlumno()
+					+ "Where s.id<>"+ses.getId()+" AND s.idAlumno="+ses.getIdAlumno()
 					+ " AND s.fecha='"+fechasConverter.fechaToString(ses.getFecha())+"' AND " 
 					//lo que viene a continuacion comprueba la validez de las horas
 					+"("
@@ -184,10 +184,10 @@ public class DAOSesionIMP implements DAOSesion{
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "UPDATE Sesion SET fecha='"+a.getFecha()+"',horaini='"
-			+a.getHoraini()+"',horafin='"+a.getHorafin()+"',tipo='"+a.getTipo()
-			+",Activo="+a.isActivo()+"',idAlumno='"+a.getIdAlumno()
-			+"',idProfesor='"+a.getIdProfesor()
+			String query = "UPDATE Sesion SET fecha='"+fechasConverter.fechaToString(a.getFecha())+"',horaini='"
+			+fechasConverter.horaToString(a.getHoraini())+"',horafin='"+fechasConverter.horaToString(a.getHorafin())+"',tipo='"+a.getTipo()
+			+"',Activo="+a.isActivo()+",idAlumno="+a.getIdAlumno()
+			+",idProfesor="+a.getIdProfesor()
 			
 			+" WHERE id="+a.getId()+";";
 			int resultSet = statement.executeUpdate(query);

@@ -62,7 +62,7 @@ public class fechasConverter {
 			return null;
 		}
 	}
-	public static Date StringHoraToString(String h) { //convert string into date(hour)
+	public static Date StringHoraToDate(String h) { //convert string into date(hour)
 		DateFormat formatter = new SimpleDateFormat(hourFormart);
         try {
 			Date hour = formatter.parse(h);

@@ -24,6 +24,7 @@ import negocio.Sesion.TSesion;
 import presentacion.Controller;
 import presentacion.GUIMaker;
 import presentacion.eventos;
+import resources.fechasConverter;
 
 public class GUIModificarSesion extends JFrame {
 	
@@ -35,6 +36,7 @@ public class GUIModificarSesion extends JFrame {
 	JLabel lblTipo = new  JLabel("Tipo: ");
 	JLabel lblIdA = new  JLabel("ID alumno: ");
 	JLabel lblIdP = new  JLabel("ID profesor: ");
+	
 	JLabel lblActivo = new JLabel("¿Está activa?: ");
 	JCheckBox tfActivo = new JCheckBox();
 	JTextField tfFecha = new JTextField();
@@ -43,6 +45,7 @@ public class GUIModificarSesion extends JFrame {
 	JTextField tfTipo = new JTextField();
 	JTextField tfIdA = new JTextField();
 	JTextField tfIdP = new JTextField();
+	
 	JButton actualizar = new JButton("Actualizar");
 	JButton btnCancelar=new JButton("Cancelar");
 	public void initGui() {
@@ -61,7 +64,7 @@ public class GUIModificarSesion extends JFrame {
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int aux = Integer.parseInt(tfID.getText());
-				Controller.getInstance().accion(eventos.BUSCAR_SESION,aux );
+				Controller.getInstance().accion(eventos.BUSCAR_SESION,aux);
 				}
 			});
 		upPanel.add(lblID,BorderLayout.NORTH);
@@ -73,13 +76,13 @@ public class GUIModificarSesion extends JFrame {
 	}
 	//panel con los datos cargados
 	public void updatePanel(TSesion ses) {
-		tfFecha.setText(ses.getFecha().toString()); //////
-		tfHoraIni.setText(ses.getHoraini().toString());
-		tfHoraFin.setText(ses.getHorafin().toString());
-		tfTipo.setText(ses.getTipo().toString());
-		tfIdP.setText(ses.getTipo().toString());
-		tfIdA.setText(ses.getTipo().toString());
+		tfFecha.setText(fechasConverter.fechaToString(ses.getFecha())); //////
+		tfHoraIni.setText(fechasConverter.horaToString(ses.getHoraini()));
+		tfHoraFin.setText(fechasConverter.horaToString(ses.getHorafin()));
+		tfTipo.setText(ses.getTipo());
 		tfActivo.setSelected(ses.isActivo());
+		tfIdP.setText(Integer.toString(ses.getIdProfesor()));
+		tfIdA.setText(Integer.toString(ses.getIdAlumno()));
 		centerPanel.add(lblFecha); centerPanel.add(tfFecha);
 		centerPanel.add(lblHoraIni);centerPanel.add(tfHoraIni);
 		centerPanel.add(lblHoraFin);centerPanel.add(tfHoraFin);
@@ -90,31 +93,11 @@ public class GUIModificarSesion extends JFrame {
 
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
-				Date date=null;
-				try {
-					date = format.parse(tfFecha.getText());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				DateFormat formatter = new SimpleDateFormat("HH:mm");
-				Time horaI=null;
-				try {
-					horaI = (Time)formatter.parse(tfHoraIni.getText());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Time horaF=null;
-				try {
-					horaF = (Time)formatter.parse(tfHoraFin.getText());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				TSesion s= new TSesion(0,date, horaI,horaF,tfTipo.getText(),tfActivo.isSelected(), Integer.parseInt(tfIdA.getText()),Integer.parseInt(tfIdP.getText()));  //VDFSFDSdsfDF
-				Controller.getInstance().accion(eventos.ALTA_SESION, s);
+				Date date = fechasConverter.StringFechaToDate(tfFecha.getText()), 
+						horaI= fechasConverter.StringHoraToDate(tfHoraIni.getText()), 
+						horaF= fechasConverter.StringHoraToDate(tfHoraFin.getText());
+				TSesion s= new TSesion(ses.getId(),date, horaI,horaF,tfTipo.getText(),tfActivo.isSelected(), ses.getIdAlumno(),ses.getIdProfesor());  
+				Controller.getInstance().accion(eventos.MODIFICAR_SESION, s);
 			}
 			});
 		btnCancelar.addActionListener(new ActionListener() {
@@ -125,6 +108,6 @@ public class GUIModificarSesion extends JFrame {
 		centerPanel.add(btnCancelar);
 		centerPanel.add(actualizar);
 		this.add(centerPanel);
-		this.setSize(800, 245);
+		this.setSize(850, 245);
 	}
 }

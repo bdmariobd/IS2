@@ -96,7 +96,7 @@ public class GuiMakerIMP extends GUIMaker {
 	public void configurateSubWindow(JFrame window,int h, int w, String title) {
 		window.setIconImage(pressman);
 		window.setPreferredSize(new Dimension(h,w));
-		window.setResizable(true);//cambiar a false cuando acabemos de fanciear
+		window.setResizable(false);//cambiar a false cuando acabemos de fanciear
 		window.setTitle(title+"- Autoescuela PM");
 		window.setVisible(true);
 		window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -108,6 +108,7 @@ public class GuiMakerIMP extends GUIMaker {
 	public void configurateWindow(JFrame window) {
 		//window.setLayout(new BorderLayout());
 		window.setIconImage(pressman);
+		window.setResizable(false);//cambiar a false cuando acabemos de fanciear
 		window.setPreferredSize(windowSize);
 		window.setTitle("Autoescuela PM");
 		window.setVisible(true);
