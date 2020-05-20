@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -44,6 +45,17 @@ class tAlumnoInt {
 	 * 
 	 * public List<TRelleno> readAllR(int id);
 	 */
+	
+	boolean compareLists(List<TRelleno> l1,List<TRelleno> l2) {
+		if(l1.size()!=l2.size())return false;
+		Iterator<TRelleno> it1= l1.iterator(), it2=l2.iterator();
+		while(it1.hasNext()&&it2.hasNext()) {
+			TRelleno t1=it1.next(), t2= it2.next();
+			if(t1.getIdAlumno()!=t2.getIdAlumno()||t1.getIdTest()!=t2.getIdTest()||t1.getNumFallos()!=t2.getNumFallos())
+				return false;
+		}
+		return true;
+	}
 	@BeforeAll
 	public static void initSetUp() {
 		//Vaciamos la tabla correspondiente.
@@ -160,6 +172,7 @@ class tAlumnoInt {
 		assertEquals(1,FactoriaDAO.getInstance().generateDAOAlumno().findByDNI("50638375Z"));
 		assertEquals(-1,FactoriaDAO.getInstance().generateDAOAlumno().findByDNI("88888888Z"));
 	}
+
 	@Test
 	@Order(12)
 	void testDAOReadAll() {
@@ -169,7 +182,9 @@ class tAlumnoInt {
 		lista1.add(r1);
 		lista1.add(r2);
 		//Ya tengo una lista preparada para comparar.
-		assertEquals(true,lista1.equals(FactoriaDAO.getInstance().generateDAOAlumno().readAllR(1)));
+		assertEquals(true,compareLists(lista1, FactoriaDAO.getInstance().generateDAOAlumno().readAllR(1)));
 		// Alumno id 1 se supone que tiene dos test. Comprobamos.
 	}
+	
+	
 }

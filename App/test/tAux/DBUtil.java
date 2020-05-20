@@ -18,7 +18,7 @@ public class DBUtil {
 			e.printStackTrace();
 			System.out.println("Error DB o tablename");
 		}
-	}
+	} // esto no va pq soy down y no tengo permisos en el servidor
 	public static void exportTable(String tablename) {
 	    Statement stmt;
 	    String query;
@@ -38,18 +38,6 @@ public class DBUtil {
 	        stmt = null;
 	    }
 	}
-	public static int getRandomDNI()	{
-		int x = (int) Math.floor(10000000 + Math.random() * 90000000);
-
-		System.out.println(x);
-		
-    return x;
-	}
-    public static int getRandomTelf()	{
-		int x = (int) Math.floor(100000000 + Math.random() * 900000000);
-		System.out.println(x);
-		
-    return x;
-	}	
+	
 	
 }
