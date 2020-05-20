@@ -4,6 +4,8 @@ import negocio.Alumno.SAalumno;
 import negocio.Alumno.SAalumnoImp;
 import negocio.Profesor.SAProfesor;
 import negocio.Profesor.SAProfesorImp;
+import negocio.Sesion.SASesion;
+import negocio.Sesion.SASesionIMP;
 import negocio.Sucursal.SASucursal;
 import negocio.Sucursal.SASucursalIMP;
 import negocio.Vehiculo.SAVehiculo;
@@ -40,5 +42,11 @@ public class FactoriaSAIMP extends FactoriaSA {
 	public SATest generateSATest() {
 		// TODO Auto-generated method stub
 		return new SATestIMP();
+	}
+
+	@Override
+	public SASesion generateSASesion() {
+		// TODO Auto-generated method stub
+		return new SASesionIMP();
 	}
 }

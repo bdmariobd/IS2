@@ -193,17 +193,28 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			return -4;
 		}
 	}
+	public boolean vehExist(int id) {
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT * FROM VehiculoProfesor WHERE id="+id+";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if(resultSet.next()) return true;
+			return false;
+		}
+		catch (Exception e) {
+			return false;
+		}
+	}
 	@Override
 	public int asignarVehProf(TVehProf datos) {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
 			String insertstm = "INSERT into VehiculoProfesor VALUES ("+datos.getIDV()+","+datos.getIDP()+");";
-			ResultSet resultSet = statement.executeQuery(insertstm);
-			if(resultSet.next()) {
-				return datos.getIDV();
-			}
-			return -1;
+			int resultSet = statement.executeUpdate(insertstm);
+			if(resultSet==0) return -5;
+			return datos.getIDV();
 		}
 		catch (Exception e) {
 			return -4;

@@ -51,9 +51,11 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		switch(event) {
 		case eventos.ASIGNAR_VEHPROF_OK:
 			JOptionPane.showMessageDialog(null,"Añadido correctamente(idcoche="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
 		case eventos.ASIGNAR_VEHPROF_KO:
-			if((int)res==-2)msg = "Error, ese vehiculo ya tiene un profesor asignado.";
+			if((int)res==-2)msg = "Error, compruebe los IDs introducidos.";
 			else if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res == -4) msg= "Ya está vinculado este vehiculo con ese profesor";
 				JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;	
 		case eventos.ALTA_OK_VEHICULO:

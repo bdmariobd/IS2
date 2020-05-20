@@ -21,7 +21,10 @@ public interface DAOVehiculo {
 	public int regDamage(String[] datos);
 	
 	public int isDeleted(int id);
-
+	
+	public boolean vehExist(int idv);
+	
 	public int asignarVehProf(TVehProf datos);
+	
 	public int findbyID(String id);
 }

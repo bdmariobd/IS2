@@ -58,7 +58,7 @@ public class GUIAsignarVeh extends JFrame {
 				}
 				
 				try {
-					TVehProf pv = new TVehProf(Integer.parseInt(inputs[0].getText()),Integer.parseInt(inputs[1].getText()));
+					TVehProf pv = new TVehProf(Integer.parseInt(inputs[1].getText()),Integer.parseInt(inputs[0].getText()));
 					Controller.getInstance().accion(eventos.ASIGNAR_VEHPROF, pv);
 				}
 				catch(Exception ex){

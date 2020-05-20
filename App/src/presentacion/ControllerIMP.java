@@ -8,6 +8,8 @@ import negocio.Alumno.SAalumno;
 import negocio.Alumno.TAlumno;
 import negocio.Profesor.SAProfesor;
 import negocio.Profesor.TProfesor;
+import negocio.Sesion.SASesion;
+import negocio.Sesion.TSesion;
 import negocio.Sucursal.SASucursal;
 import negocio.Sucursal.TSucursal;
 import negocio.Vehiculo.SAVehiculo;
@@ -15,6 +17,7 @@ import negocio.Vehiculo.TVehProf;
 import negocio.Vehiculo.TVehiculo;
 import presentacion.Alumno.GUIAlumno;
 import presentacion.Profesor.GUIProfesor;
+import presentacion.Sesion.GUISesion;
 import presentacion.Sucursal.GUISucursal;
 import presentacion.Vehiculo.GUIVehiculo;
 import negocio.Test.SATest;
@@ -28,6 +31,7 @@ public class ControllerIMP extends Controller {
 	private SAalumno saAlu;
 	private SAProfesor saProfe;
 	private SATest saTest;
+	private SASesion saSesion;
 	public ControllerIMP() {
 		//FactoriaSA factoria= FactoriaSA.getInstance();
 		saVeh= FactoriaSA.getInstance().generateSAVehiculo();
@@ -35,6 +39,7 @@ public class ControllerIMP extends Controller {
 		saAlu = FactoriaSA.getInstance().generateSAalumno();
 		saProfe = FactoriaSA.getInstance().generateSAProfesor();
 		saTest = FactoriaSA.getInstance().generateSATest();
+		saSesion= FactoriaSA.getInstance().generateSASesion();
 	}
 	@Override
 	public void accion(int evento, Object datos) {
@@ -59,7 +64,7 @@ public class ControllerIMP extends Controller {
 				
 			break;
 			
-			case eventos.GUI_SESION:
+			case eventos.GUI_SESION: GUISesion.getInstance().initGui();
 			break;
 			
 			case eventos.GUI_PRINC: GUIPrinc.getInstance().reInit();
@@ -240,11 +245,48 @@ public class ControllerIMP extends Controller {
             	id= saVeh.asigVehProf((TVehProf) datos);
             	if(id<0) GUIVehiculo.getInstance().update(eventos.ASIGNAR_VEHPROF_KO, id);
             	else GUIVehiculo.getInstance().update(eventos.ASIGNAR_VEHPROF_OK, id);
+            	break;
             case eventos.MOSTRAR_TEST_ALUMNO: /////7
 				List<TRelleno> listaR = saAlu.readAllR((int)datos);
 				//if(list!=null)
 				GUIAlumno.getInstance().update(eventos.MOSTRAR_OK_TEST_ALUMNO, listaR);
 			break;
+            case eventos.ALTA_SESION: 
+                id = saSesion.create((TSesion) datos); 
+                if(id<0) GUISesion.getInstance().update(eventos.ALTA_KO_SESION, id);
+                else GUISesion.getInstance().update(eventos.ALTA_OK_SESION, id);
+
+            break;
+            case eventos.BAJA_SESION:
+                id= saSesion.delete((String) datos);
+                if(id<0) GUISesion.getInstance().update(eventos.BAJA_KO_SESION, id);
+                else GUISesion.getInstance().update(eventos.BAJA_OK_SESION, id);
+            break;
+            case eventos.MOSTRAR_TODOS_SESION_PROFESOR:
+            	 List<TSesion>listS = saSesion.readAllP((int) datos);
+                 if(listS.size()==0)GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_KO_SESION_PROFESOR, listS);
+                 else GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION_PROFESOR, listS);
+            break;
+            case eventos.MOSTRAR_TODOS_SESION_ALUMNO:
+            	List<TSesion>listSe = saSesion.readAllA((int) datos);
+            	if(listSe.size()==0)GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_KO_SESION_ALUMNO, listSe);
+            	else GUISesion.getInstance().update(eventos.MOSTRAR_TODOS_OK_SESION_ALUMNO, listSe);
+            break;
+            case eventos.MOSTRAR_UNO_SESION:
+                TSesion se = saSesion.read((int) datos);
+                if(se==null) GUISesion.getInstance().update(eventos.MOSTRAR_UNO_KO_SESION, se);
+                else GUISesion.getInstance().update(eventos.MOSTRAR_UNO_OK_SESION, se);
+            break;
+            case eventos.MODIFICAR_SESION:
+                id= saSesion.update((TSesion) datos);
+                if(id<0) GUISesion.getInstance().update(eventos.MODIFICAR_KO_SESION, id);
+                else GUISesion.getInstance().update(eventos.MODIFICAR_OK_SESION, id);
+            break;
+            case eventos.BUSCAR_SESION:
+                TSesion se2 = saSesion.read((int) datos);
+                if(se2!=null)GUISesion.getInstance().update(eventos.BUSCAR_SESION_OK, se2);
+                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+            break;
 		}
 	}
 

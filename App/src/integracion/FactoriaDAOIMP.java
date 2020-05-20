@@ -6,6 +6,8 @@ import integracion.Alumno.DAOAlumno;
 import integracion.Alumno.DAOAlumnoIMP;
 import integracion.Profesor.DAOProfesor;
 import integracion.Profesor.DAOProfesorIMP;
+import integracion.Sesion.DAOSesion;
+import integracion.Sesion.DAOSesionIMP;
 import integracion.Sucursal.DAOSucursal;
 import integracion.Sucursal.DAOSucursalIMP;
 import integracion.Test.DAOTest;
@@ -37,4 +39,9 @@ public class FactoriaDAOIMP extends FactoriaDAO {
     	// TODO Auto-generated method stub
     	return new DAOTestIMP();
     }
+	@Override
+	public DAOSesion generateDAOSesion() {
+		// TODO Auto-generated method stub
+		return new DAOSesionIMP();
+	}
 }

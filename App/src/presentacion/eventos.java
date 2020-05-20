@@ -155,4 +155,10 @@ public class eventos {
 	public static final int MOSTRAR_OK_TEST_ALUMNO=271;
 	public static final int MOSTRAR_KO_TEST_ALUMNO=272;
 	//public static final int BUSCAR_VEHICULO_KO = ;
+	public static final int MOSTRAR_TODOS_SESION_PROFESOR=272;
+	public static final int MOSTRAR_TODOS_SESION_ALUMNO=273;
+	public static final int MOSTRAR_TODOS_OK_SESION_PROFESOR=274;
+	public static final int MOSTRAR_TODOS_OK_SESION_ALUMNO=275;
+	public static final int MOSTRAR_TODOS_KO_SESION_PROFESOR=276;
+	public static final int MOSTRAR_TODOS_KO_SESION_ALUMNO=277;
 }
