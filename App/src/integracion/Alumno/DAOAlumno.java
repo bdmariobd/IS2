@@ -22,10 +22,12 @@ public interface DAOAlumno {
 
 	public int findByDNI(String dni);
 	
-	public boolean existeDNI(String DNI);
+	public boolean existeDNI(TAlumno a);
 	
 	public int rellenar(TRelleno r);
 	// de momento
 	public int getID();
 	public List<TRelleno> readAllR(int id);
+	
+	public int pending(int idA);
 }

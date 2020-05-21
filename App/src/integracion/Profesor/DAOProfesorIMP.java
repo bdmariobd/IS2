@@ -51,7 +51,7 @@ public class DAOProfesorIMP implements DAOProfesor {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String consulta = "SELECT COUNT(*) FROM Profesor WHERE DNI = '" + DNI + "';";
+			String consulta = "SELECT COUNT(*) FROM Alumno a,Profesor p WHERE a.dni = '" + DNI + "' OR p.DNI='"+DNI+"';";
 			ResultSet resultSet = statement.executeQuery(consulta);
 			if (resultSet.next())
 				return (resultSet.getInt(1) > 0);

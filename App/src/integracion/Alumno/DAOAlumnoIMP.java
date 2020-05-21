@@ -112,11 +112,11 @@ public class DAOAlumnoIMP implements DAOAlumno {
 		return null;
 	}
 
-	public boolean existeDNI(String DNI) {
+	public boolean existeDNI(TAlumno a) {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String consulta = "SELECT COUNT(*) FROM Alumno WHERE DNI = '" + DNI + "';";
+			String consulta = "SELECT COUNT(*) FROM Alumno a,Profesor p WHERE a.id<>"+a.getId() +" AND (a.dni = '" + a.getDNI() + "' OR p.DNI='"+a.getDNI()+"');";
 			ResultSet resultSet = statement.executeQuery(consulta);
 			if (resultSet.next())
 				return (resultSet.getInt(1) > 0);
@@ -216,6 +216,25 @@ public class DAOAlumnoIMP implements DAOAlumno {
 		} catch (Exception e) {
 			return -4;
 		}
+	}
+	public int pending(int idA) { //-7 sesiones pendientes. 
+		try {
+		Connection connection = DAOConnect.getInstance().getConnection();
+		Statement statement = connection.createStatement();
+		String checkstm = "SELECT count(*) FROM Sesion s WHERE s.activo="+1+" AND s.idAlumno="
+				+idA+";";
+		ResultSet resultSet = statement.executeQuery(checkstm);
+		if(resultSet.next()) {
+			if(resultSet.getInt(1)>0) return -7;
+		}
+		return 0;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return -4;
+		}
+		
 	}
 
 	@Override

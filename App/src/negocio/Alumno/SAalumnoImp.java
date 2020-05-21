@@ -15,7 +15,7 @@ public class SAalumnoImp implements SAalumno {
 		DAOAlumno dao = FactoriaDAO.getInstance().generateDAOAlumno();
 		if (datosIncorrectos(a))
 			return -3;
-		else if (dao.existeDNI(a.getDNI()))
+		else if (dao.existeDNI(a))
 			return -2;
 		else
 			id = dao.create(a);
@@ -64,21 +64,22 @@ public class SAalumnoImp implements SAalumno {
 	public int update(TAlumno a) {
 		int id;
 		DAOAlumno dao = FactoriaDAO.getInstance().generateDAOAlumno();
-
-		if (datosIncorrectos(a))
-			id = -3;
-		else
-			id = dao.update(a);
+		if (datosIncorrectos(a))return -3;
+		if(dao.existeDNI(a))return -2; 
+		id = dao.update(a);
 		return id;
 	}
 
 	@Override
 	public int delete(String id) {
 		if (isNumeric(id)) {
+			int ID=Integer.parseInt(id);
 			DAOAlumno dao = FactoriaDAO.getInstance().generateDAOAlumno();
 			int deleted = dao.isDeleted(Integer.parseInt(id));
 			if (deleted != 0)
 				return deleted;
+			int aux = dao.pending(ID);
+			if(aux!=0) return aux;
 			int result = dao.delete(Integer.parseInt(id));
 			return result;
 		} else
@@ -102,6 +103,7 @@ public class SAalumnoImp implements SAalumno {
 		return 0;
 	}
 	public int rellenar(TRelleno r) {
+		if(r.getNumFallos()<0) return -8;
 		if(!existeIDAlumno(r.getIdAlumno())) return -1;
 		else if(!existeIDTest(r.getIdTest())) return -6;
 		else if(!numF(r.getNumFallos(),r.getIdTest())) return -7;

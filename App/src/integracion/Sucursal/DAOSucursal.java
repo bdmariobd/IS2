@@ -17,5 +17,7 @@ package integracion.Sucursal;
         public int delete(int id);
 
         public int isDeleted(int id);
+        
+        public int linked(int s);//devuelve el num de profes y vehiculos asignados a la sucursal
     }
 

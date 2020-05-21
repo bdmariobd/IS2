@@ -164,5 +164,19 @@ public class DAOSucursalIMP implements DAOSucursal {
 			return -4;
 		}
 	}
+	public int linked(int s) { //devuleve el numero de profes y vehiculos unidos a sucursal
+		try {
+			Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String query = "SELECT count(*) FROM Vehiculo v, Profesor p WHERE v.id="+s+" OR p.id="+s+";";
+			ResultSet resultSet = statement.executeQuery(query);
+			if (resultSet.next())
+				return (resultSet.getInt(1));
+			return 0;
+		}
+		catch (Exception e) {
+			return -4;
+		}
+	}
 
 }

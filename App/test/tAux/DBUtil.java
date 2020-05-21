@@ -13,6 +13,7 @@ public class DBUtil {
 			Statement st = con.createStatement();
 			String query = "Delete FROM "+ tablename+" ;";
 			st.executeUpdate(query);
+			System.out.println("-Tabla "+tablename+" borrada correctamente");
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -38,6 +39,18 @@ public class DBUtil {
 	        stmt = null;
 	    }
 	}
-	
+	public static void addSomething(String query) {
+		try {
+			Connection con=ConnectImp.getInstance().getConnection();
+			Statement st=con.createStatement();
+			//st.executeQuery("SET FOREIGN_KEY_CHECKS=0");
+			st.executeUpdate(query);
+			//st.executeQuery("SET FOREIGN_KEY_CHECKS=1");
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println("Error de conexion con la base de dato o de consulta");
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

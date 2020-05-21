@@ -63,6 +63,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 			else if((int)res==-1)msg = "Error, no existe.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			
 				JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 			
@@ -76,6 +77,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 			if((int)res==-3)msg = "Error, invalidez de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			else if((int)res==-7) msg="No puedes dar de baja a un alumno con sesiones pendientes.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 			
@@ -85,6 +87,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 			
 		case eventos.MODIFICAR_KO_ALUMNO:
 			if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res==-2)msg = "Error, DNI repetido.";
 			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
@@ -123,6 +126,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
 			else if((int)res==-6) msg="Error, no existe el test.";
 			else if((int)res==-7) msg="Error, el numero de respuestas incorrectas supera el numero de respuestas total.";
+			else if((int)res==-8) msg="Error, el numero de respuestas incorrectas no es válido.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_OK_TEST_ALUMNO:

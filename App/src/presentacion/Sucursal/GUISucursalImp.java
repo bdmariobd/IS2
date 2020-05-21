@@ -71,6 +71,7 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 			if((int)res==-3)msg = "Error, invalidez de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			else if((int)res==-7) msg="No se puede borrar una sucursal con profesores o vehiculos vinculados.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MOSTRAR_TODOS_OK_SUCURSAL:

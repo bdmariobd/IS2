@@ -13,6 +13,7 @@ public class SASucursalIMP implements SASucursal {
 	 * -4: error de la base de datos
 	 * -5: otros errores desconocidos
 	 * -6: el vehiculo ya estaba borrado
+	 * -7:no se puede borrar porque esta linkeado
 	 * Si se devuelve un transfer con que se devuelva null ya vale
 	 */
 		private boolean telefonoCorrecto(int m) {
@@ -51,9 +52,11 @@ public class SASucursalIMP implements SASucursal {
 	public int delete(String id) {
 		// TODO Auto-generated method stub
 		if(isNumeric(id)) {
+			int ID= Integer.parseInt(id);
 			DAOSucursal dao = FactoriaDAO.getInstance().generateDAOSucursal();
 			int deleted= dao.isDeleted(Integer.parseInt(id));
 			if(deleted!=0) return deleted;
+			if(dao.linked(ID)!=0) return -7;
 			int result = dao.delete(Integer.parseInt(id));
 			return result;
 		}
