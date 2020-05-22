@@ -198,7 +198,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM VehiculoProfesor WHERE id="+id+";";
+			String query = "SELECT * FROM VehiculoProfesor WHERE idCoche="+id+";";
 			ResultSet resultSet = statement.executeQuery(query);
 			if(resultSet.next()) return true;
 			return false;
