@@ -23,7 +23,7 @@ public class GUIAltaProfesor extends JFrame {
 	private JButton btnCancelar = new JButton("Cancelar");
 	private String[] labels = { "Insertar idSucursal", "Insertar DNI", "Insertar nombre", "Insertar apellidos",
 			"Insertar telefono", "Insertar email", "Insertar sueldo" };
-	private JCheckBox actividad = new JCheckBox("¿Está activo?", true);
+	//private JCheckBox actividad = new JCheckBox("¿Está activo?", true);
 	private JLabel etiqgeneral;
 	private JTextField[] inputs = new JTextField[labels.length];
 
@@ -43,10 +43,9 @@ public class GUIAltaProfesor extends JFrame {
 		}
 
 		//add(new JPanel());
-		add(actividad);
-		add(new JPanel());
-		add(btnAlta);
+		//add(actividad);
 		add(btnCancelar);
+		add(btnAlta);
 		setVisible(true);
 
 		GUIMaker.getInstance().configurateSubWindow(this, 410, 250, "Registrar un alta");
@@ -66,7 +65,7 @@ public class GUIAltaProfesor extends JFrame {
 				try {
 					TProfesor a = new TProfesor(0, Integer.valueOf(inputs[0].getText()), inputs[1].getText(),
 							inputs[2].getText(), inputs[3].getText(), Integer.valueOf(inputs[4].getText()),
-							inputs[5].getText(), Integer.valueOf(inputs[6].getText()), actividad.isSelected());
+							inputs[5].getText(), Integer.valueOf(inputs[6].getText()), true);
 					Controller.getInstance().accion(eventos.ALTA_PROFESOR, a);
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Compruebe formato de los datos. \n (" + ex.toString() + ")",

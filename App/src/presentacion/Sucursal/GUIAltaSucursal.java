@@ -24,7 +24,7 @@ package presentacion.Sucursal;
 		private JButton btnCancelar = new JButton("Cancelar");
 		private String[] labels = {"Insertar ciudad","Insertar telefono","Insertar direccion" };
 		private JLabel etiqgeneral;
-		private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
+		//private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];
 		
 		public void initGui() {
@@ -42,10 +42,11 @@ package presentacion.Sucursal;
 			add(inputs[i]);
 		}
 		//Anadir componentes
-		add(new JPanel());
-		add(actividad);
-		add(btnAlta);
+		//add(new JPanel());
+		//add(actividad);
 		add(btnCancelar);
+		add(btnAlta);
+		
 		setVisible(true);
 		GUIMaker.getInstance().configurateSubWindow(this,410,250,"Registrar un alta");
 		//Botones
@@ -60,7 +61,7 @@ package presentacion.Sucursal;
 				
 				try {
 					TSucursal s= new TSucursal(0,inputs[0].getText(), 
-							Integer.parseInt(inputs[1].getText()),inputs[2].getText(),actividad.isSelected());
+							Integer.parseInt(inputs[1].getText()),inputs[2].getText(),true);
 					Controller.getInstance().accion(eventos.ALTA_SUCURSAL, s);
 				}
 				catch(Exception ex){

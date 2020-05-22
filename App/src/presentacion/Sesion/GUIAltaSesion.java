@@ -31,7 +31,7 @@ import resources.fechasConverter;
 		private JButton btnCancelar = new JButton("Cancelar");
 		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo"," Insetar ID alumno", "Insertar ID profesor" };
 		private JLabel etiqgeneral;
-		private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
+		//private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];
 		
 		public void initGui() {
@@ -53,10 +53,10 @@ import resources.fechasConverter;
 			add(inputs[i]);
 		}
 		//Anadir componentesaa
-		add(new JPanel());
-		add(actividad);
-		add(btnAlta);
+		//add(new JPanel());
+		//add(actividad);
 		add(btnCancelar);
+		add(btnAlta);
 		setVisible(true);
 		GUIMaker.getInstance().configurateSubWindow(this,410,250,"Registrar un alta");
 		//Botones
@@ -73,7 +73,7 @@ import resources.fechasConverter;
 					Date date = fechasConverter.StringFechaToDate(inputs[0].getText());
 					Date horaI = fechasConverter.StringHoraToDate(inputs[1].getText());
 					Date horaF = fechasConverter.StringHoraToDate(inputs[2].getText());
-					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(),actividad.isSelected(), Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
+					TSesion s= new TSesion(0,date, horaI,horaF,inputs[3].getText(),true, Integer.parseInt(inputs[4].getText()),Integer.parseInt(inputs[5].getText()));  //VDFSFDSdsfDF
 					Controller.getInstance().accion(eventos.ALTA_SESION, s);
 				}
 				catch(Exception ex){

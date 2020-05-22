@@ -168,7 +168,8 @@ public class DAOSucursalIMP implements DAOSucursal {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT count(*) FROM Vehiculo v, Profesor p WHERE v.id="+s+" OR p.id="+s+";";
+			String query = "SELECT count(*) FROM Vehiculos v, Profesor p WHERE (v.activo="+1+" AND v.idSucursal="+s+") "
+					+ "OR (p.activo="+1+" AND p.idSucursal="+s+");";
 			ResultSet resultSet = statement.executeQuery(query);
 			if (resultSet.next())
 				return (resultSet.getInt(1));

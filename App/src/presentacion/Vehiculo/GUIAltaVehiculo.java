@@ -23,7 +23,7 @@ public class GUIAltaVehiculo extends JFrame {
 	private String[] labels = {"Insertar matricula","Insertar ID sucursal", "Insertar tipo",
 			"Insertar daños"};
 	private JLabel etiqgeneral;
-	private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
+	//private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 	private JTextField[] inputs = new JTextField[labels.length];
 	
 	public void initGui() {
@@ -41,10 +41,10 @@ public class GUIAltaVehiculo extends JFrame {
 		add(inputs[i]);
 	}
 	//Anadir componentes
-	add(new JPanel());
-	add(actividad);
-	add(btnAlta);
+	//add(new JPanel());
+	//add(actividad);
 	add(btnCancelar);
+	add(btnAlta);
 	setVisible(true);
 	GUIMaker.getInstance().configurateSubWindow(this,410,250,"Registrar un alta");
 	//Botones
@@ -59,7 +59,7 @@ public class GUIAltaVehiculo extends JFrame {
 			
 			try {
 				TVehiculo v= new TVehiculo(0,Integer.parseInt(inputs[1].getText()),
-						inputs[2].getText(),inputs[0].getText().toUpperCase(),actividad.isSelected(),inputs[3].getText());
+						inputs[2].getText(),inputs[0].getText().toUpperCase(),true,inputs[3].getText());
 				Controller.getInstance().accion(eventos.ALTA_VEHICULO, v);
 			}
 			catch(Exception ex){

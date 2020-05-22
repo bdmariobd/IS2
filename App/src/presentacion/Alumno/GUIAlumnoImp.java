@@ -50,7 +50,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 	@Override
 	public void update(int event, Object res) {
 		// TODO Auto-generated method stub
-		String msg = "";
+		String msg = "Error no contemplado";
 		
 		switch(event) {
 		case eventos.ALTA_OK_ALUMNO:

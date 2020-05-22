@@ -45,6 +45,8 @@ public class SASucursalIMP implements SASucursal {
 	@Override
 	public int update(TSucursal s) {
 		// TODO Auto-generated method stub
+		if(!telefonoCorrecto(s.getTelefono()) || s.getCiudad().length()>100 
+				|| s.getDireccion().length()>150) return -3;
 		return FactoriaDAO.getInstance().generateDAOSucursal().update(s);
 	}
 

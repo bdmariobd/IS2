@@ -67,6 +67,7 @@ public class GUIProfesorImp extends GUIProfesor implements ActionListener{
 			if((int)res==-3)msg = "Error, invalidez de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			else if((int)res==-7) msg="No puedes dar de baja a un profesor con sesiones pendientes.";
 			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 			
@@ -77,6 +78,7 @@ public class GUIProfesorImp extends GUIProfesor implements ActionListener{
 			
 		case eventos.MODIFICAR_KO_PROFESOR:
 			if((int)res==-1)msg = "Error, no existe.";
+			else if((int)res==-2)msg = "Error, DNI repetido.";
 			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";

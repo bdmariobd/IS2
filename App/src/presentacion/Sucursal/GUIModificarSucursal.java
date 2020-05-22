@@ -26,7 +26,7 @@ public class GUIModificarSucursal extends JFrame {
 	JLabel lblCiudad = new JLabel("Ciudad: ");
 	JLabel lblTelefono = new JLabel("Telefono: ");
 	JLabel lblDireccion = new JLabel("Direccion: ");
-	JLabel lblActivo = new JLabel("¿Está activa?: ");
+	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
 	JCheckBox tfActivo = new JCheckBox();
 	JTextField tfCiudad= new JTextField();
 	JTextField tfTelefono = new JTextField();
@@ -48,6 +48,7 @@ public class GUIModificarSucursal extends JFrame {
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_SUCURSAL,aux );
 				}
@@ -60,16 +61,17 @@ public class GUIModificarSucursal extends JFrame {
 		this.setVisible(true);
 	}
 	//panel con los datos cargados
-	public void updatePanel(TSucursal suc) {
+	public void updatePanel(TSucursal suc) {  
+		centerPanel.revalidate();
+		centerPanel.repaint();
 		String x = Integer.toString(suc.getTelefono());
 		tfCiudad.setText(suc.getCiudad());
 		tfTelefono.setText(x);
 		tfDireccion.setText(suc.getDireccion());
-		tfActivo.setSelected(suc.isActivo());
 		centerPanel.add(lblCiudad); centerPanel.add(tfCiudad);
 		centerPanel.add(lblTelefono);centerPanel.add(tfTelefono);
 		centerPanel.add(lblDireccion);centerPanel.add(tfDireccion);
-		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		if(!suc.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TSucursal s= new TSucursal(suc.getId(),

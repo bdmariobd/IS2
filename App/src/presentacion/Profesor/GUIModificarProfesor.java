@@ -70,7 +70,7 @@ public class GUIModificarProfesor extends JFrame{
 		this.pack();
 		this.setVisible(true);
 	}
-	//panel con los datos cargados
+	//panel con los datos cargados.
 	public void updatePanel(TProfesor a) {
 		tfIdSucursal.setText(String.valueOf(a.getIdSucursal()));
 		tfDNI.setText(a.getDNI());
@@ -79,6 +79,7 @@ public class GUIModificarProfesor extends JFrame{
 		tfEmail.setText(a.getEmail());
 		tfTelefono.setText(String.valueOf(a.getTelefono()));
 		tfSueldo.setText(String.valueOf(a.getSueldo()));
+		
 		tfActivo.setSelected(a.getActivo());
 		centerPanel.add(lblIdSucursal); centerPanel.add(tfIdSucursal);
 		centerPanel.add(lblDNI); centerPanel.add(tfDNI);

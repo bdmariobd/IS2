@@ -22,7 +22,7 @@ public class GUIAltaAlumno extends JFrame{
 	private JButton btnAlta = new JButton("Dar de alta");
 	private JButton btnCancelar = new JButton("Cancelar");
 	private String[] labels = {"Insertar DNI","Insertar nombre", "Insertar apellidos", "Insertar telefono", "Insertar email"};
-	private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
+	//private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 	private JCheckBox amaxofobia = new JCheckBox("¿Tiene amaxofobia?",false);
 	private JLabel etiqgeneral;
 	private JTextField[] inputs = new JTextField[labels.length];
@@ -42,12 +42,12 @@ public class GUIAltaAlumno extends JFrame{
             add(inputs[i]);
         }
 
-        add(new JPanel());
-        add(actividad);
+        //add(new JPanel());
+        //add(actividad);
         add(new JPanel());
         add(amaxofobia);
-        add(btnAlta);
         add(btnCancelar);
+        add(btnAlta);
         setVisible(true);
 
 		GUIMaker.getInstance().configurateSubWindow(this,410,250,"Registrar un alta");
@@ -63,7 +63,7 @@ public class GUIAltaAlumno extends JFrame{
 				}
 				
 				try {
-					TAlumno a = new TAlumno(0,inputs[0].getText(),inputs[1].getText(),inputs[2].getText(),Integer.valueOf(inputs[3].getText()),inputs[4].getText(),amaxofobia.isSelected(),actividad.isSelected());
+					TAlumno a = new TAlumno(0,inputs[0].getText(),inputs[1].getText(),inputs[2].getText(),Integer.valueOf(inputs[3].getText()),inputs[4].getText(),amaxofobia.isSelected(),true);
 					Controller.getInstance().accion(eventos.ALTA_ALUMNO, a);
 				}
 				catch(Exception ex){

@@ -33,14 +33,6 @@ class tSucursalInt {
 			return true;
 		}
 		
-		@Test
-		@Order(1)
-		void testDAOCreate() { 
-			TSucursal a = new TSucursal(1,"Murcia",919199191,"Calle del Limon de Don Salva Espin",true);
-			TSucursal b = new TSucursal(2,"Madrid",999999999,"Nuñez de Balboa, N9 ",false);
-			assertEquals(1,FactoriaDAO.getInstance().generateDAOSucursal().create(a));
-			assertEquals(2,FactoriaDAO.getInstance().generateDAOSucursal().create(b));
-		}
 		@BeforeAll
 		public static void initSetUp() {
 			System.out.println("Iniciando preparaciones previas...");
@@ -53,6 +45,14 @@ class tSucursalInt {
 				e.printStackTrace();
 			}
 			System.out.println("Se ha vaciado toda la tabla correspondiente a Sucursal, iniciando test");
+		}
+		@Test
+		@Order(1)
+		void testDAOCreate() { 
+			TSucursal a = new TSucursal(1,"Murcia",919199191,"Calle del Limon de Don Salva Espin",true);
+			TSucursal b = new TSucursal(2,"Madrid",999999999,"Nuñez de Balboa, N9 ",false);
+			assertEquals(1,FactoriaDAO.getInstance().generateDAOSucursal().create(a));
+			assertEquals(2,FactoriaDAO.getInstance().generateDAOSucursal().create(b));
 		}
 		@Test
 		@Order(2)

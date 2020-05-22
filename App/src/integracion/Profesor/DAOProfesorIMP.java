@@ -47,11 +47,11 @@ public class DAOProfesorIMP implements DAOProfesor {
 		return 1;
 	}
 
-	public boolean existeDNI(String DNI) {
+	public boolean existeDNI(TProfesor p) {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String consulta = "SELECT COUNT(*) FROM Alumno a,Profesor p WHERE a.dni = '" + DNI + "' OR p.DNI='"+DNI+"';";
+			String consulta = "SELECT COUNT(*) FROM Alumno a,Profesor p WHERE p.id<>"+p.getId() +" AND (a.dni = '" + p.getDNI() + "' OR p.DNI='"+p.getDNI()+"');";
 			ResultSet resultSet = statement.executeQuery(consulta);
 			if (resultSet.next())
 				return (resultSet.getInt(1) > 0);
@@ -68,10 +68,10 @@ public class DAOProfesorIMP implements DAOProfesor {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String consulta = "SELECT COUNT(*) FROM Sucursal WHERE id = " + idSucursal + ";";
+			String consulta = "SELECT COUNT(*) FROM Sucursal WHERE id = " + idSucursal + " AND activo="+1+";";
 			ResultSet resultSet = statement.executeQuery(consulta);
 			if (resultSet.next())
-				return (resultSet.getInt(1) > 0);					;
+				return (resultSet.getInt(1) > 0);					
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -162,8 +162,8 @@ public class DAOProfesorIMP implements DAOProfesor {
 			Statement statement = connection.createStatement();
 			String deletestm = "UPDATE Profesor SET activo=" + 0 + " WHERE id=" + id + ";";
 			int resultSet = statement.executeUpdate(deletestm);
-			if (resultSet == 0)
-				return -1;
+			if (resultSet == 0)	return -1;
+			statement.executeUpdate("DELETE FROM VehiculoProfesor Where idProfesor=" + id+";");
 			return id;
 		} catch (Exception e) {
 			return -4;
@@ -200,6 +200,24 @@ public class DAOProfesorIMP implements DAOProfesor {
 			return false;
 		}
 
+		
+	}
+	public int pending(int idP) { //-7 sesiones pendientes. 0 Si no tiene. -4 si hubo un error 
+		try {
+		Connection connection = DAOConnect.getInstance().getConnection();
+			Statement statement = connection.createStatement();
+			String checkstm = "SELECT count(*) FROM Sesion s WHERE s.activo="+1+" AND s.idProfesor="
+					+idP+";";
+			ResultSet resultSet = statement.executeQuery(checkstm);
+			if(resultSet.next()) {
+				if(resultSet.getInt(1)>0) return -7;
+			}
+			return 0;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return -4;
+		}
 		
 	}
 }

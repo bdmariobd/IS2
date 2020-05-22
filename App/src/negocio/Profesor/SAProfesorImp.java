@@ -14,7 +14,7 @@ public class SAProfesorImp implements SAProfesor {
 
 		if (datosIncorrectos(a))
 			id = -3;
-		else if (dao.existeDNI(a.getDNI()))
+		else if (dao.existeDNI(a))
 			id = -2;
 		else if (!dao.existeIdSucursal(a.getIdSucursal()))
 			id = -6;
@@ -39,12 +39,10 @@ public class SAProfesorImp implements SAProfesor {
 		int id;
 		DAOProfesor dao = FactoriaDAO.getInstance().generateDAOProfesor();
 
-		if (datosIncorrectos(a))
-			id = -3;
-		else if (!dao.existeIdSucursal(a.getIdSucursal()))
-			id = -6;
-		else
-			id = dao.update(a);
+		if (datosIncorrectos(a)) return -3;
+		if(dao.existeDNI(a))return -2; 
+		if (!dao.existeIdSucursal(a.getIdSucursal())) return -6;
+		id = dao.update(a);
 		return id;
 	}
 
@@ -77,10 +75,13 @@ public class SAProfesorImp implements SAProfesor {
 	@Override
 	public int delete(String id) {
 		if (isNumeric(id)) {
+			int ID=Integer.parseInt(id);
 			DAOProfesor dao = FactoriaDAO.getInstance().generateDAOProfesor();
 			int deleted = dao.isDeleted(Integer.parseInt(id));
 			if (deleted != 0)
 				return deleted;
+			int aux = dao.pending(ID);
+			if(aux!=0) return aux;
 			int result = dao.delete(Integer.parseInt(id));
 			return result;
 		} else

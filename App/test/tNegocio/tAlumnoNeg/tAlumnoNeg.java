@@ -59,7 +59,7 @@ class tAlumnoNeg {
     
 	@Test // Con la tabla vacia, meto un Alumno nuevo.
 	@Order(1)
-	public void testSACreate() {
+	public void test0() {
 		
 		assertEquals(FactoriaSA.getInstance().generateSAalumno().create(a),1);
 	}
@@ -155,6 +155,12 @@ class tAlumnoNeg {
 		TRelleno r = new TRelleno(1,2,5);
 		assertEquals(1,FactoriaSA.getInstance().generateSAalumno().rellenar(r));
 	}
-	
+	@Test // Comprobar funcion rellenar con un transfer relleno desactivado, prueba con datos correctos
+	@Order(14)
+	public void test13() {
+		DBUtil.addSomething("Insert INTO Test VALUES (3,'Permiso B',70,0);");
+		TRelleno r = new TRelleno(1,3,5);
+		assertEquals(-6,FactoriaSA.getInstance().generateSAalumno().rellenar(r));
+	}
 
 }
