@@ -24,7 +24,7 @@ public class GUIModificarVehiculo extends JFrame {
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
 	JLabel lblTipo = new JLabel("Tipo: ");
 	JLabel lblDanos = new JLabel("Daños: ");
-	JLabel lblActivo = new JLabel("¿Está activo?: ");
+	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
 	JCheckBox tfActivo = new JCheckBox();
 	JLabel lblMatricula = new JLabel("Matricula: ");
 	JTextField tfTipo= new JTextField();
@@ -47,6 +47,7 @@ public class GUIModificarVehiculo extends JFrame {
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_VEHICULO,aux );
 				}
@@ -60,13 +61,15 @@ public class GUIModificarVehiculo extends JFrame {
 	}
 	//panel con los datos cargados
 	public void updatePanel(TVehiculo veh) {
+		centerPanel.revalidate();
+		centerPanel.repaint();
 		tfTipo.setText(veh.getTipo());
 		tfDanos.setText(veh.getDaños());
 		tfActivo.setSelected(veh.isActivo());
 		tfMatricula.setText(veh.getMatricula());
 		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
 		centerPanel.add(lblDanos);centerPanel.add(tfDanos);
-		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		if(!veh.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		centerPanel.add(lblMatricula);centerPanel.add(tfMatricula);
 		tfDanos.setColumns(30);
 		actualizar.addActionListener(new ActionListener() {

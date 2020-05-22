@@ -24,14 +24,14 @@ public class GUIModificarAlumno extends JFrame{
 
 	private boolean init=false;
 	
-	JPanel centerPanel= new JPanel(new GridLayout(5,2));
+	JPanel centerPanel= new JPanel(new GridLayout(4,2));
 	JLabel lblDNI = new JLabel("DNI: ");
 	JLabel lblNombre = new JLabel("Nombre: ");
 	JLabel lblApellido = new JLabel("Apellido: ");
 	JLabel lblemail = new JLabel("Email: ");
 	JLabel lbltelefono = new JLabel("Telefono: ");
 	JLabel lblAmaxofobia = new JLabel("¿Tiene amaxofobia?: ");
-	JLabel lblActivo = new JLabel("¿Está activo?: ");
+	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
 	JCheckBox tfActivo = new JCheckBox();
 	JCheckBox tfAmaxofobia = new JCheckBox();
 	JTextField tfDNI= new JTextField();
@@ -57,6 +57,7 @@ public class GUIModificarAlumno extends JFrame{
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_ALUMNO, aux);
 				}
@@ -70,6 +71,8 @@ public class GUIModificarAlumno extends JFrame{
 	}
 	//panel con los datos cargados
 	public void updatePanel(TAlumno a) {
+		centerPanel.revalidate();
+		centerPanel.repaint();
 		tfDNI.setText(a.getDNI());
 		tfNombre.setText(a.getNombre());
 		tfApellidos.setText(a.getApellidos());
@@ -82,7 +85,7 @@ public class GUIModificarAlumno extends JFrame{
 		centerPanel.add(lblApellido);centerPanel.add(tfApellidos);
 		centerPanel.add(lbltelefono);centerPanel.add(tfTelefono);
 		centerPanel.add(lblemail);centerPanel.add(tfEmail);
-		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		if(!a.getActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		centerPanel.add(lblAmaxofobia);centerPanel.add(tfAmaxofobia);
 		
 		actualizar.addActionListener(new ActionListener() {

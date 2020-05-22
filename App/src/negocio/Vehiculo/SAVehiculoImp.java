@@ -35,7 +35,7 @@ public class SAVehiculoImp implements SAVehiculo {
 		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
 		if(!matriculaCorrecta(v.getMatricula()) || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
 			|| v.getTipo().length()>20 || FactoriaSA.getInstance().generateSASucursal().findByID(v.getIdSucursal()) !=1 ) return -3;
-		int aux= dao.findByName(v.getMatricula());
+		int aux= dao.findByName(v);
 		if (aux!=0) return aux;
 		int id=  dao.create(v);
 		return id;
@@ -56,7 +56,12 @@ public class SAVehiculoImp implements SAVehiculo {
 	@Override
 	public int update(TVehiculo v) {
 		// TODO Auto-generated method stub
-		return FactoriaDAO.getInstance().generateDAOVehiculo().update(v);
+		DAOVehiculo dao = FactoriaDAO.getInstance().generateDAOVehiculo();
+		if(!matriculaCorrecta(v.getMatricula()) || v.getDaños().length()>300 || v.getIdSucursal()>1000000000 
+				|| v.getTipo().length()>20 || FactoriaSA.getInstance().generateSASucursal().findByID(v.getIdSucursal()) !=1 ) return -3;
+		int aux= dao.findByName(v);
+		if (aux!=0) return aux;
+		return dao.update(v);
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class GUIModificarProfesor extends JFrame{
 	JLabel lblemail = new JLabel("Email: ");
 	JLabel lbltelefono = new JLabel("Telefono: ");
 	JLabel lblSueldo = new JLabel("Sueldo: ");
-	JLabel lblActivo = new JLabel("¿Está activo?: ");
+	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
 	JCheckBox tfActivo = new JCheckBox();
 	JTextField tfIdSucursal= new JTextField();
 	JTextField tfDNI= new JTextField();
@@ -59,6 +59,7 @@ public class GUIModificarProfesor extends JFrame{
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_PROFESOR, aux);
 				}
@@ -72,6 +73,8 @@ public class GUIModificarProfesor extends JFrame{
 	}
 	//panel con los datos cargados.
 	public void updatePanel(TProfesor a) {
+		centerPanel.revalidate();
+		centerPanel.repaint();
 		tfIdSucursal.setText(String.valueOf(a.getIdSucursal()));
 		tfDNI.setText(a.getDNI());
 		tfNombre.setText(a.getNombre());
@@ -88,7 +91,7 @@ public class GUIModificarProfesor extends JFrame{
 		centerPanel.add(lbltelefono);centerPanel.add(tfTelefono);
 		centerPanel.add(lblemail);centerPanel.add(tfEmail);
 		centerPanel.add(lblSueldo);centerPanel.add(tfSueldo);
-		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		if(!a.getActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

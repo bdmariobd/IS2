@@ -41,10 +41,11 @@ public class DAOProfesorIMP implements DAOProfesor {
 					+ "'," + a.getSueldo() + "," + a.getActivo() + ");";
 
 			statement.executeUpdate(insertstm);
+			return id;
 		} catch (Exception e) {
-			e.printStackTrace();
+			return -4;
 		}
-		return 1;
+		
 	}
 
 	public boolean existeDNI(TProfesor p) {

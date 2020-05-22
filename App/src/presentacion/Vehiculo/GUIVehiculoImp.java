@@ -45,7 +45,7 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {
 		// TODO Auto-generated method stub
-		String msg="";
+		String msg="Error no contemplado";
 		
 		//errores de las operaciones. Más detalles en SAVehiculo
 		switch(event) {
@@ -102,6 +102,7 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 			break;
 		case eventos.MODIFICAR_KO_VEHICULO:
 			if((int)res==-1)msg = "Error, no existe.";
+			if((int)res==-2)msg = "Error, matricula repetida.";
 			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
@@ -115,6 +116,7 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 			else if((int)res==-3) msg = "Error, compruebe tamaño y formato de los datos.";
 			else if((int)res==-4) msg="Error de conexion con la base de datos.";
 			else if((int)res==-5) msg="Error desconocido, consulte con administrador.";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		default:
 			

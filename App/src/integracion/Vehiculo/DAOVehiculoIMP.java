@@ -78,12 +78,12 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 		return null;
 	}
 	@Override
-	public int findByName(String nombre) { //busqueda de matriculas
+	public int findByName(TVehiculo v) { //busqueda de matriculas
 		// TODO Auto-generated method stub
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Vehiculos WHERE matricula='"+nombre+"';";
+			String query = "SELECT * FROM Vehiculos WHERE id<>"+v.getId()+" AND matricula='"+v.getMatricula()+"';";
 			ResultSet resultSet = statement.executeQuery(query);
 			if(resultSet.next()) return -2;
 			return 0;
@@ -154,6 +154,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			String deletestm = "UPDATE Vehiculos SET activo="+0+" WHERE id="+id+";";
 			int resultSet = statement.executeUpdate(deletestm);
 			if(resultSet==0) return -1;
+			statement.executeUpdate("DELETE FROM VehiculoProfesor Where idCoche=" + id+";");
 			return id;
 		}
 		catch (Exception e) {	

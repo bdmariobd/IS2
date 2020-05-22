@@ -71,6 +71,7 @@ public class GUIModificarSucursal extends JFrame {
 		centerPanel.add(lblCiudad); centerPanel.add(tfCiudad);
 		centerPanel.add(lblTelefono);centerPanel.add(tfTelefono);
 		centerPanel.add(lblDireccion);centerPanel.add(tfDireccion);
+		tfActivo.setSelected(suc.isActivo());
 		if(!suc.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

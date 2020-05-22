@@ -25,7 +25,7 @@ public class GUIModificarTest extends JFrame {
 	JPanel centerPanel= new JPanel(new GridLayout(5,2));
 	JLabel lblTipo = new JLabel("Tipo: ");
 	JLabel lblNpreguntas = new JLabel("Numero de preguntas: ");
-	JLabel lblActivo = new JLabel("¿Está activa?: ");
+	JLabel lblActivo = new JLabel("¿Desea reactivarla?:");
 	JCheckBox tfActivo = new JCheckBox();
 	JTextField tfTipo= new JTextField();
 	JTextField tfNpreguntas = new JTextField();
@@ -46,6 +46,7 @@ public class GUIModificarTest extends JFrame {
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_TEST,aux );
 				}
@@ -59,13 +60,15 @@ public class GUIModificarTest extends JFrame {
 	}
 	//panel con los datos cargados
 	public void updatePanel(TTest t) {
+		centerPanel.revalidate();
+		centerPanel.repaint();
 		String x = Integer.toString(t.getNumpreguntas());
 		tfTipo.setText(t.getTipo());
 		tfNpreguntas.setText(x);
 		tfActivo.setSelected(t.isActivo());
 		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
 		centerPanel.add(lblNpreguntas);centerPanel.add(tfNpreguntas);
-		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		if(!t.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TTest s= new TTest(t.getId(),

@@ -84,7 +84,7 @@ public class DAOSucursalIMP implements DAOSucursal {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Sucursal WHERE id="+id+";";
+			String query = "SELECT * FROM Sucursal WHERE activo="+1+" AND id="+id+";";
 			ResultSet resultSet = statement.executeQuery(query);
 			if(resultSet.next()) return 1;
 			else return -1;

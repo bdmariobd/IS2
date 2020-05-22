@@ -10,8 +10,6 @@ public interface DAOVehiculo {
 
 	public TVehiculo read(int id);
 
-	public int findByName(String nombre);
-
 	public List<TVehiculo> readAll();
 
 	public int update(TVehiculo v);
@@ -27,4 +25,6 @@ public interface DAOVehiculo {
 	public int asignarVehProf(TVehProf datos);
 	
 	public int findbyID(String id);
+
+	int findByName(TVehiculo v);
 }

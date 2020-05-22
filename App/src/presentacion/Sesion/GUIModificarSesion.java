@@ -29,7 +29,7 @@ import resources.fechasConverter;
 public class GUIModificarSesion extends JFrame {
 	
 	private boolean init=false, init2=false;
-	JPanel centerPanel= new JPanel(new GridLayout(5,2));
+	JPanel centerPanel= new JPanel(new GridLayout(4,2));
 	JLabel lblFecha = new JLabel("Fecha: ");
 	JLabel lblHoraIni = new JLabel("Hora Inicio: ");
 	JLabel lblHoraFin = new JLabel("Hora final: "); 
@@ -37,7 +37,7 @@ public class GUIModificarSesion extends JFrame {
 	JLabel lblIdA = new  JLabel("ID alumno: ");
 	JLabel lblIdP = new  JLabel("ID profesor: ");
 	
-	JLabel lblActivo = new JLabel("¿Está activa?: ");
+	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
 	JCheckBox tfActivo = new JCheckBox();
 	JTextField tfFecha = new JTextField();
 	JTextField tfHoraIni = new JTextField();
@@ -63,6 +63,7 @@ public class GUIModificarSesion extends JFrame {
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_SESION,aux);
 				}
@@ -76,6 +77,8 @@ public class GUIModificarSesion extends JFrame {
 	}
 	//panel con los datos cargados
 	public void updatePanel(TSesion ses) {
+		centerPanel.revalidate();
+		centerPanel.repaint();
 		tfFecha.setText(fechasConverter.fechaToString(ses.getFecha())); //////
 		tfHoraIni.setText(fechasConverter.horaToString(ses.getHoraini()));
 		tfHoraFin.setText(fechasConverter.horaToString(ses.getHorafin()));
@@ -87,7 +90,7 @@ public class GUIModificarSesion extends JFrame {
 		centerPanel.add(lblHoraIni);centerPanel.add(tfHoraIni);
 		centerPanel.add(lblHoraFin);centerPanel.add(tfHoraFin);
 		centerPanel.add(lblTipo);centerPanel.add(tfTipo);
-		centerPanel.add(lblActivo);centerPanel.add(tfActivo);
+		if(!ses.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
 		centerPanel.add(lblIdA);centerPanel.add(tfIdA);
 		centerPanel.add(lblIdP);centerPanel.add(tfIdP);
 
