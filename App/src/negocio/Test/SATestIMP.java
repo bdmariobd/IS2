@@ -40,6 +40,8 @@ public class SATestIMP implements SATest{
 	@Override
 	public int update(TTest t) {
 		// TODO Auto-generated method stub
+		if(t.getNumpreguntas()>50||t.getNumpreguntas()<1|| // preguntar cuantas preguntas son
+				 t.getTipo().length()>20) return -3;
 		return FactoriaDAO.getInstance().generateDAOTest().update(t);
 	}
 

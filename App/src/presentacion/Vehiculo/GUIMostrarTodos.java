@@ -13,7 +13,7 @@ public class GUIMostrarTodos extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private boolean init=false;
 	JTable jt;
-	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
+	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula","Prof.Vinculado"};
 	
 	
 	public String getValueAt(List<TVehiculo> lista, int arg0, int arg1) {

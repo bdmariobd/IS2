@@ -55,7 +55,6 @@ public class DAOProfesorIMP implements DAOProfesor {
 			String consulta = "SELECT COUNT(*) as Repetidos FROM Alumno a,Profesor p WHERE p.id<>"+p.getId() +" AND (a.dni ='" + p.getDNI() + "' OR p.DNI='"+p.getDNI()+"');";
 			ResultSet resultSet = statement.executeQuery(consulta);
 			if (resultSet.next())
-				System.out.println(resultSet.getInt("Repetidos"));
 				return (resultSet.getInt("Repetidos") > 0);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
