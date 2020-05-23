@@ -134,7 +134,6 @@ public class SAVehiculoImp implements SAVehiculo {
 		if(vehExist(datos.getIDV()) && profExist(datos.getIDP()) && vehActivo(datos.getIDV()) 
 				&& profActivo(datos.getIDP())) {
 			if(vehAvailable(datos.getIDV())) {
-				
 				result = dao.asignarVehProf(datos);
 			}
 		}

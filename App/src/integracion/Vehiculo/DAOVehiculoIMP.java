@@ -135,7 +135,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "UPDATE Vehiculos SET tipo='"+v.getTipo()+"',matricula='"+v.getMatricula()+
+			String query = "UPDATE Vehiculos SET idSucursal="+v.getIdSucursal()+", tipo='"+v.getTipo()+"',matricula='"+v.getMatricula()+
 					"',activo="+v.isActivo()+",danos='"+v.getDaños()+"' WHERE id="+v.getId()+";";
 			int resultSet = statement.executeUpdate(query);
 			if(resultSet==0) return -1;
@@ -169,7 +169,7 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
 			int id=Integer.parseInt(datos[0]);
-			String updatestm = "UPDATE Vehiculos SET danos=concat(danos,'"+", "+datos[1]+"') WHERE id="+id+";";
+			String updatestm = "UPDATE Vehiculos SET danos=concat(danos,'"+","+datos[1]+"') WHERE id="+id+";";
 			//UPDATE `Vehiculos` SET `danos` = 'test' WHERE `Vehiculos`.`id` = 100
 			int resultSet = statement.executeUpdate(updatestm);
 			if(resultSet==0) return -1;
