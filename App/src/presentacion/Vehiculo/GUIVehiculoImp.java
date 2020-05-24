@@ -98,6 +98,12 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		case eventos.BUSCAR_VEHICULO_OK:
 			gModVeh.updatePanel((TVehiculo) res);
 			break;
+			
+		case eventos.BUSCAR_VEHICULO_KO:
+			msg= "No se ha encontrado el vehículo";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+			
 		case eventos.MODIFICAR_OK_VEHICULO:
 			JOptionPane.showMessageDialog(null, "Modificado correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;

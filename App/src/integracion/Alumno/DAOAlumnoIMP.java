@@ -30,7 +30,6 @@ public class DAOAlumnoIMP implements DAOAlumno {
 	}
 	
 	public List<TRelleno> readAllR(int id) {
-		// TODO Auto-generated method stub
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
@@ -70,7 +69,6 @@ public class DAOAlumnoIMP implements DAOAlumno {
 
 	@Override
 	public int create(TAlumno a) {
-		// TODO Auto-generated method stub
 		int id = -1;
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
@@ -96,7 +94,6 @@ public class DAOAlumnoIMP implements DAOAlumno {
 
 	@Override
 	public TAlumno read(int id) {
-		// TODO Auto-generated method stub
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();

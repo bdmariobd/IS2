@@ -111,6 +111,12 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		case eventos.BUSCAR_ALUMNO_OK:
 			gModAlu.updatePanel((TAlumno) res);
 			break;
+			
+		case eventos.BUSCAR_ALUMNO_KO:
+			msg= "No se ha encontrado al alumno";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+			
 		case eventos.RELLENAR_OK_TEST:
 			JOptionPane.showMessageDialog(null, "Test rellenado correctamente para el alumno(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;

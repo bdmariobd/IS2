@@ -107,6 +107,11 @@ public class GUIProfesorImp extends GUIProfesor implements ActionListener{
 			
 		case eventos.BUSCAR_PROFESOR_OK:
 			gModProfesor.updatePanel((TProfesor) res);
+			break;			
+			
+		case eventos.BUSCAR_PROFESOR_KO:
+			msg= "No se ha encontrado profesor";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 			
 		default:

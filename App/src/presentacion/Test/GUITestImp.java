@@ -85,6 +85,10 @@ public class GUITestImp extends GUITest implements ActionListener {
 		case eventos.BUSCAR_TEST_OK:
 			gModT.updatePanel((TTest) res);
 			break;
+		case eventos.BUSCAR_TEST_KO:
+			msg= "No se ha encontrado el test";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
 		case eventos.MODIFICAR_OK_TEST:
 			JOptionPane.showMessageDialog(null, "Modificada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;

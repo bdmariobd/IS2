@@ -99,6 +99,10 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 		case eventos.BUSCAR_SESION_OK:
 			gModSes.updatePanel((TSesion) res);
 			break;
+		case eventos.BUSCAR_SESION_KO:
+			msg= "No se ha encontrado la sesión";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
 		case eventos.MODIFICAR_OK_SESION:
 			JOptionPane.showMessageDialog(null, "Modificada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
