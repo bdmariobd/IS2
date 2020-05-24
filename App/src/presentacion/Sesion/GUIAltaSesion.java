@@ -2,31 +2,26 @@ package presentacion.Sesion;
 
 
 	import java.awt.GridLayout;
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.swing.JButton;
-	import javax.swing.JCheckBox;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
-	import javax.swing.JOptionPane;
-	import javax.swing.JPanel;
-	import javax.swing.JTextField;
-	import javax.swing.SwingConstants;
-	import negocio.Sesion.TSesion;
-	import presentacion.Controller;
-	import presentacion.GUIMaker;
-	import presentacion.eventos;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import negocio.Sesion.TSesion;
+import presentacion.Controller;
+import presentacion.GUIMaker;
+import presentacion.eventos;
 import resources.fechasConverter;
 
-	@SuppressWarnings("serial")
 	public class GUIAltaSesion extends JFrame {
-		private boolean init=false;
+		private static final long serialVersionUID = 1L;
+		private boolean isInit=false;
 		private JButton btnAlta = new JButton("Dar de alta");
 		private JButton btnCancelar = new JButton("Cancelar");
 		private String[] labels = {"Insertar fecha","Insertar hora inicio","Insertar hora fin", "Insertar tipo"," Insetar ID alumno", "Insertar ID profesor" };
@@ -35,11 +30,11 @@ import resources.fechasConverter;
 		private JTextField[] inputs = new JTextField[labels.length];
 		
 		public void initGui() {
-		if(init) {
+		if(isInit) {
 			this.setVisible(true);
 			return;
 		}
-		init=true;
+		isInit=true;
 		this.setLayout(new GridLayout(8,2,5,10));
 		for(int i = 0; i<labels.length;i++) {
 			etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);

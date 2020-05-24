@@ -36,6 +36,7 @@ public class GUIProfesorImp extends GUIProfesor implements ActionListener{
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(int event, Object res) {
 		String msg = "Error no contemplado";

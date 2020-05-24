@@ -1,12 +1,8 @@
 package presentacion;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionListener;
@@ -14,32 +10,25 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class GuiMakerIMP extends GUIMaker {
-	private Image car,pressman;
-	private final static Dimension windowSize= new Dimension(720,210);
-	private final static int carSize= 80, fontSize = 18;
+//	private Image car;
+	private Image pressman;
 	
-	private int index;
-	private JPanel animation;
+	private final static Dimension windowSize= new Dimension(720,210);
+//	private final static int carSize= 80, fontSize = 18;
+//	private int index;
+//	private JPanel animation;
 	GuiMakerIMP() {
 		try {
-			car= ImageIO.read(new File("src/resources/car.png"));
+			//car= ImageIO.read(new File("src/resources/car.png"));
 			pressman= ImageIO.read(new File("src/resources/pressmanIco.png"));
 		} catch (IOException e) {
 			System.out.print("no carga imagen");
@@ -65,12 +54,12 @@ public class GuiMakerIMP extends GUIMaker {
 		}
 		return bot;
 	}
-	private JPanel getAnimation(String text) {
+/*	private JPanel getAnimation(String text) {
 		index = windowSize.width;
 		JPanel panel = new JPanel() {
 			@Override
 	         public void paintComponent(Graphics g) {
-	        	/*super.paintComponent(g);
+	        	super.paintComponent(g);
 	        	Graphics2D g2d = (Graphics2D) g;
 	        	//g2d.setFont(new Font("Arial", Font.PLAIN, fontSize));
 	        	if(index>windowSize.width/2 - 50) g2d.drawString(text, index,windowSize.height/5);
@@ -79,12 +68,12 @@ public class GuiMakerIMP extends GUIMaker {
 	            index-=10;
 	            try {
 					Thread.sleep(40);
-				} catch (InterruptedException e) {}*/
+				} catch (InterruptedException e) {}
 			}
 	  
 	      };
 		return panel;
-	}
+	}*/
 	private void animateCar() {
 		/*while(index>0) {
 			animation.repaint();
@@ -118,8 +107,7 @@ public class GuiMakerIMP extends GUIMaker {
 	}
 	@Override
 	public void reInit() {
-		// TODO Auto-generated method stub
-		index = windowSize.width;
+//		index = windowSize.width;
 		animateCar();
 	}
 	@Override

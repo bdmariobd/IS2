@@ -1,15 +1,10 @@
 package presentacion.Sesion;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import negocio.Sesion.TSesion;
 import presentacion.Controller;
@@ -43,6 +38,7 @@ public class GUISesionImp extends GUISesion implements ActionListener {
 		GUIMaker.getInstance().configurateWindow(this);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {

@@ -22,32 +22,31 @@ import presentacion.eventos;
 public class GUIModificarAlumno extends JFrame{
 	private static final long serialVersionUID = 1L;
 
-	private boolean init=false;
-	
-	JPanel centerPanel= new JPanel(new GridLayout(4,2));
-	JLabel lblDNI = new JLabel("DNI: ");
-	JLabel lblNombre = new JLabel("Nombre: ");
-	JLabel lblApellido = new JLabel("Apellido: ");
-	JLabel lblemail = new JLabel("Email: ");
-	JLabel lbltelefono = new JLabel("Telefono: ");
-	JLabel lblAmaxofobia = new JLabel("¿Tiene amaxofobia?: ");
-	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
-	JCheckBox tfActivo = new JCheckBox();
-	JCheckBox tfAmaxofobia = new JCheckBox();
-	JTextField tfDNI= new JTextField();
-	JTextField tfNombre = new JTextField();
-	JTextField tfApellidos = new JTextField();
-	JTextField tfEmail = new JTextField();
-	JTextField tfTelefono = new JTextField();
-	JButton actualizar = new JButton("Actualizar");
-	JButton btnCancelar=new JButton("Cancelar");
+	private boolean isInit=false;
+	private JPanel centerPanel= new JPanel(new GridLayout(4,2));
+	private JLabel lblDNI = new JLabel("DNI: ");
+	private JLabel lblNombre = new JLabel("Nombre: ");
+	private JLabel lblApellido = new JLabel("Apellido: ");
+	private JLabel lblemail = new JLabel("Email: ");
+	private JLabel lbltelefono = new JLabel("Telefono: ");
+	private JLabel lblAmaxofobia = new JLabel("¿Tiene amaxofobia?: ");
+	private JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
+	private JCheckBox cbActivo = new JCheckBox();
+	private JCheckBox cbAmaxofobia = new JCheckBox();
+	private JTextField tfDNI= new JTextField();
+	private JTextField tfNombre = new JTextField();
+	private JTextField tfApellidos = new JTextField();
+	private JTextField tfEmail = new JTextField();
+	private JTextField tfTelefono = new JTextField();
+	private JButton btnActualizar = new JButton("Actualizar");
+	private JButton btnCancelar=new JButton("Cancelar");
 	
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
-		init=true;
+		isInit=true;
 		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar un alumno ");
 		this.setLayout(new FlowLayout());
 		JPanel upPanel = new JPanel(new BorderLayout());
@@ -57,7 +56,7 @@ public class GUIModificarAlumno extends JFrame{
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
+				centerPanel.remove(lblActivo);centerPanel.remove(cbActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_ALUMNO, aux);
 				}
@@ -78,20 +77,20 @@ public class GUIModificarAlumno extends JFrame{
 		tfApellidos.setText(a.getApellidos());
 		tfEmail.setText(a.getEmail());
 		tfTelefono.setText(String.valueOf(a.getTelefono()));
-		tfAmaxofobia.setSelected(a.getAmaxofobia());
-		tfActivo.setSelected(a.getActivo());
+		cbAmaxofobia.setSelected(a.getAmaxofobia());
+		cbActivo.setSelected(a.getActivo());
 		centerPanel.add(lblDNI); centerPanel.add(tfDNI);
 		centerPanel.add(lblNombre);centerPanel.add(tfNombre);
 		centerPanel.add(lblApellido);centerPanel.add(tfApellidos);
 		centerPanel.add(lbltelefono);centerPanel.add(tfTelefono);
 		centerPanel.add(lblemail);centerPanel.add(tfEmail);
-		if(!a.getActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
-		centerPanel.add(lblAmaxofobia);centerPanel.add(tfAmaxofobia);
+		if(!a.getActivo()) {centerPanel.add(lblActivo);centerPanel.add(cbActivo);}
+		centerPanel.add(lblAmaxofobia);centerPanel.add(cbAmaxofobia);
 		
-		actualizar.addActionListener(new ActionListener() {
+		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TAlumno alu= new TAlumno(a.getId(),tfDNI.getText(),
-						tfNombre.getText(),tfApellidos.getText(),Integer.valueOf(tfTelefono.getText()),tfEmail.getText(),tfAmaxofobia.isSelected(), tfActivo.isSelected());
+						tfNombre.getText(),tfApellidos.getText(),Integer.valueOf(tfTelefono.getText()),tfEmail.getText(),cbAmaxofobia.isSelected(), cbActivo.isSelected());
 				Controller.getInstance().accion(eventos.MODIFICAR_ALUMNO, alu);
 			}
 			});
@@ -101,7 +100,7 @@ public class GUIModificarAlumno extends JFrame{
 				}
 			});
 		centerPanel.add(btnCancelar);
-		centerPanel.add(actualizar);
+		centerPanel.add(btnActualizar);
 		this.add(centerPanel);
 		this.setSize(800, 245);
 	}

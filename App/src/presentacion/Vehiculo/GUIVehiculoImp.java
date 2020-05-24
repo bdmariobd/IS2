@@ -41,6 +41,7 @@ public class GUIVehiculoImp extends GUIVehiculo implements ActionListener {
 		GUIMaker.getInstance().configurateWindow(this);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {

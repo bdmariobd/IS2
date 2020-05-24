@@ -18,27 +18,27 @@ import presentacion.eventos;
 
 @SuppressWarnings("serial")
 public class GUIAltaAlumno extends JFrame{
-	private boolean init = false;
+	private boolean isInit = false;
 	private JButton btnAlta = new JButton("Dar de alta");
 	private JButton btnCancelar = new JButton("Cancelar");
 	private String[] labels = {"Insertar DNI","Insertar nombre", "Insertar apellidos", "Insertar telefono", "Insertar email"};
 	//private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 	private JCheckBox amaxofobia = new JCheckBox("¿Tiene amaxofobia?",false);
-	private JLabel etiqgeneral;
+	private JLabel etiqGeneral;
 	private JTextField[] inputs = new JTextField[labels.length];
 	
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			this.setVisible(true);
 			return;
 		}
-		init=true;
+		isInit=true;
 		this.setLayout(new GridLayout(8,2,5,10));
         for(int i = 0; i<labels.length;i++) {
-            etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
+            etiqGeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
             inputs[i] = new JTextField(20);
-            add(etiqgeneral);
-            etiqgeneral.setLabelFor(inputs[i]);
+            add(etiqGeneral);
+            etiqGeneral.setLabelFor(inputs[i]);
             add(inputs[i]);
         }
 

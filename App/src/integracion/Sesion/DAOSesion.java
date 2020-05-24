@@ -1,6 +1,5 @@
 package integracion.Sesion;
 
-import java.util.Date;
 import java.util.List;
 
 import negocio.Sesion.TSesion;;

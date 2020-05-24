@@ -20,17 +20,17 @@ import presentacion.GUIMaker;
 import presentacion.eventos;
 
 public class GUIModificarTest extends JFrame {
-	
-	private boolean init=false, init2=false;
-	JPanel centerPanel= new JPanel(new GridLayout(5,2));
-	JLabel lblTipo = new JLabel("Tipo: ");
-	JLabel lblNpreguntas = new JLabel("Numero de preguntas: ");
-	JLabel lblActivo = new JLabel("¿Desea reactivarla?:");
-	JCheckBox tfActivo = new JCheckBox();
-	JTextField tfTipo= new JTextField();
-	JTextField tfNpreguntas = new JTextField();
-	JButton actualizar = new JButton("Actualizar");
-	JButton btnCancelar=new JButton("Cancelar");
+	private static final long serialVersionUID = 1L;
+	private boolean init=false;
+	private JPanel centerPanel= new JPanel(new GridLayout(5,2));
+	private JLabel lblTipo = new JLabel("Tipo: ");
+	private JLabel lblNpreguntas = new JLabel("Numero de preguntas: ");
+	private JLabel lblActivo = new JLabel("¿Desea reactivarla?:");
+	private JCheckBox cbActivo = new JCheckBox();
+	private JTextField tfTipo= new JTextField();
+	private JTextField tfNpreguntas = new JTextField();
+	private JButton btnActualizar = new JButton("Actualizar");
+	private JButton btnCancelar=new JButton("Cancelar");
 	public void initGui() {
 		if(init) {
 			setVisible(true);
@@ -46,7 +46,7 @@ public class GUIModificarTest extends JFrame {
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
+				centerPanel.remove(lblActivo);centerPanel.remove(cbActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_TEST,aux );
 				}
@@ -65,14 +65,14 @@ public class GUIModificarTest extends JFrame {
 		String x = Integer.toString(t.getNumpreguntas());
 		tfTipo.setText(t.getTipo());
 		tfNpreguntas.setText(x);
-		tfActivo.setSelected(t.isActivo());
+		cbActivo.setSelected(t.isActivo());
 		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
 		centerPanel.add(lblNpreguntas);centerPanel.add(tfNpreguntas);
-		if(!t.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
-		actualizar.addActionListener(new ActionListener() {
+		if(!t.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(cbActivo);}
+		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TTest s= new TTest(t.getId(),
-						tfTipo.getText(),Integer.parseInt(tfNpreguntas.getText()),tfActivo.isSelected());
+						tfTipo.getText(),Integer.parseInt(tfNpreguntas.getText()),cbActivo.isSelected());
 				Controller.getInstance().accion(eventos.MODIFICAR_TEST, s);
 			}
 			});
@@ -82,7 +82,7 @@ public class GUIModificarTest extends JFrame {
 				}
 			});
 		centerPanel.add(btnCancelar);
-		centerPanel.add(actualizar);
+		centerPanel.add(btnActualizar);
 		this.add(centerPanel);
 		this.setSize(800, 245);
 	}

@@ -16,13 +16,13 @@ import presentacion.eventos;
 
 @SuppressWarnings("serial")
 public class GUIRegistrarVehiculo extends JFrame {
-	private boolean init=false;
+	private boolean isInit=false;
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
-		init=true;
+		isInit=true;
 		GUIMaker.getInstance().configurateSubWindow(this,840,120,"Registrar daños en un vehículo ");
 		JPanel reg = new JPanel(new GridLayout(3,2));
 		this.add(reg);

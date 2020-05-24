@@ -24,10 +24,11 @@ import presentacion.eventos;
 
 public class GUIMostrarAlumno extends JFrame{
 	private static final long serialVersionUID = 1L;
-	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "DNI","nombre","apellidos","telefono","email","amaxofobia","activo"};
-	JTable jt;
-	private boolean init=false, init2=false;
+	private JPanel panelcentro = new JPanel(new FlowLayout());
+	private String[] colNames = {"id", "DNI","nombre","apellidos","telefono","email","amaxofobia","activo"};
+	private JTable tabla;
+	private boolean isInit=false, isInit2=false;
+	
 	public void mostrarUno(TAlumno a) {
 		
 		String[][]datos = {{Integer.toString(a.getId()),a.getDNI(),
@@ -40,15 +41,15 @@ public class GUIMostrarAlumno extends JFrame{
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
-		if(init2) {
+		tabla.setModel(tmodel);
+		if(isInit2) {
 			return;
 		}
-		init2=true;
+		isInit2=true;
 						
 		JPanel p= new JPanel(new BorderLayout());
-		p.add(jt,BorderLayout.CENTER);
-		p.add(jt.getTableHeader(), BorderLayout.NORTH);
+		p.add(tabla,BorderLayout.CENTER);
+		p.add(tabla.getTableHeader(), BorderLayout.NORTH);
 		Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
 		p.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Resultado", TitledBorder.LEFT,TitledBorder.TOP));
 		panelcentro.add(p);
@@ -57,12 +58,12 @@ public class GUIMostrarAlumno extends JFrame{
 		this.setVisible(true);
 	}
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
-		init=true;
-		jt= new JTable();
+		isInit=true;
+		tabla= new JTable();
 		this.setLayout(new BorderLayout());
 		GUIMaker.getInstance().configurateSubWindow(this,650,200,"Mostrar un alumno ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());

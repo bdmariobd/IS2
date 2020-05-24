@@ -1,12 +1,9 @@
 package presentacion.Sucursal;
 
 
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,9 +13,10 @@ import presentacion.GUIMaker;
 
 
 public class GUIMostrarTodasSucursales extends JFrame {
-	private boolean init=false;
-	JTable jt;
-	String[] colNames ={"id", "ciudad","telefono","direccion","activo"};
+	private static final long serialVersionUID = 1L;
+	private boolean isInit=false;
+	private JTable tabla;
+	private String[] colNames ={"id", "ciudad","telefono","direccion","activo"};
 	
 	
 	public String getValueAt(List<TSucursal> lista, int arg0, int arg1) {
@@ -45,17 +43,17 @@ public class GUIMostrarTodasSucursales extends JFrame {
 	}
 	
 	public void mostrarSucursales(List<TSucursal> lista) {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 		}
-		init=true;
+		isInit=true;
 		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos las sucursales");
-		jt= new JTable();
+		tabla= new JTable();
 		actualizarTabla(lista);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p= new JScrollPane(jt);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p= new JScrollPane(tabla);
 		this.pack();
 		this.add(p);
 		this.setSize(720,450);
@@ -69,11 +67,13 @@ public class GUIMostrarTodasSucursales extends JFrame {
 				datos[i][j]= getValueAt(lista,i,j);
 				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
+		tabla.setModel(tmodel);
 	}
 }

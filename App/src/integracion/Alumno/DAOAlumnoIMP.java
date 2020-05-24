@@ -21,7 +21,7 @@ public class DAOAlumnoIMP implements DAOAlumno {
 			
 			String insertstm = "INSERT into TestRealizados VALUES ("+r.getIdAlumno()+","+r.getIdTest()+","+r.getNumFallos()+");";
 			
-			int resultSet = statement.executeUpdate(insertstm);
+			statement.executeUpdate(insertstm);
 		}
 		catch (Exception e) {	
 			e.printStackTrace();

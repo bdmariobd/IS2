@@ -22,10 +22,10 @@ import presentacion.eventos;
 
 public class GUIMostrarVehiculo extends JFrame {
 	private static final long serialVersionUID = 1L;
-	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
-	JTable jt;
-	private boolean init=false, init2=false;
+	private JPanel panelcentro = new JPanel(new FlowLayout());
+	private String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula"};
+	private JTable tabla;
+	private boolean isInit=false, isInit2=false;
 	
 	public void mostrarUno(TVehiculo veh) {
 		
@@ -39,15 +39,15 @@ public class GUIMostrarVehiculo extends JFrame {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
-		if(init2) {
+		tabla.setModel(tmodel);
+		if(isInit2) {
 			return;
 		}
-		init2=true;
+		isInit2=true;
 						
 		JPanel p= new JPanel(new BorderLayout());
-		p.add(jt,BorderLayout.CENTER);
-		p.add(jt.getTableHeader(), BorderLayout.NORTH);
+		p.add(tabla,BorderLayout.CENTER);
+		p.add(tabla.getTableHeader(), BorderLayout.NORTH);
 		Border _defaultBorder = BorderFactory.createLineBorder(Color.black, 1);
 		p.setBorder(BorderFactory.createTitledBorder(_defaultBorder, "Resultado", TitledBorder.LEFT,TitledBorder.TOP));
 		panelcentro.add(p);
@@ -56,13 +56,13 @@ public class GUIMostrarVehiculo extends JFrame {
 	}
 	
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
 		
-		init=true;
-		jt= new JTable();
+		isInit=true;
+		tabla= new JTable();
 		this.setLayout(new BorderLayout());
 		GUIMaker.getInstance().configurateSubWindow(this,500,200,"Mostrar un vehiculo ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
