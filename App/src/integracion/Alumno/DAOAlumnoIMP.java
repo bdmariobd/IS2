@@ -116,10 +116,19 @@ public class DAOAlumnoIMP implements DAOAlumno {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String consulta = "SELECT COUNT(*) FROM Alumno a,Profesor p WHERE a.id<>"+a.getId() +" AND (a.dni = '" + a.getDNI() + "' OR p.DNI='"+a.getDNI()+"');";
+			String consulta = "SELECT COUNT(*) as Repetidos FROM Alumno a WHERE a.id<>"+a.getId() +" AND a.DNI='"+a.getDNI()+"';";
 			ResultSet resultSet = statement.executeQuery(consulta);
-			if (resultSet.next())
-				return (resultSet.getInt(1) > 0);
+			if (resultSet.next()) {
+				int repesAl= resultSet.getInt("Repetidos");
+				if(repesAl>0) return true;
+				else {
+					consulta = "SELECT COUNT(*) as Repetidos FROM Profesor p WHERE p.dni='"+a.getDNI()+"';";
+					resultSet = statement.executeQuery(consulta);
+					if (resultSet.next()) {
+						return resultSet.getInt("Repetidos")>0;
+					}
+				}
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

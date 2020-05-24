@@ -26,7 +26,8 @@ import resources.fechasConverter;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-class tSesionInt {
+public
+class tSesionIntTest {
 /*
 public int create(TSesion ses);
     public TSesion read(int id);

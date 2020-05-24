@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class tSesionNeg {
+public class tSesionNegTest {
 /*
  * public int create(TSesion ses);
     public TSesion read(int id);

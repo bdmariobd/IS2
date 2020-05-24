@@ -14,14 +14,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import integracion.FactoriaDAO;
+import junit.framework.TestSuite;
 import negocio.Alumno.TAlumno;
 import negocio.Alumno.TRelleno;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-class tAlumnoInt {
+public
+class tAlumnoIntTest {
 	/*
 	 * public int create(TAlumno a);
+
 	 * 
 	 * public TAlumno read(int id);
 	 * 
@@ -56,11 +59,13 @@ class tAlumnoInt {
 		}
 		return true;
 	}
+	
 	@BeforeAll
 	public static void initSetUp() {
 		//Vaciamos la tabla correspondiente.
 		try {
 			DBUtil.deleteTable("Alumno");
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

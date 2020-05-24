@@ -22,7 +22,8 @@ import negocio.Vehiculo.TVehiculo;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-class tVehiculoInt {
+public
+class tVehiculoIntTest {
 /*
  public int create(TVehiculo v);
 
@@ -61,6 +62,7 @@ class tVehiculoInt {
 		try {
 			DBUtil.deleteTable("VehiculoProfesor");
 			DBUtil.deleteTable("Sucursal");
+			DBUtil.deleteTable("Sesion");
 			DBUtil.deleteTable("Profesor");
 			DBUtil.deleteTable("Vehiculos");
 			

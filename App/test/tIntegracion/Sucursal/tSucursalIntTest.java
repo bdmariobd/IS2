@@ -20,8 +20,9 @@ import negocio.Sucursal.TSucursal;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
+public
 
-class tSucursalInt {
+class tSucursalIntTest {
 		
 		boolean compareLists(List<TSucursal> l1,List<TSucursal> l2) {
 			if(l1.size()!=l2.size())return false;

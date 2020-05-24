@@ -16,7 +16,8 @@ import org.junit.jupiter.api.Order;
 
 import tAux.DBUtil;
 @TestMethodOrder(OrderAnnotation.class)
-class tSucursalNeg {
+public
+class tSucursalNegTest {
 
 	private TSucursal a = new TSucursal(1,"Murcia",919199191,"Calle del Limon de Don Salva Espin",true);
 	private TSucursal b = new TSucursal(2,"Madrid",9,"Nuñez de Balboa, N9 ",false);

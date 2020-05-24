@@ -16,17 +16,17 @@ import integracion.FactoriaDAO;
 import negocio.Profesor.TProfesor;
 import tAux.DBUtil;
 @TestMethodOrder(OrderAnnotation.class)
-class tProfesorInt {
+public
+class tProfesorIntTest {
 	@BeforeAll
 	public static void initSetUp() {
 		//Vaciamos la tabla correspondiente.
 		try {
-			
 			DBUtil.deleteTable("Sucursal");
 			DBUtil.deleteTable("Sesion");
 			DBUtil.deleteTable("Profesor");
 			DBUtil.deleteTable("Alumno");
-			
+			DBUtil.deleteTable("Vehiculos");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

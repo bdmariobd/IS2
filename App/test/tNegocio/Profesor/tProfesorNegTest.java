@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class tProfesorNeg {
+public class tProfesorNegTest {
 
 	
 	
@@ -37,6 +37,7 @@ public class tProfesorNeg {
 			DBUtil.deleteTable("Sucursal");
 			DBUtil.deleteTable("Sesion");
 			DBUtil.deleteTable("Profesor");
+			DBUtil.deleteTable("Alumno");
 			DBUtil.deleteTable("Vehiculos");
 			DBUtil.addSomething("INSERT INTO `Sucursal` (`id`, `ciudad`, `telefono`, `direccion`, `activo`) VALUES ('1', 'Lorca', '915411555', 'Av del Triangulo Longo',1);");
 			//Una activada
@@ -92,6 +93,7 @@ public class tProfesorNeg {
 		//Vamos a vincular profesor 1 con un vehiculo 1 y con sucursal 1.
 		DBUtil.addSomething("INSERT INTO `Vehiculos` (`id`, `idSucursal`, `tipo`, `danos`, `activo`, `matricula`) VALUES ('1', '1', 'Toyota Auris', 'Roce', '1', '7654DRT');");
 		DBUtil.addSomething("INSERT INTO `VehiculoProfesor` (`idCoche`, `idProfesor`) VALUES ('1', '1');");
+		DBUtil.addSomething("INSERT into Alumno VALUES (1,'12345678Q','Eufalio','Macetero',912465867,'xxGamer@gmail.com',0,1)");
 		DBUtil.addSomething("INSERT INTO `Sesion` (`id`, `fecha`, `horaini`, `horafin`, `tipo`, `activo`, `idAlumno`, `idProfesor`) VALUES ('1', '2020-06-22', '9:00', '10:30', 'Permiso B', '1', '1', '1');"); 
 		assertEquals(-3,FactoriaSA.getInstance().generateSAProfesor().delete("je")); // Mal id.
 		assertEquals(-1,FactoriaSA.getInstance().generateSAProfesor().delete("99")); //Borrar uno que no existe.

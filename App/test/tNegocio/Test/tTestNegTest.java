@@ -21,7 +21,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class tTestNeg {
+public class tTestNegTest {
 
 	private SATest sa = FactoriaSA.getInstance().generateSATest();
 	private TTest a = new TTest (1,"Permiso B",30,true); // test activo

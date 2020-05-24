@@ -19,7 +19,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class tTestInt {
+public class tTestIntTest {
 
 	@BeforeAll
 	public static void initSetUp() {

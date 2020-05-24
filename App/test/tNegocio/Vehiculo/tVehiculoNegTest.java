@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import tAux.DBUtil;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class tVehiculoNeg {
+public class tVehiculoNegTest {
 /*
  * public int create(TVehiculo v);
 	public TVehiculo read(int id);
