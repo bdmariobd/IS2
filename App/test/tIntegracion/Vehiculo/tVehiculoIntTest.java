@@ -3,9 +3,6 @@ package tIntegracion.Vehiculo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -15,8 +12,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import integracion.FactoriaDAO;
 import integracion.Vehiculo.DAOVehiculo;
-import negocio.Alumno.TAlumno;
-import negocio.Alumno.TRelleno;
 import negocio.Vehiculo.TVehProf;
 import negocio.Vehiculo.TVehiculo;
 import tAux.DBUtil;

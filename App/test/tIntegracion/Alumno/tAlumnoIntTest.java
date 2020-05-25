@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import integracion.FactoriaDAO;
-import junit.framework.TestSuite;
 import negocio.Alumno.TAlumno;
 import negocio.Alumno.TRelleno;
 import tAux.DBUtil;

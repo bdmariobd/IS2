@@ -1,8 +1,6 @@
 package tIntegracion.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeAll;

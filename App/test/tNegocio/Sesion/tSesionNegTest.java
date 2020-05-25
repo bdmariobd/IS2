@@ -3,17 +3,11 @@ package tNegocio.Sesion;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestMethodOrder;
 import negocio.FactoriaSA;
-import negocio.Profesor.TProfesor;
 import negocio.Sesion.SASesion;
 import negocio.Sesion.TSesion;
-import negocio.Vehiculo.SAVehiculo;
-import negocio.Vehiculo.TVehProf;
-import negocio.Vehiculo.TVehiculo;
 import resources.fechasConverter;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;

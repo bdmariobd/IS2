@@ -11,8 +11,8 @@ import presentacion.GUIMaker;
 public class GUIMostrarTodosProfesores extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private boolean init = false;
-	JTable jt;
-	String[] colNames = { "id", "idSucursal", "DNI", "nombre", "apellidos", "telefono", "email", "sueldo", "activo" };
+	private JTable tabla;
+	private String[] colNames = { "id", "idSucursal", "DNI", "nombre", "apellidos", "telefono", "email", "sueldo", "activo" };
 
 	public String getVprofeeAt(List<TProfesor> lista, int arg0, int arg1) {
 		String s = null;
@@ -55,10 +55,10 @@ public class GUIMostrarTodosProfesores extends JFrame {
 		}
 		init = true;
 		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los profesores");
-		jt = new JTable();
+		tabla = new JTable();
 		actualizarTabla(lista);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p = new JScrollPane(jt);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p = new JScrollPane(tabla);
 		this.pack();
 		this.add(p);
 		this.setSize(720, 450);
@@ -79,6 +79,6 @@ public class GUIMostrarTodosProfesores extends JFrame {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
+		tabla.setModel(tmodel);
 	}
 }

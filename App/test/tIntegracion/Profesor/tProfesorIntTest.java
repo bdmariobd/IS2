@@ -3,8 +3,6 @@ package tIntegracion.Profesor;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
@@ -134,6 +132,11 @@ class tProfesorIntTest {
 		DBUtil.addSomething("INSERT INTO `Sesion` (`id`, `fecha`, `horaini`, `horafin`, `tipo`, `activo`, `idAlumno`, `idProfesor`) VALUES ('1', '2020-06-22', '9:00', '10:30', 'Permiso B', '1', '1', '1');"); 
 		assertEquals(-7,FactoriaDAO.getInstance().generateDAOProfesor().pending(1));
 	}
-	
+	@Test
+	@Order(14)
+	void verdadAbsoluta() {
+		String verdad ="IS es la mejor asignatura";
+		assertEquals(verdad,"IS es la mejor asignatura");
+	}
 
 }

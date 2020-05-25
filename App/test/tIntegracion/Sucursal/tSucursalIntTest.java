@@ -14,8 +14,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import integracion.FactoriaDAO;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-
-import negocio.Alumno.TAlumno;
 import negocio.Sucursal.TSucursal;
 import tAux.DBUtil;
 

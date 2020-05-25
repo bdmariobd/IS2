@@ -1,7 +1,8 @@
 package negocio.Vehiculo;
 
 public class TVehiculo {
-	private int id, idSucursal;
+	private int id, idSucursal, idP;
+	
 	private String tipo, matricula, daños;
 	private boolean activo;
 	
@@ -12,10 +13,16 @@ public class TVehiculo {
 		this.matricula = matricula;
 		this.daños = daños;
 		this.activo = activo;
+		idP=-1;
 	}
-	
+	public void setIdP(int idP) {
+		this.idP = idP;
+	}
 	public int getId() {
 		return id;
+	}
+	public int getIdP() {
+		return idP;
 	}
 	public int getIdSucursal() {
 		return idSucursal;

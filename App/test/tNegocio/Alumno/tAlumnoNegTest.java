@@ -23,7 +23,7 @@ class tAlumnoNegTest {
 
 	private TAlumno a =  new TAlumno(1,"50638375Z", "Paco", "Marhuenda" , 915439233, "junits@gmail.com", true, true); // ID 1
 	private TAlumno b = new TAlumno(2,Integer.toString(getRandomDNI())+"Z", "M.", "Rajoy" , 913333333, "junits@gmail.com", false, false); // 2
-	private TAlumno c =  new TAlumno(3,Integer.toString(getRandomDNI())+"Z", "Ortega", "Cano" , 94444233, "junits@gmail.com", true, true); // ID 3
+	//private TAlumno c =  new TAlumno(3,Integer.toString(getRandomDNI())+"Z", "Ortega", "Cano" , 94444233, "junits@gmail.com", true, true); // ID 3
 	private TAlumno invaliddni = new TAlumno(0,"1X9//Z", "Paco", "Marhuenda" , 915439233, "junits@gmail.com", false, false); // dni invalido
 	
 	

@@ -1,15 +1,10 @@
 package presentacion.Alumno;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import negocio.Alumno.TAlumno;
 import negocio.Alumno.TRelleno;
@@ -47,6 +42,7 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(int event, Object res) {
 		// TODO Auto-generated method stub
@@ -115,6 +111,12 @@ public class GUIAlumnoImp extends GUIAlumno implements ActionListener{
 		case eventos.BUSCAR_ALUMNO_OK:
 			gModAlu.updatePanel((TAlumno) res);
 			break;
+			
+		case eventos.BUSCAR_ALUMNO_KO:
+			msg= "No se ha encontrado al alumno";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+			
 		case eventos.RELLENAR_OK_TEST:
 			JOptionPane.showMessageDialog(null, "Test rellenado correctamente para el alumno(id="+res+").","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;

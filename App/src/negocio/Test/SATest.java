@@ -2,8 +2,6 @@ package negocio.Test;
 
 import java.util.List;
 
-import negocio.Sucursal.TSucursal;
-
 public interface SATest {
     public int create(TTest t);
     public TTest read(int id);

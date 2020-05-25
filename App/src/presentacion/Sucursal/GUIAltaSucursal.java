@@ -2,43 +2,43 @@ package presentacion.Sucursal;
 
 
 	import java.awt.GridLayout;
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ActionListener;
-	import javax.swing.JButton;
-	import javax.swing.JCheckBox;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
-	import javax.swing.JOptionPane;
-	import javax.swing.JPanel;
-	import javax.swing.JTextField;
-	import javax.swing.SwingConstants;
-	import negocio.Sucursal.TSucursal;
-	import presentacion.Controller;
-	import presentacion.GUIMaker;
-	import presentacion.eventos;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import negocio.Sucursal.TSucursal;
+import presentacion.Controller;
+import presentacion.GUIMaker;
+import presentacion.eventos;
 
 	@SuppressWarnings("serial")
 	public class GUIAltaSucursal extends JFrame {
-		private boolean init=false;
+		private boolean isInit=false;
 		private JButton btnAlta = new JButton("Dar de alta");
 		private JButton btnCancelar = new JButton("Cancelar");
 		private String[] labels = {"Insertar ciudad","Insertar telefono","Insertar direccion" };
-		private JLabel etiqgeneral;
+		private JLabel etiqGeneral;
 		//private JCheckBox actividad = new JCheckBox("¿Está activo?",true);
 		private JTextField[] inputs = new JTextField[labels.length];
 		
 		public void initGui() {
-		if(init) {
+		if(isInit) {
 			this.setVisible(true);
 			return;
 		}
-		init=true;
+		isInit=true;
 		this.setLayout(new GridLayout(6,2,5,10));
 		for(int i = 0; i<labels.length;i++) {
-			etiqgeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
+			etiqGeneral = new JLabel(labels[i]+": ", SwingConstants.CENTER);
 			inputs[i] = new JTextField(20);
-			add(etiqgeneral);
-			etiqgeneral.setLabelFor(inputs[i]);
+			add(etiqGeneral);
+			etiqGeneral.setLabelFor(inputs[i]);
 			add(inputs[i]);
 		}
 		//Anadir componentes

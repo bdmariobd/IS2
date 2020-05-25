@@ -1,16 +1,12 @@
 package tNegocio.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import integracion.FactoriaDAO;
 import negocio.FactoriaSA;
 import negocio.Test.SATest;
 import negocio.Test.TTest;

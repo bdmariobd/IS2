@@ -11,9 +11,9 @@ import presentacion.GUIMaker;
 
 public class GUIMostrarTodos extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private boolean init=false;
-	JTable jt;
-	String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula","Prof.Vinculado"};
+	private boolean isInit=false;
+	private JTable tabla;
+	private String[] colNames = {"id", "idSucursal","tipo","daños","activo","matricula","profesor"};
 	
 	
 	public String getValueAt(List<TVehiculo> lista, int arg0, int arg1) {
@@ -38,22 +38,26 @@ public class GUIMostrarTodos extends JFrame {
 		case 5:
 			s = lista.get(arg0).getMatricula();
 			break;
+		case 6:
+			int id= lista.get(arg0).getIdP();
+			s = id ==-1? "sin asignar": Integer.toString(id);
+			break;
 		}
 		return s;
 	}
 	
 	public void mostrarVehiculos(List<TVehiculo> lista) {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 		}
-		init=true;
+		isInit=true;
 		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los vehiculos");
-		jt= new JTable();
+		tabla= new JTable();
 		actualizarTabla(lista);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p= new JScrollPane(jt);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p= new JScrollPane(tabla);
 		this.pack();
 		this.add(p);
 		this.setSize(720,450);
@@ -74,7 +78,7 @@ public class GUIMostrarTodos extends JFrame {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
+		tabla.setModel(tmodel);
 	}
 }
 

@@ -1,12 +1,9 @@
 package presentacion.Test;
 
 
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,9 +13,10 @@ import presentacion.GUIMaker;
 
 
 public class GUIMostrarTodosTests extends JFrame {
-	private boolean init=false;
-	JTable jt;
-	String[] colNames ={"id", "tipo","numero de preguntas","activo"};
+	private static final long serialVersionUID = 1L;
+	private boolean isInit=false;
+	private JTable tabla;
+	private String[] colNames ={"id", "tipo","numero de preguntas","activo"};
 	
 	
 	public String getValueAt(List<TTest> lista, int arg0, int arg1) {
@@ -42,17 +40,17 @@ public class GUIMostrarTodosTests extends JFrame {
 	}
 	
 	public void mostrarTest(List<TTest> lista) {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 		}
-		init=true;
+		isInit=true;
 		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar todos los test");
-		jt= new JTable();
+		tabla= new JTable();
 		actualizarTabla(lista);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p= new JScrollPane(jt);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p= new JScrollPane(tabla);
 		this.pack();
 		this.add(p);
 		this.setSize(720,450);
@@ -66,11 +64,13 @@ public class GUIMostrarTodosTests extends JFrame {
 				datos[i][j]= getValueAt(lista,i,j);
 				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
+		tabla.setModel(tmodel);
 	}
 }

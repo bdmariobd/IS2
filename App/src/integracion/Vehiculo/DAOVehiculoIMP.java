@@ -2,12 +2,10 @@ package integracion.Vehiculo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import integracion.DAOConnect;
 import integracion.DAOConnect;
 import negocio.Vehiculo.TVehProf;
 import negocio.Vehiculo.TVehiculo;
@@ -68,9 +66,16 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 			Statement statement = connection.createStatement();
 			String query = "SELECT * FROM Vehiculos WHERE id="+id+";";
 			ResultSet resultSet = statement.executeQuery(query);
-			if(resultSet.next()) return new TVehiculo(resultSet.getInt("id"),resultSet.getInt("idSucursal"), 
-					resultSet.getString("tipo"), resultSet.getString("matricula"),
-					resultSet.getBoolean("activo"),resultSet.getString("danos"));
+			if(resultSet.next()) {
+				TVehiculo v = new TVehiculo(resultSet.getInt("id"),resultSet.getInt("idSucursal"), 
+						resultSet.getString("tipo"), resultSet.getString("matricula"),
+						resultSet.getBoolean("activo"),resultSet.getString("danos"));
+				resultSet = statement.executeQuery("SELECT * FROM VehiculoProfesor WHERE idCoche="+id+";");
+				if(resultSet.next()) {
+					v.setIdP(resultSet.getInt("idProfesor"));  return v;
+				}
+				else return v;
+			}
 		}
 		catch (Exception e) {
 			return null;
@@ -113,14 +118,17 @@ public class DAOVehiculoIMP implements DAOVehiculo {
 		try {
 			Connection connection = DAOConnect.getInstance().getConnection();
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM Vehiculos;";
+			String query = "SELECT * FROM Vehiculos v LEFT JOIN VehiculoProfesor vh ON v.id=vh.idCoche;";
 			
 			List<TVehiculo> list = new ArrayList<TVehiculo>();
 			ResultSet resultSet = statement.executeQuery(query);
 			while(resultSet.next()) {
-				list.add(new TVehiculo(resultSet.getInt("id"),resultSet.getInt("idSucursal"), 
+				TVehiculo v = new TVehiculo(resultSet.getInt("id"),resultSet.getInt("idSucursal"), 
 						resultSet.getString("tipo"), resultSet.getString("matricula"),
-						resultSet.getBoolean("activo"),resultSet.getString("danos")));
+						resultSet.getBoolean("activo"),resultSet.getString("danos"));
+				int idP = resultSet.getInt("idProfesor");
+				if(idP!=0) v.setIdP(idP);
+				list.add(v);
 			}
 			return list;
 		}
