@@ -2,12 +2,9 @@ package presentacion.Sesion;
 
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -27,10 +24,11 @@ import resources.fechasConverter;
 
 
 public class GUIMostrarTodasSesionesProfesor extends JFrame {
-	private boolean init=false, init2=false;
-	JTable jt;
-	JPanel panelcentro = new JPanel(new FlowLayout());
-	String[] colNames = {"id", "fecha","horaIni","horaFin","tipo","activo","idAlumno", "idProfesor"};
+	private static final long serialVersionUID = 1L;
+	private boolean isInit=false, isInit2=false;
+	private JTable tabla;
+	private JPanel panelcentro = new JPanel(new FlowLayout());
+	private String[] colNames = {"id", "fecha","horaIni","horaFin","tipo","activo","idAlumno", "idProfesor"};
 	
 	
 	public String getValueAt(List<TSesion> lista, int arg0, int arg1) {   ////////////////7
@@ -65,12 +63,12 @@ public class GUIMostrarTodasSesionesProfesor extends JFrame {
 		return s;
 	}
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
-		init=true;
-		jt= new JTable();
+		isInit=true;
+		tabla= new JTable();
 		this.setLayout(new BorderLayout());
 		GUIMaker.getInstance().configurateSubWindow(this,650,200,"Mostrar sesion de un profesor ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
@@ -98,17 +96,17 @@ public class GUIMostrarTodasSesionesProfesor extends JFrame {
 	
 	
 	public void mostrarSesiones(List<TSesion> lista) {
-		if(init2) {
+		if(isInit2) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 		}
-		init2=true;
+		isInit2=true;
 		GUIMaker.getInstance().configurateSubWindow(this, 1200, 800, "Mostrar sesion de un profesor");
-		jt= new JTable();
+		tabla= new JTable();
 		actualizarTabla(lista);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p= new JScrollPane(jt);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p= new JScrollPane(tabla);
 		this.pack();
 		this.add(p);
 		this.setSize(720,450);
@@ -122,11 +120,13 @@ public class GUIMostrarTodasSesionesProfesor extends JFrame {
 				datos[i][j]= getValueAt(lista,i,j);
 				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
+		tabla.setModel(tmodel);
 	}
 }

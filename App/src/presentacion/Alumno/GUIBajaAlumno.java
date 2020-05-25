@@ -22,16 +22,16 @@ public class GUIBajaAlumno extends JFrame{
 	private JPanel principal = new JPanel(new GridLayout(2,2));
 	private JButton btnBaja = new JButton("Dar de baja");
 	private JPanel prueba = new JPanel(new BorderLayout());
-	private JLabel tfLabel = new JLabel("Introduce el ID del alumno para darlo de baja: ");
+	private JLabel lblId = new JLabel("Introduce el ID del alumno para darlo de baja: ");
 	private JTextField campoID= new JTextField();
 	private JButton btnCancelar = new JButton("Cancelar");
 	
 	public void initGui() {
 		GUIMaker.getInstance().configurateSubWindow(this,520,100,"Registrar una baja ");
-		tfLabel.setHorizontalAlignment(JLabel.CENTER);
+		lblId.setHorizontalAlignment(JLabel.CENTER);
 		campoID.setColumns(5);
 		prueba.add(campoID,BorderLayout.LINE_START);
-		principal.add(tfLabel);
+		principal.add(lblId);
 		principal.add(prueba);
 		principal.add(btnBaja);
 		principal.add(btnCancelar);

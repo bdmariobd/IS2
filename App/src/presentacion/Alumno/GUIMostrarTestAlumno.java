@@ -2,7 +2,6 @@ package presentacion.Alumno;
 
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,10 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import negocio.Alumno.TAlumno;
 import negocio.Alumno.TRelleno;
 import presentacion.Controller;
 import presentacion.GUIMaker;
@@ -26,14 +23,14 @@ import presentacion.eventos;
 
 
 public class GUIMostrarTestAlumno extends JFrame {
-	private boolean init=false;
-	private boolean init2=false;
-	JPanel panelcentro = new JPanel(new FlowLayout());
-	JTable jt;
-	String[] colNames ={"idAlumno","idTest", "numero de fallos"};
+	private static final long serialVersionUID = 1L;
+	private boolean isInit=false;
+	private boolean isInit2=false;
+	private JPanel panelCentro = new JPanel(new FlowLayout());
+	private JTable tabla;
+	private String[] colNames ={"idAlumno","idTest", "numero de fallos"};
 	
 	public String getValueAt(List<TRelleno> lista, int arg0, int arg1) {
-		// TODO Auto-generated method stub
 		String s = null;
 		switch (arg1) {
 		case 0:
@@ -51,13 +48,13 @@ public class GUIMostrarTestAlumno extends JFrame {
 	}
 	
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
 		
-		init=true;
-		jt= new JTable();
+		isInit=true;
+		tabla= new JTable();
 		this.setLayout(new BorderLayout());
 		GUIMaker.getInstance().configurateSubWindow(this,350,200,"Mostrar test de un alumno ");
 		JPanel panelEtiq = new JPanel(new FlowLayout());
@@ -76,24 +73,24 @@ public class GUIMostrarTestAlumno extends JFrame {
 				}
 			});
 		
-		panelcentro.add(btnBuscar);
-		add(panelcentro,BorderLayout.WEST);
+		panelCentro.add(btnBuscar);
+		add(panelCentro,BorderLayout.WEST);
 		this.setVisible(true);
 		
 	}
 	public void mostrarTest(List<TRelleno> lista) {
 		
-		if(init2) {
+		if(isInit2) {
 			setVisible(true);
 			actualizarTabla(lista);
 			return;
 			
 		}
-		init2=true;
+		isInit2=true;
 		GUIMaker.getInstance().configurateSubWindow(this, 230, 260, "Mostrar test de alumno");
 		actualizarTabla(lista);
-		jt.getTableHeader().setReorderingAllowed(false);
-		JScrollPane p= new JScrollPane(jt);
+		tabla.getTableHeader().setReorderingAllowed(false);
+		JScrollPane p= new JScrollPane(tabla);
 		this.pack();
 		this.add(p);
 		this.setSize(420,250);
@@ -108,11 +105,13 @@ public class GUIMostrarTestAlumno extends JFrame {
 				datos[i][j]= getValueAt(lista,i,j);
 				
 		DefaultTableModel tmodel = new DefaultTableModel(datos,colNames) {
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
-		jt.setModel(tmodel);
+		tabla.setModel(tmodel);
 	}
 }

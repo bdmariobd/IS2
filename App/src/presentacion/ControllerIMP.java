@@ -89,7 +89,7 @@ public class ControllerIMP extends Controller {
 			case eventos.BUSCAR_PROFESOR:
 				TProfesor p = saProfe.read((int) datos);
 				if(p!=null)GUIProfesor.getInstance().update(eventos.BUSCAR_PROFESOR_OK, p);
-				//else GUIProfesor.getInstance().update(eventos.BUSCAR_PROFESOR_KO, p);
+				else GUIProfesor.getInstance().update(eventos.BUSCAR_PROFESOR_KO, p);
 			break;
 			case eventos.MOSTRAR_UNO_PROFESOR:
 				TProfesor profe = saProfe.read((int) datos);
@@ -121,7 +121,7 @@ public class ControllerIMP extends Controller {
 			case eventos.BUSCAR_ALUMNO:
 				TAlumno a = saAlu.read((int) datos);
 				if(a!=null)GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_OK, a);
-				//else GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_KO, a);
+				else GUIAlumno.getInstance().update(eventos.BUSCAR_ALUMNO_KO, a);
 			break;
 			case eventos.MOSTRAR_UNO_ALUMNO:
 				TAlumno alu = saAlu.read((int) datos);
@@ -170,7 +170,7 @@ public class ControllerIMP extends Controller {
 			case eventos.BUSCAR_VEHICULO:
 				TVehiculo v = saVeh.read((int) datos);
 				if(v!=null)GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_OK, v);
-				//else GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_KO, v);
+				else GUIVehiculo.getInstance().update(eventos.BUSCAR_VEHICULO_KO, v);
 			break;
 			case eventos.ALTA_SUCURSAL: 
                 id = saSuc.create((TSucursal) datos); 
@@ -202,7 +202,7 @@ public class ControllerIMP extends Controller {
             case eventos.BUSCAR_SUCURSAL:
                 TSucursal s = saSuc.read((int) datos);
                 if(s!=null)GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_OK, s);
-                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+                else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, s);
             break;
             case eventos.ALTA_TEST: 
                 id = saTest.create((TTest) datos); 
@@ -234,7 +234,7 @@ public class ControllerIMP extends Controller {
             case eventos.BUSCAR_TEST:
                 TTest t = saTest.read((int) datos);
                 if(t!=null)GUITest.getInstance().update(eventos.BUSCAR_TEST_OK, t);
-                //else GUITest.getInstance().update(eventos.BUSCAR_TEST_KO, v);
+                else GUITest.getInstance().update(eventos.BUSCAR_TEST_KO, t);
             break;
             case eventos.RELLENAR_TEST:
 				id = saAlu.rellenar((TRelleno) datos); 
@@ -285,7 +285,7 @@ public class ControllerIMP extends Controller {
             case eventos.BUSCAR_SESION:
                 TSesion se2 = saSesion.read((int) datos);
                 if(se2!=null)GUISesion.getInstance().update(eventos.BUSCAR_SESION_OK, se2);
-                //else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, v);
+                else GUISucursal.getInstance().update(eventos.BUSCAR_SUCURSAL_KO, se2);
             break;
 		}
 	}

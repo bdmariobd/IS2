@@ -3,14 +3,14 @@ package presentacion.Profesor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import negocio.Profesor.TProfesor;
 import presentacion.Controller;
 import presentacion.GUIMaker;
@@ -18,27 +18,27 @@ import presentacion.eventos;
 
 public class GUIAltaProfesor extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private boolean init = false;
+	private boolean isInit = false;
 	private JButton btnAlta = new JButton("Dar de alta");
 	private JButton btnCancelar = new JButton("Cancelar");
 	private String[] labels = { "Insertar idSucursal", "Insertar DNI", "Insertar nombre", "Insertar apellidos",
 			"Insertar telefono", "Insertar email", "Insertar sueldo" };
 	//private JCheckBox actividad = new JCheckBox("¿Está activo?", true);
-	private JLabel etiqgeneral;
+	private JLabel etiqGeneral;
 	private JTextField[] inputs = new JTextField[labels.length];
 
 	public void initGui() {
-		if (init) {
+		if (isInit) {
 			this.setVisible(true);
 			return;
 		}
-		init = true;
+		isInit = true;
 		this.setLayout(new GridLayout(9, 2, 5, 10));
 		for (int i = 0; i < labels.length; i++) {
-			etiqgeneral = new JLabel(labels[i] + ": ", SwingConstants.CENTER);
+			etiqGeneral = new JLabel(labels[i] + ": ", SwingConstants.CENTER);
 			inputs[i] = new JTextField(20);
-			add(etiqgeneral);
-			etiqgeneral.setLabelFor(inputs[i]);
+			add(etiqGeneral);
+			etiqGeneral.setLabelFor(inputs[i]);
 			add(inputs[i]);
 		}
 

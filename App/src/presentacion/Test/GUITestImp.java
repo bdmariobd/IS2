@@ -1,15 +1,10 @@
 package presentacion.Test;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import negocio.Test.TTest;
 import presentacion.Controller;
@@ -42,6 +37,7 @@ public class GUITestImp extends GUITest implements ActionListener {
 		GUIMaker.getInstance().configurateWindow(this);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {
@@ -88,6 +84,10 @@ public class GUITestImp extends GUITest implements ActionListener {
 			break;
 		case eventos.BUSCAR_TEST_OK:
 			gModT.updatePanel((TTest) res);
+			break;
+		case eventos.BUSCAR_TEST_KO:
+			msg= "No se ha encontrado el test";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case eventos.MODIFICAR_OK_TEST:
 			JOptionPane.showMessageDialog(null, "Modificada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);

@@ -20,24 +20,24 @@ import presentacion.eventos;
 
 public class GUIModificarVehiculo extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private boolean init=false, init2=false;
-	JPanel centerPanel= new JPanel(new GridLayout(5,2));
-	JLabel lblTipo = new JLabel("Tipo: ");
-	JLabel lblDanos = new JLabel("Daños: ");
-	JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
-	JCheckBox tfActivo = new JCheckBox();
-	JLabel lblMatricula = new JLabel("Matricula: ");
-	JTextField tfTipo= new JTextField();
-	JTextField tfDanos = new JTextField();
-	JTextField tfMatricula = new JTextField();
-	JButton actualizar = new JButton("Actualizar");
-	JButton btnCancelar=new JButton("Cancelar");
+	private boolean isInit=false;
+	private JPanel centerPanel= new JPanel(new GridLayout(5,2));
+	private JLabel lblTipo = new JLabel("Tipo: ");
+	private JLabel lblDanos = new JLabel("Daños: ");
+	private JLabel lblActivo = new JLabel("¿Desea reactivarla?: ");
+	private JCheckBox cbActivo = new JCheckBox();
+	private JLabel lblMatricula = new JLabel("Matricula: ");
+	private JTextField tfTipo= new JTextField();
+	private JTextField tfDanos = new JTextField();
+	private JTextField tfMatricula = new JTextField();
+	private JButton btnActualizar = new JButton("Actualizar");
+	private JButton btnCancelar=new JButton("Cancelar");
 	public void initGui() {
-		if(init) {
+		if(isInit) {
 			setVisible(true);
 			return;
 		}
-		init=true;
+		isInit=true;
 		GUIMaker.getInstance().configurateSubWindow(this,220,110,"Modificar un vehículo ");
 		this.setLayout(new FlowLayout());
 		JPanel upPanel = new JPanel(new BorderLayout());
@@ -47,7 +47,7 @@ public class GUIModificarVehiculo extends JFrame {
 		JButton traerDB = new JButton("Buscar en la base de datos");
 		traerDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				centerPanel.remove(lblActivo);centerPanel.remove(tfActivo);
+				centerPanel.remove(lblActivo);centerPanel.remove(cbActivo);
 				int aux = Integer.parseInt(tfID.getText());
 				Controller.getInstance().accion(eventos.BUSCAR_VEHICULO,aux );
 				}
@@ -65,17 +65,17 @@ public class GUIModificarVehiculo extends JFrame {
 		centerPanel.repaint();
 		tfTipo.setText(veh.getTipo());
 		tfDanos.setText(veh.getDaños());
-		tfActivo.setSelected(veh.isActivo());
+		cbActivo.setSelected(veh.isActivo());
 		tfMatricula.setText(veh.getMatricula());
 		centerPanel.add(lblTipo); centerPanel.add(tfTipo);
 		centerPanel.add(lblDanos);centerPanel.add(tfDanos);
-		if(!veh.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(tfActivo);}
+		if(!veh.isActivo()) {centerPanel.add(lblActivo);centerPanel.add(cbActivo);}
 		centerPanel.add(lblMatricula);centerPanel.add(tfMatricula);
 		tfDanos.setColumns(30);
-		actualizar.addActionListener(new ActionListener() {
+		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TVehiculo v= new TVehiculo(veh.getId(),veh.getIdSucursal(),
-						tfTipo.getText(),tfMatricula.getText(),tfActivo.isSelected(),tfDanos.getText());
+						tfTipo.getText(),tfMatricula.getText(),cbActivo.isSelected(),tfDanos.getText());
 				Controller.getInstance().accion(eventos.MODIFICAR_VEHICULO, v);
 			}
 			});
@@ -85,7 +85,7 @@ public class GUIModificarVehiculo extends JFrame {
 				}
 			});
 		centerPanel.add(btnCancelar);
-		centerPanel.add(actualizar);
+		centerPanel.add(btnActualizar);
 		this.add(centerPanel);
 		this.setSize(800, 245);
 	}

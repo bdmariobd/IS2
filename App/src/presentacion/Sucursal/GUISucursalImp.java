@@ -1,15 +1,10 @@
 package presentacion.Sucursal;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import negocio.Sucursal.TSucursal;
 import presentacion.Controller;
@@ -43,6 +38,7 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 		GUIMaker.getInstance().configurateWindow(this);
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	//Respuestas de las operaciones que se han invocado
 	public void update(int event, Object res) {
@@ -91,6 +87,11 @@ public class GUISucursalImp extends GUISucursal implements ActionListener {
 		case eventos.BUSCAR_SUCURSAL_OK:
 			gModSuc.updatePanel((TSucursal) res);
 			break;
+		case eventos.BUSCAR_SUCURSAL_KO:
+			msg= "No se ha encontrado la sucursal";
+			JOptionPane.showMessageDialog(null, msg,"Información",JOptionPane.INFORMATION_MESSAGE);
+			break;
+			
 		case eventos.MODIFICAR_OK_SUCURSAL:
 			JOptionPane.showMessageDialog(null, "Modificada correctamente.","Información",JOptionPane.INFORMATION_MESSAGE);
 			break;
